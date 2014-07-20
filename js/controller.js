@@ -1,6 +1,10 @@
-var mediadumpControllers = angular.module('mediadumpControllers', []);
+var mediadumpController = angular.module('mediadumpController', []);
 
-mediadumpControllers.controller('mediadumpCtrl', function ($location, $scope, $route, $routeParams, $http) {
+mediadumpController.controller('mediadumpCtrl', function ($location, $scope, $route, $routeParams, $http) {
+
+
+	$scope.query = "atlas";
+	/*
 	// app stuff
 	$scope.default_queries = [];
 	$http.get('http://media-dump.samt.st/generate_json.php')
@@ -14,7 +18,7 @@ mediadumpControllers.controller('mediadumpCtrl', function ($location, $scope, $r
 
 	// search stuff
 	$scope.search_mode = "search";
-	$scope.query = "";
+	
 	$scope.page = 1;
 
 	$scope.iLightIndex = -1;
@@ -235,4 +239,6 @@ mediadumpControllers.controller('mediadumpCtrl', function ($location, $scope, $r
 	    },
 	    zoom: 1
 	};
+
+	*/
 });
