@@ -3,17 +3,20 @@ var mediadumpController = angular.module('mediadumpController', []);
 mediadumpController.controller('mediadumpCtrl', function ($location, $scope, $route, $routeParams, $http) {
 
 
-	$scope.query = "atlas";
-	/*
-	// app stuff
+	$scope.query = "";
+	$scope.total_files_in_md = 12447;
+	
 	$scope.default_queries = [];
 	$http.get('http://media-dump.samt.st/generate_json.php')
 	.then(function(res) {
 		$scope.default_queries = res.data;
 	});
 
+
+	
+	// app stuff
+	
 	$scope.bQueryBuilderVisible = false;
-	$scope.total_files_in_md = 12447;
 	$scope.search_mode = "";
 
 	// search stuff
@@ -140,7 +143,6 @@ mediadumpController.controller('mediadumpCtrl', function ($location, $scope, $ro
 	};
 
 	$scope.do_search = function() {
-		console.log("do search");
 		if($scope.query !== ""){
 			$scope.bSearching = true;	
 			$http({
@@ -152,7 +154,6 @@ mediadumpController.controller('mediadumpCtrl', function ($location, $scope, $ro
 	            if(data.results.files != undefined){
 	            	$scope.results = data.results.files;
 		            $scope.search_info = data.results.info;
-		            console.log("search results: " + $scope.results.length);
 				}else{
 	            	// if not successful, bind errors to error variables
 	            	console.log("http successful, but problem with results :(");
@@ -240,5 +241,5 @@ mediadumpController.controller('mediadumpCtrl', function ($location, $scope, $ro
 	    zoom: 1
 	};
 
-	*/
+	
 });

@@ -1,7 +1,12 @@
 
 
 $left_col_width: 300px;
+$left_col_width_on_mobile: 100%;
 $padding: 8px;
+$margin: 4px;
+$no_padding: 0px;
+$ui_breakpoint: 400px;
+
 
 
 body{
@@ -10,21 +15,19 @@ body{
 }
 
 #logo_description{
-	background: blue;
 }
 #logo{
-	background: green;
 	width: $left_col_width;
 	padding: $padding;
 }
 #description{
-	background: orange;
 	padding: $padding;
 }
 
 #tabs{
-	background: red;
 	padding: $padding;
+	padding-left: $no_padding;
+	padding-right: $no_padding;
 }
 
 #search_results{
@@ -32,16 +35,93 @@ body{
 }
 
 #search{
-	background: lime;
 	width: $left_col_width;
 	padding: $padding;
 }
 
 #results{
-	background: purple;
 	padding: $padding;
 }
 
-.flexible_container_left_fixed{}
-.flexible_container_left_fixed .left_div{float:left;width:$left_col_width;}
-.flexible_container_left_fixed .right_div{margin-left:$left_col_width;}
+.flexible_container_left_fixed{clear: both;}
+.flexible_container_left_fixed .left_div{
+	float:left;
+	width:$left_col_width;
+
+	background-image: linear-gradient(to left, #f6f6f6 0%, #fff 16px);
+	box-shadow: inset -1px 0 0 #eee;
+}
+.flexible_container_left_fixed .right_div{
+	margin-left:$left_col_width;
+}
+
+
+
+
+#tabs{display:none;}
+
+.tab-pane#map{max-height: 80%;}
+.default_query{
+	width: 100%;
+	margin-top: $padding;
+	display: block;
+	cursor: pointer;
+}
+
+ul.nav-pills a{padding: 4px;}
+
+
+#thumb_results a.thumb_result_link img{
+	margin-right: $margin;
+	margin-bottom: $margin;
+	padding-right: 0px;
+}
+
+#search_input{
+	margin-bottom: $padding;
+}
+
+
+@media (max-width:$ui_breakpoint) {
+	#logo{width:$left_col_width_on_mobile;}
+	#search{width:$left_col_width_on_mobile;}
+
+
+	.flexible_container_left_fixed .left_div{
+		background-image: none;
+		box-shadow: none;
+	}
+	.flexible_container_left_fixed .right_div{margin-left: 0px;}
+
+
+	/* small layout */
+	#tabs{display:block;}
+
+	#description{
+		display: none;
+	}
+
+	#logo{width: 100%;}
+
+	.left_div{width: 100%;}
+	.right_div{
+		width: 100%;
+		margin-left: 0px;
+	}
+
+	.search_results_tab{display:none;width:100%;}
+	.search_results_tab.active{display:block;width:100%;}
+
+
+}
+
+
+
+/*
+bootstrap
+*/
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}

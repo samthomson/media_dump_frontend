@@ -1,8 +1,19 @@
 <!--
-bootstrap
 different angular map, not google, open
 
 then later sort out api call to media-dump
+
+lazy load results?
+
+- geo search
+- geo results
+- go to page top on search
+- lightbox
+- style browse/map tabs/buttons
+- style results
+
+
+
 -->
 <html>
 	<head>
@@ -28,33 +39,84 @@ then later sort out api call to media-dump
 
 
 		<div ng-controller="mediadumpCtrl">
-			<div id="logo_description" class="flexible_container_left_fixed">
+			<div id="logo_description" class="flexible_container_left_fixed clearfix">
 				<div id="logo" class="left_div">
-					logo
+					media-dump.samt.st
 				</div>
 				<div id="description" class="right_div">
-					description
 				</div>
 			</div>
 			<div id="tabs">
-				tabs
+				<ul class="nav nav-tabs" role="tablist">
+					<li id="search_tab" class="active"><a href="javascript:_set_tab('search');">Search</a></li>
+  					<li id="results_tab"><a href="javascript:_set_tab('results');">Results <span class="badge">{{search_info.count}}</span></a></li>
+				</ul>
 			</div>
-			<div id="search_results" class="flexible_container_left_fixed">
-				<div id="search" class="left_div">
-					search ui
+			<div id="search_results" class="flexible_container_left_fixed clearfix">
+				<div id="search" class="search_results_tab left_div active">
+					<ul class="nav nav-pills">
+						<li class="active"><a href="#browse" role="tab" data-toggle="tab">Browse</a></li>
+  						<li><a href="#map" role="tab" data-toggle="tab">Map</a></li>
+						<!--<li class="dropdown">
+						    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						      More <span class="caret"></span>
+						    </a>
+					    	
+					    	<ul class="dropdown-menu" role="menu">
+					    	</ul>
+					    	
+					  	</li>-->
+					</ul>
+
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<div class="tab-pane active" id="browse">
+							<a ng-repeat="default_query in default_queries" class="default_query" ng-click="do_default_query(default_query.tag_value)">
+								<img ng-src="http://7.cdn.samt.st/icon/{{default_query.hash}}.jpg" alt="{{default_query.tag_value}}" title="{{default_query.tag_value}}" />
+								<span>{{default_query.tag_value}}
+							</a>
+						</div>
+						<div class="tab-pane" id="map">map</div>
+						<div class="tab-pane" id="more">...</div>
+					</div>
 				</div>
-				<div id="results" class="right_div">
-					search results
+				<div id="results" class="search_results_tab right_div">
+
+					<div id="search_input" class="input-group">
+						<input type="text" class="form-control" ng-model="query">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button">Go!</button>
+						</span>
+					</div><!-- /input-group -->
+
+
+					<div id="thumb_results">
+						<a class="thumb_result_link" ng-repeat="result in results" ng-click="thumb_click($index)">
+							<img alt="{{result.p}}" title="{{result.p}}" ng-src="{{urlFromHash('thumbs', result.h, '')}}"/>
+						</a>
+					</div>
+
+					<div id="pagination_social_container" ng-show="search_info.count > 0">
+						<div id="pagination_social">
+							Found around {{search_info.count * search_info.available_pages}} files in <i class="fa fa-flash"></i> {{search_info.total_speed | number:2}} ms -
+							<span ng-show="show_pagination()">
+								<a ng-show="pagination_enabled(true)" ng-click="page=page-1;">
+							        Previous
+							    </a>
+							    {{page}}/{{search_info.available_pages}}
+							    <a ng-show="pagination_enabled(false)" ng-click="page=page+1;">
+							        Next
+							    </a>
+						    </span>
+						    <span ng-show="show_map_summary()">
+						    	Showing around {{search_info.count}}
+						    </span>
+						</div>
+					</div>
+
 				</div>
-			</div>
-
-
-
-
-			query: <strong>{{query}}</strong>
 			</div>
 		</div>
-
 
 
 		<!-- scripts & analytics -->

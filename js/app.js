@@ -35,3 +35,11 @@ mediadumpApp.config(['$routeProvider', '$httpProvider',
 	    delete $httpProvider.defaults.headers.common['X-Requested-With'];
 	}]);
 */
+
+function _set_tab(s_tab){
+	$("#tabs li").removeClass("active");
+	$("#tabs li#"+s_tab+"_tab").addClass("active");
+
+	$("#search_results .search_results_tab").removeClass("active");
+	$("#search_results .search_results_tab#"+s_tab).addClass("active");
+}
