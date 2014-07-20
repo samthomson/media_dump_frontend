@@ -1,11 +1,12 @@
 
 
-$left_col_width: 400px;
+$left_col_width: 300px;
+$padding: 8px;
 
 
 body{
 	font-family: Muli;
-	padding: 8px;
+	padding: $padding;
 }
 
 #logo_description{
@@ -14,13 +15,16 @@ body{
 #logo{
 	background: green;
 	width: $left_col_width;
+	padding: $padding;
 }
 #description{
 	background: orange;
+	padding: $padding;
 }
 
 #tabs{
 	background: red;
+	padding: $padding;
 }
 
 #search_results{
@@ -30,12 +34,14 @@ body{
 #search{
 	background: lime;
 	width: $left_col_width;
-}
-
-#divider{
-	background: yellow;
+	padding: $padding;
 }
 
 #results{
 	background: purple;
+	padding: $padding;
 }
+
+.flexible_container_left_fixed{}
+.flexible_container_left_fixed .left_div{float:left;width:$left_col_width;}
+.flexible_container_left_fixed .right_div{margin-left:$left_col_width;}

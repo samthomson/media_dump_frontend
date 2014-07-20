@@ -1,42 +1,53 @@
-/* line 6, ../scss/screen.scss */
+/* line 7, ../scss/screen.scss */
 body {
   font-family: Muli;
   padding: 8px;
 }
 
-/* line 11, ../scss/screen.scss */
+/* line 12, ../scss/screen.scss */
 #logo_description {
   background: blue;
 }
 
-/* line 14, ../scss/screen.scss */
+/* line 15, ../scss/screen.scss */
 #logo {
   background: green;
-  width: 400px;
+  width: 300px;
+  padding: 8px;
 }
 
-/* line 18, ../scss/screen.scss */
+/* line 20, ../scss/screen.scss */
 #description {
   background: orange;
+  padding: 8px;
 }
 
-/* line 22, ../scss/screen.scss */
+/* line 25, ../scss/screen.scss */
 #tabs {
   background: red;
+  padding: 8px;
 }
 
-/* line 30, ../scss/screen.scss */
+/* line 34, ../scss/screen.scss */
 #search {
   background: lime;
-  width: 400px;
+  width: 300px;
+  padding: 8px;
 }
 
-/* line 35, ../scss/screen.scss */
-#divider {
-  background: yellow;
-}
-
-/* line 39, ../scss/screen.scss */
+/* line 40, ../scss/screen.scss */
 #results {
   background: purple;
+  padding: 8px;
+}
+
+/* line 46, ../scss/screen.scss */
+.flexible_container_left_fixed .left_div {
+  float: left;
+  width: 300px;
+}
+
+/* line 47, ../scss/screen.scss */
+.flexible_container_left_fixed .right_div {
+  margin-left: 300px;
 }
