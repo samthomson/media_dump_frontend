@@ -1,86 +1,93 @@
-/* line 15, ../scss/screen.scss */
+/* line 16, ../scss/screen.scss */
 body {
   font-family: Muli;
   padding: 8px;
 }
 
-/* line 19, ../scss/screen.scss */
+/* line 20, ../scss/screen.scss */
 a {
   color: maroon;
+  cursor: pointer;
 }
 
-/* line 20, ../scss/screen.scss */
+/* line 21, ../scss/screen.scss */
 a:hover {
   color: maroon;
 }
 
-/* line 21, ../scss/screen.scss */
+/* line 22, ../scss/screen.scss */
 a:visited {
   color: maroon;
 }
 
-/* line 22, ../scss/screen.scss */
+/* line 23, ../scss/screen.scss */
 a:active {
   color: maroon;
 }
 
-/* line 26, ../scss/screen.scss */
+/* line 27, ../scss/screen.scss */
 #logo {
   width: 200px;
   padding: 8px;
 }
 
-/* line 30, ../scss/screen.scss */
+/* line 31, ../scss/screen.scss */
 #description {
   padding: 8px;
 }
 
-/* line 34, ../scss/screen.scss */
+/* line 35, ../scss/screen.scss */
 #tabs {
   padding: 8px;
   padding-left: 0px;
   padding-right: 0px;
 }
 
-/* line 44, ../scss/screen.scss */
+/* line 45, ../scss/screen.scss */
 #search {
   width: 200px;
   padding: 8px;
 }
 
-/* line 49, ../scss/screen.scss */
+/* line 50, ../scss/screen.scss */
 #results {
   padding: 8px;
 }
 
-/* line 53, ../scss/screen.scss */
+/* line 54, ../scss/screen.scss */
 .flexible_container_left_fixed {
   clear: both;
 }
 
-/* line 54, ../scss/screen.scss */
+/* line 55, ../scss/screen.scss */
 .flexible_container_left_fixed .left_div {
   float: left;
   width: 200px;
   background-image: linear-gradient(to left, #f6f6f6 0%, #ffffff 16px);
 }
 
-/* line 60, ../scss/screen.scss */
+/* line 61, ../scss/screen.scss */
 .flexible_container_left_fixed .right_div {
   margin-left: 200px;
 }
 
-/* line 66, ../scss/screen.scss */
+/* line 67, ../scss/screen.scss */
+#search ul li.active a {
+  background: maroon;
+  color: white;
+}
+
+/* line 69, ../scss/screen.scss */
 #tabs {
   display: none;
 }
 
-/* line 68, ../scss/screen.scss */
+/* line 71, ../scss/screen.scss */
 .tab-pane#map {
   max-height: 80%;
 }
 
-/* line 69, ../scss/screen.scss */
+/* line 72, ../scss/screen.scss */
 .default_query {
   width: 100%;
   margin-top: 8px;
@@ -88,90 +95,91 @@ a:active {
   cursor: pointer;
 }
 
-/* line 76, ../scss/screen.scss */
-ul.nav-pills a {
-  padding: 4px;
-}
-
 /* line 79, ../scss/screen.scss */
-#search_input button.active {
-  background: maroon;
-  color: white;
+ul.nav-pills a {
+  padding: 6px;
 }
 
 /* line 82, ../scss/screen.scss */
+#search_input button.active {
+  background: maroon;
+  color: white;
+  border-color: maroon;
+}
+
+/* line 85, ../scss/screen.scss */
 #thumb_results a.thumb_result_link img {
   margin-right: 4px;
   margin-bottom: 4px;
   padding-right: 0px;
 }
 
-/* line 88, ../scss/screen.scss */
+/* line 91, ../scss/screen.scss */
 #search_input {
   margin-bottom: 8px;
 }
 
-/* line 92, ../scss/screen.scss */
+/* line 95, ../scss/screen.scss */
 .angular-leaflet-map {
   height: 100%;
 }
 
 @media (max-width: 400px) {
-  /* line 96, ../scss/screen.scss */
+  /* line 99, ../scss/screen.scss */
   #logo {
     width: 100%;
   }
 
-  /* line 97, ../scss/screen.scss */
+  /* line 100, ../scss/screen.scss */
   #search {
     width: 100%;
   }
 
-  /* line 100, ../scss/screen.scss */
+  /* line 103, ../scss/screen.scss */
   .flexible_container_left_fixed .left_div {
     background-image: none;
     box-shadow: none;
   }
 
-  /* line 104, ../scss/screen.scss */
+  /* line 107, ../scss/screen.scss */
   .flexible_container_left_fixed .right_div {
     margin-left: 0px;
   }
 
   /* small layout */
-  /* line 108, ../scss/screen.scss */
+  /* line 111, ../scss/screen.scss */
   #tabs {
     display: block;
   }
 
-  /* line 110, ../scss/screen.scss */
+  /* line 113, ../scss/screen.scss */
   #description {
     display: none;
   }
 
-  /* line 114, ../scss/screen.scss */
+  /* line 117, ../scss/screen.scss */
   #logo {
     width: 100%;
   }
 
-  /* line 116, ../scss/screen.scss */
+  /* line 119, ../scss/screen.scss */
   .left_div {
     width: 100%;
   }
 
-  /* line 117, ../scss/screen.scss */
+  /* line 120, ../scss/screen.scss */
   .right_div {
     width: 100%;
     margin-left: 0px;
   }
 
-  /* line 122, ../scss/screen.scss */
+  /* line 125, ../scss/screen.scss */
   .search_results_tab {
     display: none;
     width: 100%;
   }
 
-  /* line 123, ../scss/screen.scss */
+  /* line 126, ../scss/screen.scss */
   .search_results_tab.active {
     display: block;
     width: 100%;
@@ -180,7 +188,7 @@ ul.nav-pills a {
 /*
 bootstrap
 */
-/* line 133, ../scss/screen.scss */
+/* line 136, ../scss/screen.scss */
 .clearfix:after {
   content: "";
   display: table;

@@ -5,6 +5,7 @@ mediadumpController.controller('mediadumpCtrl', function ($location, $scope, $ro
 
 	$scope.query = "";
 	$scope.total_files_in_md = 12447;
+
 	
 	$scope.default_queries = [];
 	$http.get('http://media-dump.samt.st/generate_json.php')
@@ -172,7 +173,6 @@ mediadumpController.controller('mediadumpCtrl', function ($location, $scope, $ro
 			$scope.results = [];
 			$scope.search_info = [];
         }
-        document.body.scrollTop = document.documentElement.scrollTop = 0;
 	};
 
 	$scope.thumb_click = function(index) {
@@ -241,6 +241,13 @@ mediadumpController.controller('mediadumpCtrl', function ($location, $scope, $ro
 	    },
 	    zoom: 1
 	};
+
+	$scope.status = function(){
+		var s_message = "";
+
+
+		return s_message;
+	}
 
 	
 });

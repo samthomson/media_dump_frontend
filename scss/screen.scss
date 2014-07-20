@@ -3,6 +3,7 @@
 $left_col_width: 200px;
 $left_col_width_on_mobile: 100%;
 $padding: 8px;
+$tab_padding: 6px;
 $margin: 4px;
 $no_padding: 0px;
 $ui_breakpoint: 400px;
@@ -16,7 +17,7 @@ body{
 	font-family: Muli;
 	padding: $padding;
 }
-a{color: $media_dump_colour;}
+a{color: $media_dump_colour;cursor: pointer;}
 a:hover{color: $media_dump_colour;}
 a:visited{color: $media_dump_colour;}
 a:active{color: $media_dump_colour;}
@@ -63,6 +64,8 @@ a:active{color: $media_dump_colour;}
 
 
 
+#search ul li.active a{background: $media_dump_colour;color: $media_dump_inverse_colour;}
+
 #tabs{display:none;}
 
 .tab-pane#map{max-height: 80%;}
@@ -73,10 +76,10 @@ a:active{color: $media_dump_colour;}
 	cursor: pointer;
 }
 
-ul.nav-pills a{padding: 4px;}
+ul.nav-pills a{padding: $tab_padding;}
 
 
-#search_input button.active{background: $media_dump_colour;color: $media_dump_inverse_colour;}
+#search_input button.active{background: $media_dump_colour;color: $media_dump_inverse_colour;border-color: $media_dump_colour;}
 
 
 #thumb_results a.thumb_result_link img{
