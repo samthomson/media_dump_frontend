@@ -1,5 +1,5 @@
 
-var mediadumpApp = angular.module('mediadumpApp', ['ngRoute', 'mediadumpController']);
+var mediadumpApp = angular.module('mediadumpApp', ['ngRoute', 'mediadumpController', 'leaflet-directive']);
 
 
 

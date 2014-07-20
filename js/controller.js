@@ -172,6 +172,7 @@ mediadumpController.controller('mediadumpCtrl', function ($location, $scope, $ro
 			$scope.results = [];
 			$scope.search_info = [];
         }
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
 	};
 
 	$scope.thumb_click = function(index) {

@@ -1,11 +1,14 @@
 
 
-$left_col_width: 300px;
+$left_col_width: 200px;
 $left_col_width_on_mobile: 100%;
 $padding: 8px;
 $margin: 4px;
 $no_padding: 0px;
 $ui_breakpoint: 400px;
+
+$media_dump_colour: maroon;
+$media_dump_inverse_colour: #fff;
 
 
 
@@ -13,6 +16,10 @@ body{
 	font-family: Muli;
 	padding: $padding;
 }
+a{color: $media_dump_colour;}
+a:hover{color: $media_dump_colour;}
+a:visited{color: $media_dump_colour;}
+a:active{color: $media_dump_colour;}
 
 #logo_description{
 }
@@ -49,12 +56,10 @@ body{
 	width:$left_col_width;
 
 	background-image: linear-gradient(to left, #f6f6f6 0%, #fff 16px);
-	box-shadow: inset -1px 0 0 #eee;
 }
 .flexible_container_left_fixed .right_div{
 	margin-left:$left_col_width;
 }
-
 
 
 
@@ -71,6 +76,9 @@ body{
 ul.nav-pills a{padding: 4px;}
 
 
+#search_input button.active{background: $media_dump_colour;color: $media_dump_inverse_colour;}
+
+
 #thumb_results a.thumb_result_link img{
 	margin-right: $margin;
 	margin-bottom: $margin;
@@ -80,6 +88,8 @@ ul.nav-pills a{padding: 4px;}
 #search_input{
 	margin-bottom: $padding;
 }
+
+.angular-leaflet-map{height: 100%;}
 
 
 @media (max-width:$ui_breakpoint) {
