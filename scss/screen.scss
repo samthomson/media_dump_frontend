@@ -1,14 +1,19 @@
+
+
+$left_col_width: 400px;
+
+
 body{
 	font-family: Muli;
 	padding: 8px;
 }
-
 
 #logo_description{
 	background: blue;
 }
 #logo{
 	background: green;
+	width: $left_col_width;
 }
 #description{
 	background: orange;
@@ -24,6 +29,7 @@ body{
 
 #search{
 	background: lime;
+	width: $left_col_width;
 }
 
 #divider{
