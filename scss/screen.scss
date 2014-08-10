@@ -8,8 +8,11 @@ $margin: 4px;
 $no_padding: 0px;
 $ui_breakpoint: 400px;
 
-$media_dump_colour: maroon;
+$media_dump_colour: #B82731;
 $media_dump_inverse_colour: #fff;
+
+$small_thumb_width: 115px;
+$small_thumb_height: 115px;
 
 
 
@@ -86,6 +89,8 @@ ul.nav-pills a{padding: $tab_padding;}
 	margin-right: $margin;
 	margin-bottom: $margin;
 	padding-right: 0px;
+	width: $small_thumb_width;
+	height: $small_thumb_height;
 }
 
 #search_input{
@@ -94,8 +99,13 @@ ul.nav-pills a{padding: $tab_padding;}
 
 .angular-leaflet-map{height: 100%;}
 
+#pagination_social_container{
+	font-size:x-large;
+}
+
 
 @media (max-width:$ui_breakpoint) {
+	/* small screens */
 	#logo{width:$left_col_width_on_mobile;}
 	#search{width:$left_col_width_on_mobile;}
 
