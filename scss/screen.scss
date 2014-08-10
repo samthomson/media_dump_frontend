@@ -82,7 +82,13 @@ a:active{color: $media_dump_colour;}
 ul.nav-pills a{padding: $tab_padding;}
 
 
-#search_input button.active{background: $media_dump_colour;color: $media_dump_inverse_colour;border-color: $media_dump_colour;}
+#search_input button.active{
+	background: $media_dump_colour;
+	color: $media_dump_inverse_colour;
+	border-color: $media_dump_colour;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+}
 
 
 #thumb_results a.thumb_result_link img{
