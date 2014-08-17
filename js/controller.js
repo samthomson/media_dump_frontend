@@ -3,7 +3,7 @@ var mediadumpController = angular.module('mediadumpController', []);
 mediadumpController.controller('mediadumpCtrl', function ($location, $scope, $route, $routeParams, $http) {
 
 
-	$scope.query = "";
+	$scope.query = "*";
 	$scope.total_files_in_md = 12447;
 
 	
@@ -18,7 +18,6 @@ mediadumpController.controller('mediadumpCtrl', function ($location, $scope, $ro
 	// app stuff
 	
 	$scope.bQueryBuilderVisible = false;
-	$scope.search_mode = "";
 
 	// search stuff
 	$scope.search_mode = "search";
@@ -42,17 +41,42 @@ mediadumpController.controller('mediadumpCtrl', function ($location, $scope, $ro
 	}
 	if(jo_url_vars.file  != undefined){
 		$scope.iLightIndex = parseInt(jo_url_vars.file);
-		console.log("light index initiated from: " + $scope.iLightIndex);
 	}
 
 	$scope.results = [];
+
 	$scope.search_info = [];
 	$scope.bSearching = false;
+
 
 	// ui stuff
 	$scope.sLightboxURL = "";
 	$scope.sLightboxPlace = "";
 	$scope.map_settings = {"centre": [0, 0], "zoom": 1};
+
+	//
+	// data interfaces
+	//
+	$scope.markers = [];
+	$scope.map = {
+	    center: {
+	        latitude: 45,
+	        longitude: -73
+	    },
+	    zoom: 8
+	};	
+	$scope.bMapVisible = function(){
+		if ($scope.search_mode === 'map')
+			if (!$scope.bSearching)
+				return true;
+		/*
+			if(!$scope.bSearching){
+				google.maps.event.trigger(map, 'resize');
+				return true;
+			}
+*/
+		return false;
+	};
 
 
 	//
@@ -75,7 +99,46 @@ mediadumpController.controller('mediadumpCtrl', function ($location, $scope, $ro
 	});
 	$scope.$watch('search_mode', function(){
 		$scope.reconstruct_url();
+		if($scope.search_mode === 'map'){
+			/*
+			// re-initialise map and centre to avoid partial display
+			console.log("refresh map");
+			//google.maps.event.trigger(map, 'resize');
+
+			window.setTimeout(function(){
+
+				var map = new google.maps.Map(document.getElementById("map_canvas");
+
+				google.maps.event.trigger(map, 'resize');
+				map.setCenter($scope.map.center);
+
+			}, 100);
+*/
+		}
 	});
+	$scope.$watch('results', function(){
+		// reset markers structure that we'll return (so that it can be returned empty if no resutls)
+		$scope.markers = [];
+
+		var mTempMarker = {};
+
+		// go through all results and parse them into what a marker requires
+		for(var cResult = 0; cResult < $scope.results.length; cResult++){
+			mTempMarker = {
+	            latitude: $scope.results[cResult].a,
+	            longitude: $scope.results[cResult].o,
+	            title: 'm' + cResult,
+	            icon: $scope.urlFromHash('map_search', $scope.results[cResult].h, '')
+	        };
+	        mTempMarker["id"] = cResult;
+	        $scope.markers.push(mTempMarker);
+		}
+	});
+
+	$scope.reset = function(){
+		$scope.query = "*";
+		$scope.search_mode = "search";
+	};
 
 	// ui logic
 	$scope.b_results = function() {
@@ -115,7 +178,7 @@ mediadumpController.controller('mediadumpCtrl', function ($location, $scope, $ro
 				return 'http://6.cdn.samt.st/icon/'+sHash+'.jpg';
 				break;
 			case 'thumbs':
-				return 'http://5.cdn.samt.st/map-result/'+sHash+'.jpg';
+				return 'http://7.cdn.samt.st/map-result/'+sHash+'.jpg';
 				break;
 		}
 	};
@@ -144,6 +207,9 @@ mediadumpController.controller('mediadumpCtrl', function ($location, $scope, $ro
 	};
 
 	$scope.do_search = function() {
+		$scope.results = [];
+		$scope.search_info = [];
+
 		if($scope.query !== ""){
 			$scope.bSearching = true;	
 			$http({
@@ -169,9 +235,6 @@ mediadumpController.controller('mediadumpCtrl', function ($location, $scope, $ro
 				$scope.results = [];
 				$scope.search_info = [];
 	        });
-        }else{
-			$scope.results = [];
-			$scope.search_info = [];
         }
 	};
 
@@ -224,7 +287,7 @@ mediadumpController.controller('mediadumpCtrl', function ($location, $scope, $ro
 		if($scope.search_mode === 'map'){
 			return false;
 		}else{
-			return true;
+			return ($scope.search_info.available_pages > 1);
 		}
 	}
 	$scope.show_map_summary = function(){

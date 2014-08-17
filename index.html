@@ -36,106 +36,146 @@ lazy load results?
 		<noscript>Sorry, this page uses Javascript, which isn't enabled in your browser. You need to turn it on.</noscript>
 
 		<!-- the actual webpage -->
-		<div>
-			<div ng-controller="mediadumpCtrl">
-				<div id="logo_description" class="flexible_container_left_fixed clearfix">
-					<div id="logo" class="left_div">
-						media-dump.samt.st
-					</div>
-					<div id="description" class="right_div">
-						{{bounds.northEast.lat}}
-					</div>
+		<div id="mainBody" ng-controller="mediadumpCtrl">
+			<div id="logo_search">
+				<div id="logo" class="left_div">
+					<a ng-click="reset()"><i class="glyphicon glyphicon-home"></i> media-dump</a>
 				</div>
-				<div id="tabs">
-					<ul class="nav nav-tabs" role="tablist">
-						<li id="search_tab" class="active"><a href="javascript:_set_tab('search');">Search</a></li>
-	  					<li id="results_tab"><a href="javascript:_set_tab('results');">Results <span class="badge">{{search_info.count}}</span></a></li>
+
+				<div id="search_input" class="input-group">
+				
+					<input type="text" class="form-control" ng-model="query">
+					<span class="input-group-btn">
+						<button class="btn btn-default" ng-click="search_mode = 'search'" type="button" ng-class="{active: search_mode == 'search'}">grid</button>
+						<button class="btn btn-default" ng-click="search_mode = 'map'" type="button" ng-class="{active: search_mode == 'map'}">map</button>
+					</span>
+
+
+				</div><!-- /input-group -->
+
+			</div>
+
+
+			
+
+			<div id="tabs">			
+				<ul class="nav nav-tabs" role="tablist">
+					<li id="search_tab" class="active"><a href="javascript:_set_tab('search');">Search</a></li>
+  					<li id="results_tab"><a href="javascript:_set_tab('results');">Results <span class="badge">{{search_info.count}}</span></a></li>
+				</ul>
+			</div>
+			<div id="search_results" class="flexible_container_left_fixed clearfix">
+				<div id="search" class="search_results_tab left_div active">
+					<ul class="nav nav-pills">
+						<li class="active"><a href="#browse" role="tab" data-toggle="tab">Browse</a></li>
+  						<li><a href="#map" role="tab" data-toggle="tab">Map</a></li>
+						<!--<li class="dropdown">
+						    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						      More <span class="caret"></span>
+						    </a>
+					    	
+					    	<ul class="dropdown-menu" role="menu">
+					    	</ul>
+					    	
+					  	</li>-->
 					</ul>
-				</div>
-				<div id="search_results" class="flexible_container_left_fixed clearfix">
-					<div id="search" class="search_results_tab left_div active">
-						<ul class="nav nav-pills">
-							<li class="active"><a href="#browse" role="tab" data-toggle="tab">Browse</a></li>
-	  						<li><a href="#map" role="tab" data-toggle="tab">Map</a></li>
-							<!--<li class="dropdown">
-							    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-							      More <span class="caret"></span>
-							    </a>
-						    	
-						    	<ul class="dropdown-menu" role="menu">
-						    	</ul>
-						    	
-						  	</li>-->
-						</ul>
 
-						<!-- Tab panes -->
-						<div class="tab-content">
-							<div class="tab-pane active" id="browse">
-								<a ng-repeat="default_query in default_queries" class="default_query" ng-click="do_default_query(default_query.tag_value)">
-									<img ng-src="http://7.cdn.samt.st/icon/{{default_query.hash}}.jpg" alt="{{default_query.tag_value}}" title="{{default_query.tag_value}}" />
-									<span>{{default_query.tag_value}}
-								</a>
-							</div>
-							<div class="tab-pane" id="map">
-								<leaflet></leaflet>
-							</div>
-							<div class="tab-pane" id="more">...</div>
-						</div>
-					</div>
-					<div id="results" class="search_results_tab right_div">
-
-						<div id="search_input" class="input-group">
-							<input type="text" class="form-control" ng-model="query">
-							<span class="input-group-btn">
-								<button class="btn btn-default" ng-click="search_mode = 'search'" type="button" ng-class="{active: search_mode == 'search'}">grid</button>
-								<button class="btn btn-default" ng-click="search_mode = 'map'" type="button" ng-class="{active: search_mode == 'map'}">map</button>
-							</span>
-						</div><!-- /input-group -->
-
-
-
-
-
-
-						<div id="thumb_results" ng-show="search_mode === 'search'">
-							<a class="thumb_result_link" ng-repeat="result in results" ng-click="thumb_click($index)">
-								<img alt="{{result.p}}" title="{{result.p}}" ng-src="{{urlFromHash('thumbs', result.h, '')}}"/>
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<div class="tab-pane active" id="browse">
+							
+							<a ng-repeat="default_query in default_queries" class="default_query" ng-click="do_default_query(default_query.tag_value)">
+								<img ng-src="http://7.cdn.samt.st/icon/{{default_query.hash}}.jpg" alt="{{default_query.tag_value}}" title="{{default_query.tag_value}}" />
+								<span>{{default_query.tag_value}}
 							</a>
+							
 						</div>
-
-						<leaflet markers="markers" ng-show="search_mode === 'map'"></leaflet>
-
-						<div id="pagination_social_container" ng-show="search_info.count > 0">
-							<div id="pagination_social">
-								Found {{search_info.count * search_info.available_pages}} files in <i class="fa fa-flash"></i> {{search_info.total_speed | number:2}} ms -
-								<span ng-show="show_pagination()">
-									<a ng-show="pagination_enabled(true)" ng-click="page=page-1;">
-								        Previous
-								    </a>
-								    {{page}}/{{search_info.available_pages}}
-								    <a ng-show="pagination_enabled(false)" ng-click="page=page+1;">
-								        Next
-								    </a>
-							    </span>
-							    <span ng-show="show_map_summary()">
-							    	Showing around {{search_info.count}}
-							    </span>
-							</div>
+						<div class="tab-pane" id="map">
+							<!-- TODO: map input -->
 						</div>
-
+						<div class="tab-pane" id="more">...</div>
 					</div>
+				</div>
+				<div id="results" class="search_results_tab right_div">
+
+					
+					<div id="loading" ng-show="bSearching"><i class="glyphicon glyphicon-refresh spin"></i> loading</div>
+
+
+					<div id="thumb_results" ng-show="search_mode === 'search'">
+						<a class="thumb_result_link" ng-repeat="result in results" ng-click="thumb_click($index)">
+							<img alt="{{result.p}}" title="{{result.p}}" ng-src="{{urlFromHash('thumbs', result.h, '')}}"/>
+						</a>
+					</div>
+
+					<div id="map_result_container" ng-show="bMapVisible()" ng-if="bMapVisible()">
+						<google-map 
+							center="map.center" 
+							zoom="map.zoom" 
+							draggable='true'
+							icon='icon'
+							refresh="bMapVisible()"
+							>
+							<markers
+								models="markers"
+								coords="'self'"
+								doCluster="true"
+								>
+							</markers>
+						</google-map>
+					</div>
+					
 				</div>
 			</div>
-		</div>
+			<div id="pagination_social_container" ng-show="search_info.count > 0">
+				<div id="pagination_social">
+					<span id="result_stats" class="pull-left">
+						Found {{search_info.count * search_info.available_pages}} files in <i class="fa fa-flash"></i> {{search_info.total_speed | number:2}} ms
+					</span>
+					<span ng-show="show_pagination()" class="pull-right">
+						<a ng-show="pagination_enabled(true)" ng-click="page=page-1;">
+					        Previous
+					    </a>
+					    {{page}}/{{search_info.available_pages}}
+					    <a ng-show="pagination_enabled(false)" ng-click="page=page+1;">
+					        Next
+					    </a>
+				    </span>
+				    <span ng-show="show_map_summary()" class="pull-right">
+				    	Showing around {{search_info.count}}
+				    </span>
+				</div>
+			</div>
 
+
+			<div id="lightbox" ng-show="iLightIndex > -1">
+				<a class="lightbox_button" id="close_lightbox" ng-click="close_lightbox();">
+					<i class="fa fa-times"></i>
+				</a>
+				<a class="lightbox_button" id="left_lightbox" ng-click="lightChange(-1);">
+					<i class="fa fa-arrow-left"></i>
+				</a>
+				<a class="lightbox_button" id="right_lightbox" ng-click="lightChange(1);">
+					<i class="fa fa-arrow-right"></i>
+				</a>
+				<a ng-click="lightRight();">
+					<img ng-src="http://5.cdn.samt.st/lightbox/{{results[iLightIndex].h}}.{{results[iLightIndex].e}}" alt="{{results[iLightIndex].p}}" title="{{results[iLightIndex].p}}" />
+				</a>
+			</div>
+		</div>
 
 		<!-- scripts & analytics -->
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 		<!-- angular -->
+		<!--
 		<script src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js"></script>
+		-->
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
-		<script src="/js/angular-leaflet-directive.min.js"></script>
+		<!--<script src="/js/angular-leaflet-directive.min.js"></script>-->
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-route.js"></script>
+        <script src='/js/lodash.min.js'></script>
+        <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
+		<script src='/js/angular-google-maps.min.js'></script>
 		<!-- bootstrap -->
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
@@ -143,3 +183,14 @@ lazy load results?
 		<script src="/js/controller.js"></script>
 	</body>
 </html>
+
+<!--
+<div id="lightbox" ng-class="{lightbox_visible: iLightIndex > -1 && iLightIndex < (results.length)}">
+	<a class="lightbox_button" id="close_lightbox" ng-click="close_lightbox();"><i class="fa fa-times"></i></a>
+	<a class="lightbox_button" id="left_lightbox" ng-click="lightChange(-1);"><i class="fa fa-arrow-left"></i></a>
+	<a class="lightbox_button" id="right_lightbox" ng-click="lightChange(1);"><i class="fa fa-arrow-right"></i></a>
+	<a ng-click="lightRight();">
+		<img ng-src="http://5.cdn.samt.st/lightbox/{{results[iLightIndex].h}}.{{results[iLightIndex].e}}" alt="{{results[iLightIndex].p}}" title="{{results[iLightIndex].p}}" />
+	</a>
+</div>
+-->

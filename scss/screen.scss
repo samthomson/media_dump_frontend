@@ -14,8 +14,14 @@ $media_dump_inverse_colour: #fff;
 $small_thumb_width: 115px;
 $small_thumb_height: 115px;
 
+$font_size: larger;
+
+$logo_search_height: 50px;
+$tabs_height: 50px;
+$output_height: 40px;
 
 
+/* general */
 body{
 	font-family: Muli;
 	padding: $padding;
@@ -25,33 +31,87 @@ a:hover{color: $media_dump_colour;}
 a:visited{color: $media_dump_colour;}
 a:active{color: $media_dump_colour;}
 
-#logo_description{
+
+/* structure */
+
+#mainBody{
+	position:absolute;
+	top:0px;
+	right:0px;
+	bottom:0px;
+	left:0px;
 }
+
+#logo_search{
+	position:absolute;
+	top:0px;
+	right:0px;
+	height: $logo_search_height;
+	left:0px;
+}
+
 #logo{
+	font-size: $font_size;
+	height: 34px;
+	margin-bottom: 8px;
+	float: left;
 	width: $left_col_width;
 	padding: $padding;
+	padding-top: 14px;
 }
-#description{
-	padding: $padding;
-}
+
 
 #tabs{
 	padding: $padding;
-	padding-left: $no_padding;
+	padding-left: $padding;
 	padding-right: $no_padding;
+	height: $tabs_height;
 }
 
 #search_results{
-	
+	position:absolute;
+	top: $logo_search_height;
+	right:0px;
+	bottom:$output_height;
+	left:0px;
 }
 
 #search{
-	width: $left_col_width;
 	padding: $padding;
+	position:absolute;
+	top:0px;
+	bottom:0px;
+	left:0px;
+	overflow-x:hidden;
+	overflow-y:auto;
 }
 
 #results{
 	padding: $padding;
+	position:absolute;
+	top:0px;
+	bottom:0px;
+	left:0px;
+	right:0px;
+	overflow-y:auto;
+}
+#map_result_container{
+	position:absolute;
+	top:0px;
+	bottom:0px;
+	left:$padding;
+	right:$padding;
+}
+
+#pagination_social_container{
+	position:absolute;
+	height:$output_height;
+	bottom:0px;
+	left:0px;
+	right:0px;
+
+	font-size:$font_size;
+	padding:$padding;
 }
 
 .flexible_container_left_fixed{clear: both;}
@@ -66,8 +126,37 @@ a:active{color: $media_dump_colour;}
 }
 
 
+/* maps */
+.angular-google-map-container {
+	position:absolute;
+	display:block;
+	top:0;
+	bottom:0px;
+	left:0px;
+	right:0px;
+	padding: $padding;
+}
 
-#search ul li.active a{background: $media_dump_colour;color: $media_dump_inverse_colour;}
+#search_input{
+	/*
+	margin-bottom: $padding;
+	position: absolute;
+	left: $left_col_width;
+	top:0px;
+	right:0px;
+	background: orange;
+	*/
+	padding: $padding;
+}
+
+
+
+
+
+#search ul li.active a{
+	background: $media_dump_colour;
+	color: $media_dump_inverse_colour;
+}
 
 #tabs{display:none;}
 
@@ -77,6 +166,7 @@ a:active{color: $media_dump_colour;}
 	margin-top: $padding;
 	display: block;
 	cursor: pointer;
+	font-size:$font_size;
 }
 
 ul.nav-pills a{padding: $tab_padding;}
@@ -99,14 +189,60 @@ ul.nav-pills a{padding: $tab_padding;}
 	height: $small_thumb_height;
 }
 
-#search_input{
-	margin-bottom: $padding;
+
+a img{
+	opacity: 0.8;
+    filter: alpha(opacity=80); /* For IE8 and earlier */
+}
+a:hover img{
+	opacity: 1.0;
+    filter: alpha(opacity=100); /* For IE8 and earlier */
 }
 
-.angular-leaflet-map{height: 100%;}
 
-#pagination_social_container{
-	font-size:x-large;
+#loading{
+	font-size: xx-large;
+	z-index: 50;
+	color:$media_dump_colour;
+
+    width:200px;
+    height:50px;
+    position:absolute;
+    left:50%;
+    top:40%;
+    margin:-25px 0 0 -100px;
+
+}
+
+#lightbox{
+	z-index:100;
+	background:#fff;
+	position: absolute;
+	top:0px;
+	right:0px;
+	bottom:0px;
+	left:0px;
+}
+
+/* lightbox */
+#lightbox img{
+	width:auto;
+	max-width: 100%;
+	height:auto;
+	max-height: 100%;
+	margin:auto;
+	display:block;
+
+	opacity: 1.0;
+    filter: alpha(opacity=100); /* For IE8 and earlier */
+}
+#close_lightbox{top:0px;right:0px;}
+#left_lightbox{bottom:0px;left:0px;}
+#right_lightbox{bottom:0px;right:0px;}
+.lightbox_button{
+	position: absolute;
+	padding:10px;
+	font-size: x-large;
 }
 
 
@@ -125,7 +261,9 @@ ul.nav-pills a{padding: $tab_padding;}
 
 	/* small layout */
 	#tabs{display:block;}
-
+	#search_results{
+		top:$tabs_height;
+	}
 	#description{
 		display: none;
 	}
@@ -141,7 +279,13 @@ ul.nav-pills a{padding: $tab_padding;}
 	.search_results_tab{display:none;width:100%;}
 	.search_results_tab.active{display:block;width:100%;}
 
+	#pagination_social_container{
+		left:0px;
+	}
 
+	#result_stats{
+		display: none;
+	}
 }
 
 
@@ -153,4 +297,25 @@ bootstrap
   content: "";
   display: table;
   clear: both;
+}
+
+/*
+Functional
+*/
+
+/* spinner */
+@-webkit-keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to { 
+    -webkit-transform: rotate(359deg);
+  }
+}
+.spin
+{
+	-webkit-animation-name:             rotate; 
+	-webkit-animation-duration:         1s; 
+	-webkit-animation-iteration-count:  infinite;
+	-webkit-animation-timing-function: linear;
 }
