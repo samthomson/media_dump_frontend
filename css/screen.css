@@ -1,79 +1,58 @@
 /* general */
-/* line 25, ../scss/screen.scss */
 body {
   font-family: Muli;
-  padding: 8px;
-}
+  padding: 8px; }
 
-/* line 29, ../scss/screen.scss */
 a {
   color: #b82731;
-  cursor: pointer;
-}
+  cursor: pointer; }
 
-/* line 30, ../scss/screen.scss */
 a:hover {
-  color: #b82731;
-}
+  color: #b82731; }
 
-/* line 31, ../scss/screen.scss */
 a:visited {
-  color: #b82731;
-}
+  color: #b82731; }
 
-/* line 32, ../scss/screen.scss */
 a:active {
-  color: #b82731;
-}
+  color: #b82731; }
 
 /* structure */
-/* line 37, ../scss/screen.scss */
 #mainBody {
   position: absolute;
   top: 0px;
   right: 0px;
   bottom: 0px;
-  left: 0px;
-}
+  left: 0px; }
 
-/* line 45, ../scss/screen.scss */
 #logo_search {
   position: absolute;
   top: 0px;
   right: 0px;
   height: 50px;
-  left: 0px;
-}
+  left: 0px; }
 
-/* line 53, ../scss/screen.scss */
 #logo {
   font-size: larger;
   height: 34px;
   margin-bottom: 8px;
   float: left;
-  width: 200px;
+  width: 300px;
   padding: 8px;
-  padding-top: 14px;
-}
+  padding-top: 14px; }
 
-/* line 64, ../scss/screen.scss */
 #tabs {
   padding: 8px;
   padding-left: 8px;
   padding-right: 0px;
-  height: 50px;
-}
+  height: 50px; }
 
-/* line 71, ../scss/screen.scss */
 #search_results {
   position: absolute;
   top: 50px;
   right: 0px;
   bottom: 40px;
-  left: 0px;
-}
+  left: 0px; }
 
-/* line 79, ../scss/screen.scss */
 #search {
   padding: 8px;
   position: absolute;
@@ -81,10 +60,8 @@ a:active {
   bottom: 0px;
   left: 0px;
   overflow-x: hidden;
-  overflow-y: auto;
-}
+  overflow-y: auto; }
 
-/* line 89, ../scss/screen.scss */
 #results {
   padding: 8px;
   position: absolute;
@@ -92,19 +69,15 @@ a:active {
   bottom: 0px;
   left: 0px;
   right: 0px;
-  overflow-y: auto;
-}
+  overflow-y: auto; }
 
-/* line 98, ../scss/screen.scss */
 #map_result_container {
   position: absolute;
   top: 0px;
   bottom: 0px;
   left: 8px;
-  right: 8px;
-}
+  right: 8px; }
 
-/* line 106, ../scss/screen.scss */
 #pagination_social_container {
   position: absolute;
   height: 40px;
@@ -112,39 +85,32 @@ a:active {
   left: 0px;
   right: 0px;
   font-size: larger;
-  padding: 8px;
-}
+  padding: 8px; }
 
-/* line 117, ../scss/screen.scss */
 .flexible_container_left_fixed {
-  clear: both;
-}
+  clear: both; }
 
-/* line 118, ../scss/screen.scss */
 .flexible_container_left_fixed .left_div {
   float: left;
-  width: 200px;
-  background-image: linear-gradient(to left, #f6f6f6 0%, #ffffff 16px);
-}
+  width: 300px;
+  background-image: linear-gradient(to left, #f6f6f6 0%, white 16px); }
 
-/* line 124, ../scss/screen.scss */
 .flexible_container_left_fixed .right_div {
-  margin-left: 200px;
-}
+  margin-left: 300px; }
 
 /* maps */
-/* line 130, ../scss/screen.scss */
-.angular-google-map-container {
+#search_map .angular-google-map-container {
+  height: 400px; }
+
+#map_result_container .angular-google-map-container {
   position: absolute;
   display: block;
   top: 0;
   bottom: 0px;
   left: 0px;
   right: 0px;
-  padding: 8px;
-}
+  padding: 8px; }
 
-/* line 140, ../scss/screen.scss */
 #search_input {
   /*
   margin-bottom: $padding;
@@ -154,72 +120,52 @@ a:active {
   right:0px;
   background: orange;
   */
-  padding: 8px;
-}
+  padding: 8px; }
 
-/* line 156, ../scss/screen.scss */
 #search ul li.active a {
   background: #b82731;
-  color: white;
-}
+  color: white; }
 
-/* line 161, ../scss/screen.scss */
 #tabs {
-  display: none;
-}
+  display: none; }
 
-/* line 163, ../scss/screen.scss */
 .tab-pane#map {
-  max-height: 80%;
-}
+  max-height: 80%; }
 
-/* line 164, ../scss/screen.scss */
 .default_query {
   width: 100%;
   margin-top: 8px;
   display: block;
   cursor: pointer;
-  font-size: larger;
-}
+  font-size: larger; }
 
-/* line 172, ../scss/screen.scss */
 ul.nav-pills a {
-  padding: 6px;
-}
+  padding: 6px; }
 
-/* line 175, ../scss/screen.scss */
 #search_input button.active {
   background: #b82731;
   color: white;
   border-color: #b82731;
   -webkit-box-shadow: none;
-  box-shadow: none;
-}
+  box-shadow: none; }
 
-/* line 184, ../scss/screen.scss */
 #thumb_results a.thumb_result_link img {
   margin-right: 4px;
   margin-bottom: 4px;
   padding-right: 0px;
   width: 115px;
-  height: 115px;
-}
+  height: 115px; }
 
-/* line 193, ../scss/screen.scss */
 a img {
   opacity: 0.8;
   filter: alpha(opacity=80);
-  /* For IE8 and earlier */
-}
+  /* For IE8 and earlier */ }
 
-/* line 197, ../scss/screen.scss */
 a:hover img {
   opacity: 1.0;
   filter: alpha(opacity=100);
-  /* For IE8 and earlier */
-}
+  /* For IE8 and earlier */ }
 
-/* line 203, ../scss/screen.scss */
 #loading {
   font-size: xx-large;
   z-index: 50;
@@ -229,10 +175,8 @@ a:hover img {
   position: absolute;
   left: 50%;
   top: 40%;
-  margin: -25px 0 0 -100px;
-}
+  margin: -25px 0 0 -100px; }
 
-/* line 217, ../scss/screen.scss */
 #lightbox {
   z-index: 100;
   background: #fff;
@@ -240,11 +184,9 @@ a:hover img {
   top: 0px;
   right: 0px;
   bottom: 0px;
-  left: 0px;
-}
+  left: 0px; }
 
 /* lightbox */
-/* line 228, ../scss/screen.scss */
 #lightbox img {
   width: auto;
   max-width: 100%;
@@ -254,141 +196,93 @@ a:hover img {
   display: block;
   opacity: 1.0;
   filter: alpha(opacity=100);
-  /* For IE8 and earlier */
-}
+  /* For IE8 and earlier */ }
 
-/* line 239, ../scss/screen.scss */
 #close_lightbox {
   top: 0px;
-  right: 0px;
-}
+  right: 0px; }
 
-/* line 240, ../scss/screen.scss */
 #left_lightbox {
   bottom: 0px;
-  left: 0px;
-}
+  left: 0px; }
 
-/* line 241, ../scss/screen.scss */
 #right_lightbox {
   bottom: 0px;
-  right: 0px;
-}
+  right: 0px; }
 
-/* line 242, ../scss/screen.scss */
 .lightbox_button {
   position: absolute;
   padding: 10px;
-  font-size: x-large;
-}
+  font-size: x-large; }
 
 @media (max-width: 400px) {
   /* small screens */
-  /* line 251, ../scss/screen.scss */
   #logo {
-    width: 100%;
-  }
+    width: 100%; }
 
-  /* line 252, ../scss/screen.scss */
   #search {
-    width: 100%;
-  }
+    width: 100%; }
 
-  /* line 255, ../scss/screen.scss */
   .flexible_container_left_fixed .left_div {
     background-image: none;
-    box-shadow: none;
-  }
+    box-shadow: none; }
 
-  /* line 259, ../scss/screen.scss */
   .flexible_container_left_fixed .right_div {
-    margin-left: 0px;
-  }
+    margin-left: 0px; }
 
   /* small layout */
-  /* line 263, ../scss/screen.scss */
   #tabs {
-    display: block;
-  }
+    display: block; }
 
-  /* line 264, ../scss/screen.scss */
   #search_results {
-    top: 50px;
-  }
+    top: 50px; }
 
-  /* line 267, ../scss/screen.scss */
   #description {
-    display: none;
-  }
+    display: none; }
 
-  /* line 271, ../scss/screen.scss */
   #logo {
-    width: 100%;
-  }
+    width: 100%; }
 
-  /* line 273, ../scss/screen.scss */
   .left_div {
-    width: 100%;
-  }
+    width: 100%; }
 
-  /* line 274, ../scss/screen.scss */
   .right_div {
     width: 100%;
-    margin-left: 0px;
-  }
+    margin-left: 0px; }
 
-  /* line 279, ../scss/screen.scss */
   .search_results_tab {
     display: none;
-    width: 100%;
-  }
+    width: 100%; }
 
-  /* line 280, ../scss/screen.scss */
   .search_results_tab.active {
     display: block;
-    width: 100%;
-  }
+    width: 100%; }
 
-  /* line 282, ../scss/screen.scss */
   #pagination_social_container {
-    left: 0px;
-  }
+    left: 0px; }
 
-  /* line 286, ../scss/screen.scss */
   #result_stats {
-    display: none;
-  }
-}
+    display: none; } }
 /*
 bootstrap
 */
-/* line 296, ../scss/screen.scss */
 .clearfix:after {
   content: "";
   display: table;
-  clear: both;
-}
+  clear: both; }
 
 /*
 Functional
 */
 /* spinner */
 @-webkit-keyframes rotate {
-  /* line 308, ../scss/screen.scss */
   from {
-    -webkit-transform: rotate(0deg);
-  }
+    -webkit-transform: rotate(0deg); }
 
-  /* line 311, ../scss/screen.scss */
   to {
-    -webkit-transform: rotate(359deg);
-  }
-}
-
-/* line 316, ../scss/screen.scss */
+    -webkit-transform: rotate(359deg); } }
 .spin {
   -webkit-animation-name: rotate;
   -webkit-animation-duration: 1s;
   -webkit-animation-iteration-count: infinite;
-  -webkit-animation-timing-function: linear;
-}
+  -webkit-animation-timing-function: linear; }

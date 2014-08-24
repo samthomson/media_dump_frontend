@@ -42,33 +42,31 @@ lazy load results?
 					<a ng-click="reset()"><i class="glyphicon glyphicon-home"></i> media-dump</a>
 				</div>
 
-				<div id="search_input" class="input-group">
-				
+				<div id="search_input" class="input-group">		
 					<input type="text" class="form-control" ng-model="query">
 					<span class="input-group-btn">
 						<button class="btn btn-default" ng-click="search_mode = 'search'" type="button" ng-class="{active: search_mode == 'search'}">grid</button>
 						<button class="btn btn-default" ng-click="search_mode = 'map'" type="button" ng-class="{active: search_mode == 'map'}">map</button>
 					</span>
-
-
 				</div><!-- /input-group -->
-
 			</div>
-
-
 			
 
 			<div id="tabs">			
 				<ul class="nav nav-tabs" role="tablist">
-					<li id="search_tab" class="active"><a href="javascript:_set_tab('search');">Search</a></li>
-  					<li id="results_tab"><a href="javascript:_set_tab('results');">Results <span class="badge">{{search_info.count}}</span></a></li>
+					<li id="search_tab" class="active">
+						<a href="javascript:_set_tab('search');">Search</a>
+					</li>
+  					<li id="results_tab">
+  						<a href="javascript:_set_tab('results');">Results <span class="badge">{{search_info.count}}</span></a>
+					</li>
 				</ul>
 			</div>
 			<div id="search_results" class="flexible_container_left_fixed clearfix">
 				<div id="search" class="search_results_tab left_div active">
 					<ul class="nav nav-pills">
 						<li class="active"><a href="#browse" role="tab" data-toggle="tab">Browse</a></li>
-  						<li><a href="#map" role="tab" data-toggle="tab">Map</a></li>
+  						<li><a href="#search_map" role="tab" data-toggle="tab">Map</a></li>
 						<!--<li class="dropdown">
 						    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
 						      More <span class="caret"></span>
@@ -89,8 +87,16 @@ lazy load results?
 								<span>{{default_query.tag_value}}
 							</a>							
 						</div>
-						<div class="tab-pane" id="map">
+						<div class="tab-pane" id="search_map">
 							<!-- TODO: map input -->
+							<google-map 
+								center="search_map.center" 
+								zoom="search_map.zoom" 
+								draggable='true'
+								events="search_map.events"
+								bounds="search_map.bounds"
+								>
+							</google-map>
 						</div>
 						<div class="tab-pane" id="more">...</div>
 					</div>
@@ -117,6 +123,7 @@ lazy load results?
 								coords="'self'"
 								doCluster="true"
 								icon="'icon'"
+								click="'map_icon_click'"
 								>
 							</markers>
 						</google-map>

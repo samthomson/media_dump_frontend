@@ -44,6 +44,16 @@ mediadumpController.controller('mediadumpCtrl', function ($location, $scope, $ro
 	}
 
 	$scope.results = [];
+	$scope.results_bounds = {
+		northeast: {
+			latitude:0,
+			longitude:0
+		},
+		southwest: {
+			latitude:0,
+			longitude:0
+		}
+	};
 
 	$scope.search_info = [];
 	$scope.bSearching = false;
@@ -65,6 +75,55 @@ mediadumpController.controller('mediadumpCtrl', function ($location, $scope, $ro
 	    },
 	    zoom: 8
 	};	
+	$scope.search_map = {
+	    center: {
+	        latitude: 45,
+	        longitude: -73
+	    },
+	    bounds: {},
+	    zoom: 8,
+	    events: {
+		    idle: function (map) {
+		    	$scope.$apply(function () {
+
+		    		//$scope.map_changed();
+
+
+					/*
+		    		console.log(map.getBounds().getNorthEast());
+		    		console.log(map.getBounds().getSouthWest());
+		    		console.log(map.getBounds());
+		    		console.log("");
+		    		*/
+
+		    		/*
+		    		console.log($scope.search_map.bounds.northeast.latitude);
+		    		console.log($scope.search_map.bounds.southwest.latitude);
+		    		console.log("");
+		    		*/
+		    		/*
+		    		var llBounds = map.getBounds();
+
+			    	var llNorthEast = llBounds.getNorthEast();
+			    	var llSouthWest = llBounds.getSouthWest();
+
+
+			    	var sQuery = "map=";
+			    	sQuery += llSouthWest.lat();
+			    	sQuery += ",";			
+			    	sQuery += llNorthEast.lat();
+			    	sQuery += ",";			
+			    	sQuery += llSouthWest.lng();
+			    	sQuery += ",";			
+			    	sQuery += llNorthEast.lng();
+
+			    	console.log(sQuery);    
+			    	*/
+				});
+		    }
+	    }
+	};	
+
 	$scope.bMapVisible = function(){
 		if ($scope.search_mode === 'map')
 			if (!$scope.bSearching)
@@ -99,22 +158,6 @@ mediadumpController.controller('mediadumpCtrl', function ($location, $scope, $ro
 	});
 	$scope.$watch('search_mode', function(){
 		$scope.reconstruct_url();
-		if($scope.search_mode === 'map'){
-			/*
-			// re-initialise map and centre to avoid partial display
-			console.log("refresh map");
-			//google.maps.event.trigger(map, 'resize');
-
-			window.setTimeout(function(){
-
-				var map = new google.maps.Map(document.getElementById("map_canvas");
-
-				google.maps.event.trigger(map, 'resize');
-				map.setCenter($scope.map.center);
-
-			}, 100);
-*/
-		}
 	});
 	$scope.$watch('results', function(){
 		// reset markers structure that we'll return (so that it can be returned empty if no resutls)
@@ -134,6 +177,16 @@ mediadumpController.controller('mediadumpCtrl', function ($location, $scope, $ro
 	        $scope.markers.push(mTempMarker);
 		}
 	});
+
+
+	$scope.boundsChanged = function(){
+		console.log("var");
+	}
+
+	$scope.new_bounds = function(){
+		return $scope.results_bounds;
+	}
+
 
 	$scope.reset = function(){
 		$scope.query = "*";
@@ -214,13 +267,14 @@ mediadumpController.controller('mediadumpCtrl', function ($location, $scope, $ro
 			$scope.bSearching = true;	
 			$http({
 		        method  : 'GET',
-		        url     : 'http://media-dump.samt.st/api/search',
+		        url     : 'http://media-dump-instant/api/search',
 		        params    : {q: $scope.query, page: $scope.page, m: $scope.search_mode}
 		    })
 	        .success(function(data) {
 	            if(data.results.files != undefined){
 	            	$scope.results = data.results.files;
 		            $scope.search_info = data.results.info;
+
 				}else{
 	            	// if not successful, bind errors to error variables
 	            	console.log("http successful, but problem with results :(");
@@ -239,14 +293,18 @@ mediadumpController.controller('mediadumpCtrl', function ($location, $scope, $ro
 	};
 
 	$scope.thumb_click = function(index) {
-		console.log("light clicked: " + index);
 		$scope.iLightIndex = index;
 	}
+	$scope.map_icon_click = function() {
+		console.log("light clicked");
+	}
+
+	/*
 	$scope.map_icon_click = function(event, index) {
 		console.log("icon clicked: " + index)
 		$scope.iLightIndex = index;
 		$scope.$apply();
-	}
+	}*/
 	$scope.map_changed = function(event) {
 		// only fire this event if we're actually doing a geo search
 		if($scope.search_mode == 'map' || $scope.search_mode == 'search_map'){

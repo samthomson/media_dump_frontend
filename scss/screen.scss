@@ -1,6 +1,6 @@
 
 
-$left_col_width: 200px;
+$left_col_width: 300px;
 $left_col_width_on_mobile: 100%;
 $padding: 8px;
 $tab_padding: 6px;
@@ -127,7 +127,11 @@ a:active{color: $media_dump_colour;}
 
 
 /* maps */
-.angular-google-map-container {
+
+#search_map .angular-google-map-container {
+	height: 400px;
+}
+#map_result_container .angular-google-map-container {
 	position:absolute;
 	display:block;
 	top:0;
