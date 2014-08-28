@@ -155,6 +155,7 @@ mediadumpController.controller('mediadumpCtrl', function ($location, $scope, $ro
 	});
 	$scope.$watch('iLightIndex', function(){
 		$scope.reconstruct_url();
+		$scope.preload_around();
 	});
 	$scope.$watch('search_mode', function(){
 		$scope.reconstruct_url();
@@ -181,11 +182,11 @@ mediadumpController.controller('mediadumpCtrl', function ($location, $scope, $ro
 
 	$scope.boundsChanged = function(){
 		console.log("var");
-	}
+	};
 
 	$scope.new_bounds = function(){
 		return $scope.results_bounds;
-	}
+	};
 
 
 	$scope.reset = function(){
@@ -236,6 +237,28 @@ mediadumpController.controller('mediadumpCtrl', function ($location, $scope, $ro
 		}
 	};
 
+	$scope.preload_around = function(){
+		if($scope.iLightIndex > -1 && $scope.results.length > 0){
+			var saPreloadURLS = [];
+
+			for(cImage = $scope.iLightIndex - 2, cPreloadCount = 0; cPreloadCount < 5; cImage++, cPreloadCount++){
+				if(cImage > -1 && cImage < $scope.results.length){
+					saPreloadURLS.push($scope.urlFromHash('lightbox', $scope.results[cImage].h, 'jpg'));
+				}
+			}
+
+			
+			
+			//console.log("preload: " + );
+			saPreloadURLS.forEach(function(value){
+				try {
+		            var _img = new Image();
+		            _img.src = value;
+		        } catch (e) { }
+			});
+		}
+	}
+
 	$scope.reconstruct_url = function(){
 		if($scope.query !== ''){
 			$location.search('query', $scope.query);
@@ -267,7 +290,8 @@ mediadumpController.controller('mediadumpCtrl', function ($location, $scope, $ro
 			$scope.bSearching = true;	
 			$http({
 		        method  : 'GET',
-		        url     : 'http://media-dump-instant/api/search',
+		        /*url     : 'http://media-dump-instant/api/search',*/
+		        url     : 'http://media-dump.samt.st/api/search',
 		        params    : {q: $scope.query, page: $scope.page, m: $scope.search_mode}
 		    })
 	        .success(function(data) {
@@ -369,6 +393,4 @@ mediadumpController.controller('mediadumpCtrl', function ($location, $scope, $ro
 
 		return s_message;
 	}
-
-	
 });
