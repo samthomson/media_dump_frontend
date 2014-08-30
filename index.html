@@ -20,7 +20,6 @@ lazy load results?
     	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 
 		<!-- css & fonts -->
-		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css">
 		<!-- fonts -->
 		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 		<link href='http://fonts.googleapis.com/css?family=Muli' rel='stylesheet' type='text/css'>
@@ -37,7 +36,7 @@ lazy load results?
 		<div id="mainBody" ng-controller="mediadumpCtrl">
 			<div id="logo_search">
 				<div id="logo" class="left_div">
-					<a ng-click="reset()"><i class="glyphicon glyphicon-home"></i> media-dump</a>
+					<a ng-click="reset()"><i class="glyphicon glyphicon-home"></i> media-dump</a>{{map.bounds}}
 				</div>
 
 				<div id="search_input" class="input-group">		
@@ -81,7 +80,7 @@ lazy load results?
 						<div class="tab-pane active" id="browse">
 							
 							<a ng-repeat="default_query in default_queries" class="default_query" ng-click="do_default_query(default_query.tag_value)">
-								<img ng-src="http://7.cdn.samt.st/icon/{{default_query.hash}}.jpg" alt="{{default_query.tag_value}}" title="{{default_query.tag_value}}" />
+								<img ng-src="http://7.cdn.samt.st/map-result/{{default_query.hash}}.jpg" alt="{{default_query.tag_value}}" title="{{default_query.tag_value}}" />
 								<span>{{default_query.tag_value}}
 							</a>							
 						</div>
@@ -114,7 +113,7 @@ lazy load results?
 							center="map.center" 
 							zoom="map.zoom" 
 							draggable='true'
-							refresh="bMapVisible()"
+							bounds="map.bounds"
 							>
 							<markers
 								models="markers"
@@ -182,7 +181,6 @@ lazy load results?
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
 		<script src="/js/app.js"></script>
-		<script src="/js/controller.js"></script>
 	</body>
 </html>
 
