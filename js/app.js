@@ -8,11 +8,8 @@ mediadumpApp.config(function($httpProvider){
 mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $routeParams, $http) {
 
 
-
 	$scope.query = "*";
 	$scope.total_files_in_md = 12447;
-
-	$scope.mapInstance = {};
 
 	
 	$scope.default_queries = [];
@@ -52,6 +49,16 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	}
 
 	$scope.results = [];
+	$scope.results_bounds = {
+		northeast: {
+			latitude:0,
+			longitude:0
+		},
+		southwest: {
+			latitude:0,
+			longitude:0
+		}
+	};
 
 	$scope.search_info = [];
 	$scope.bSearching = false;
@@ -71,19 +78,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	        latitude: 45,
 	        longitude: -73
 	    },
-	    zoom: 8,
-	    /*
-	    bounds: {
-			northeast: {
-				latitude:0,
-				longitude:0
-			},
-			southwest: {
-				latitude:0,
-				longitude:0
-			}
-		}*/
-		bounds: {}
+	    zoom: 8
 	};	
 	$scope.search_map = {
 	    center: {
@@ -130,11 +125,6 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 			    	console.log(sQuery);    
 			    	*/
 				});
-		    },
-		    tilesloaded: function (map) {
-			    $scope.$apply(function () {
-			    	$scope.mapInstance = map;
-			    });
 		    }
 	    }
 	};	
@@ -143,7 +133,12 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		if ($scope.search_mode === 'map')
 			if (!$scope.bSearching)
 				return true;
-
+		/*
+			if(!$scope.bSearching){
+				google.maps.event.trigger(map, 'resize');
+				return true;
+			}
+*/
 		return false;
 	};
 
@@ -165,6 +160,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	});
 	$scope.$watch('iLightIndex', function(){
 		$scope.reconstruct_url();
+		$scope.preload_around();
 	});
 	$scope.$watch('search_mode', function(){
 		$scope.reconstruct_url();
@@ -191,17 +187,16 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 
 	$scope.boundsChanged = function(){
 		console.log("var");
-	}
+	};
 
 	$scope.new_bounds = function(){
 		return $scope.results_bounds;
-	}
+	};
 
 
 	$scope.reset = function(){
 		$scope.query = "*";
 		$scope.search_mode = "search";
-    	//$scope.map.bounds = {};
 	};
 
 	// ui logic
@@ -247,6 +242,28 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		}
 	};
 
+	$scope.preload_around = function(){
+		if($scope.iLightIndex > -1 && $scope.results.length > 0){
+			var saPreloadURLS = [];
+
+			for(cImage = $scope.iLightIndex - 2, cPreloadCount = 0; cPreloadCount < 5; cImage++, cPreloadCount++){
+				if(cImage > -1 && cImage < $scope.results.length){
+					saPreloadURLS.push($scope.urlFromHash('lightbox', $scope.results[cImage].h, 'jpg'));
+				}
+			}
+
+			
+			
+			//console.log("preload: " + );
+			saPreloadURLS.forEach(function(value){
+				try {
+		            var _img = new Image();
+		            _img.src = value;
+		        } catch (e) { }
+			});
+		}
+	}
+
 	$scope.reconstruct_url = function(){
 		if($scope.query !== ''){
 			$location.search('query', $scope.query);
@@ -276,33 +293,16 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 
 		if($scope.query !== ""){
 			$scope.bSearching = true;	
-
-			
 			$http({
 		        method  : 'GET',
 		        /*url     : 'http://media-dump-instant/api/search',*/
-		        url     : 'http://media-dump-instant/api/search/',
-		        params: {
-			    	q: $scope.query, 
-			    	page: $scope.page, 
-			    	m: $scope.search_mode
-			    }
+		        url     : 'http://media-dump.samt.st/api/search',
+		        params    : {q: $scope.query, page: $scope.page, m: $scope.search_mode}
 		    })
 	        .success(function(data) {
 	            if(data.results.files != undefined){
-		            $scope.search_info = data.results.info;	
-	            	$scope.map.bounds = data.results.info.bounds;
-
-	            	
-	            	/*
-	            	if($scope.mapInstance != undefined){
-	            		console.log("refresh map");
-	            		//$scope.mapInstance.setCenter($scope.mapInstance.getCenter());
-	            		//console.log($scope.mapInstance.getBounds());
-	            		google.maps.event.trigger($scope.mapInstance, 'resize');
-	            	}*/
-
 	            	$scope.results = data.results.files;
+		            $scope.search_info = data.results.info;
 
 				}else{
 	            	// if not successful, bind errors to error variables
@@ -334,7 +334,6 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		$scope.iLightIndex = index;
 		$scope.$apply();
 	}*/
-	/*
 	$scope.map_changed = function(event) {
 		// only fire this event if we're actually doing a geo search
 		if($scope.search_mode == 'map' || $scope.search_mode == 'search_map'){
@@ -354,7 +353,6 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 			$scope.$apply();
 		}
 	}
-	*/
 
 	$scope.close_lightbox = function(){
 		$scope.iLightIndex = -1;
@@ -400,14 +398,4 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 
 		return s_message;
 	}
-
-	
 });
-
-function _set_tab(s_tab){
-	$("#tabs li").removeClass("active");
-	$("#tabs li#"+s_tab+"_tab").addClass("active");
-
-	$("#search_results .search_results_tab").removeClass("active");
-	$("#search_results .search_results_tab#"+s_tab).addClass("active");
-}
