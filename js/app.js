@@ -229,6 +229,10 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	};
 
 	$scope.urlFromHash = function(sMode, sHash, sExt){
+		//sHash = Object.keys(sHash)[0];
+
+		return 'http://mdcdn/thumb/'+sHash.id+'.jpg';
+		
 		switch(sMode){
 			case 'lightbox':
 				return 'http://5.cdn.samt.st/lightbox/'+sHash+'.'+sExt;
@@ -295,14 +299,15 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 			$scope.bSearching = true;	
 			$http({
 		        method  : 'GET',
-		        /*url     : 'http://media-dump-instant/api/search',*/
-		        url     : 'http://media-dump.samt.st/api/search',
-		        params    : {q: $scope.query, page: $scope.page, m: $scope.search_mode}
+		        /*url     : 'http://media-dump-instant/api/search',
+		        url     : 'http://media-dump.samt.st/api/search',*/
+		        url     : 'http://127.0.0.1:8000/search/',
+		        params    : {query: $scope.query, page: $scope.page, m: $scope.search_mode}
 		    })
 	        .success(function(data) {
-	            if(data.results.files != undefined){
-	            	$scope.results = data.results.files;
-		            $scope.search_info = data.results.info;
+	            if(data != undefined){
+	            	$scope.results = data.files;
+		            $scope.search_info = data.results_info;
 
 				}else{
 	            	// if not successful, bind errors to error variables

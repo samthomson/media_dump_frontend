@@ -80,8 +80,8 @@ lazy load results?
 						<div class="tab-pane active" id="browse">
 							
 							<a ng-repeat="default_query in default_queries" class="default_query" ng-click="do_default_query(default_query.tag_value)">
-								<img ng-src="http://7.cdn.samt.st/map-result/{{default_query.hash}}.jpg" alt="{{default_query.tag_value}}" title="{{default_query.tag_value}}" />
-								<span>{{default_query.tag_value}}
+								<img ng-src="http://6.cdn.samt.st/map-result/{{default_query.hash}}.jpg" alt="{{default_query.tag_value}}" title="{{default_query.tag_value}}" />
+								<span>
 							</a>							
 						</div>
 						<div class="tab-pane" id="search_map">
@@ -105,7 +105,7 @@ lazy load results?
 
 
 					<div id="thumb_results" ng-show="search_mode === 'search'">
-						<a class="thumb_result_link" ng-repeat="result in results" ng-click="thumb_click($index)"><img alt="{{result.p}}" title="{{result.p}}" ng-src="{{urlFromHash('thumbs', result.h, '')}}"/></a>
+						<a class="thumb_result_link" ng-repeat="result in results" ng-click="thumb_click($index)"><img alt="result.p" title="result.p" ng-src="{{urlFromHash('thumbs', result, '')}}"/></a>
 					</div>
 
 					<div id="map_result_container" ng-show="bMapVisible()" ng-if="bMapVisible()">
