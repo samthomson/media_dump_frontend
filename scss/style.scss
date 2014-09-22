@@ -1,0 +1,101 @@
+
+$zero_pix: 0px;
+
+$padding: 8px;
+$margin: 4px;
+$ui_breakpoint: 400px;
+
+$media_dump_colour: maroon;
+$media_dump_inverse_colour: #fff;
+$secondary_colour: silver;
+
+$small_thumb_width: 115px;
+$small_thumb_height: 115px;
+
+$font_size: larger;
+
+
+
+/* general */
+body{
+	font-family: Muli;
+	padding: $zero_pix;
+	margin: $zero_pix;
+}
+
+a{color: $media_dump_colour;cursor: pointer;}
+a:hover{color: $media_dump_colour;}
+a:visited{color: $media_dump_colour;}
+a:active{color: $media_dump_colour;}
+
+a img{
+	opacity: 1.0;
+    filter: alpha(opacity=100); /* For IE8 and earlier */
+}
+a:hover img{
+	opacity: 0.8;
+    filter: alpha(opacity=80); /* For IE8 and earlier */
+}
+
+/*
+bootstrap
+*/
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/*
+Functional
+*/
+
+/* spinner */
+@-webkit-keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to { 
+    -webkit-transform: rotate(359deg);
+  }
+}
+.spin
+{
+	-webkit-animation-name:             rotate; 
+	-webkit-animation-duration:         1s; 
+	-webkit-animation-iteration-count:  infinite;
+	-webkit-animation-timing-function: linear;
+}
+
+/*
+Layout
+*/
+#header{
+	background: $media_dump_colour;
+	color: $media_dump_inverse_colour;
+	padding: $padding;
+}
+#main{
+	padding: $padding;
+}
+#nav{}
+#results{}
+
+/*
+layout parts
+*/
+#logo{
+	font-size:x-large;
+	display: inline;
+	width:20%;
+	float:left;
+
+	text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+#search_input{
+	display: inline;
+	width: 75%;
+	float: right;
+}
