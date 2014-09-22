@@ -56,6 +56,7 @@ Layout
 */
 #header {
   background: maroon;
+  background: #333;
   color: white;
   padding: 8px; }
 
@@ -77,4 +78,35 @@ layout parts
 #search_input {
   display: inline;
   width: 75%;
-  float: right; }
+  right: 4px;
+  position: absolute; }
+
+#advanced_search {
+  position: relative;
+  width: 100%;
+  padding: 8px;
+  border: 8px silver solid; }
+
+/*
+styling
+*/
+.btn-media-dump {
+  background: maroon;
+  color: white; }
+
+.btn-media-dump:hover, .btn-media-dump:active, .btn-media-dump:visited {
+  color: white; }
+
+.btn.advanced_showing {
+  background: silver;
+  color: maroon; }
+
+.form-control, .btn {
+  border-radius: 0px; }
+
+.light_opacity {
+  background: silver;
+  	/*
+  	opacity: 0.9;
+      filter: alpha(opacity=90);*/
+  /* For IE8 and earlier */ }

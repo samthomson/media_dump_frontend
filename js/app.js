@@ -31,6 +31,8 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 
 	$scope.iLightIndex = -1;
 
+	$scope.bShowAdvancedSearch = false;
+
 
 	var jo_url_vars = $location.search();
 	
@@ -49,6 +51,15 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	}
 
 	$scope.results = [];
+	$scope.available_filters = [];
+	$scope.bUpdate = function(){
+		for(var cFilter = 0; cFilter < $scope.available_filters.length; cFilter++){
+			if($scope.available_filters[cFilter].add === true){
+				return true;
+			}
+		}
+		return false;
+	}
 	$scope.results_bounds = {
 		northeast: {
 			latitude:0,
@@ -61,6 +72,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	};
 
 	$scope.search_info = [];
+	$scope.result_info = [];
 	$scope.bSearching = false;
 
 
@@ -183,7 +195,32 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	        $scope.markers.push(mTempMarker);
 		}
 	});
+	$scope.$watch('result_info', function(){
+		var oTempFilter = {};
+		if(typeof($scope.result_info.distinct) !== undefined)
+			for(var cFilter = 0; cFilter < $scope.result_info.distinct.length; cFilter++){
+				oTempFilter = {
+					"value": $scope.result_info.distinct[cFilter].term,
+					"add": false
+				};
+				$scope.available_filters.push(oTempFilter);
+			}
+	});
 
+	$scope.addFilter = function($index){
+		// add filters to search query
+		$scope.available_filters[$index].add = !$scope.available_filters[$index].add;
+	}
+
+	$scope.refreshSearch = function(){
+		// add filters to search query
+		for(var cFilter = 0; cFilter < $scope.available_filters.length; cFilter++){
+			if($scope.available_filters[cFilter].add === true){
+				$scope.query += " " + $scope.available_filters[cFilter].value;
+			}
+		}
+		$scope.available_filters = [];
+	}
 
 	$scope.boundsChanged = function(){
 		console.log("var");
@@ -302,12 +339,12 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		        /*url     : 'http://media-dump-instant/api/search',
 		        url     : 'http://media-dump.samt.st/api/search',*/
 		        url     : 'http://127.0.0.1:8000/search/',
-		        params    : {query: $scope.query, page: $scope.page, m: $scope.search_mode}
+		        params    : {query: $scope.query.replace(" ", ","), page: $scope.page, m: $scope.search_mode}
 		    })
 	        .success(function(data) {
 	            if(data != undefined){
 	            	$scope.results = data.files;
-		            $scope.search_info = data.results_info;
+		            $scope.result_info = data.results_info;
 
 				}else{
 	            	// if not successful, bind errors to error variables

@@ -72,6 +72,7 @@ Layout
 */
 #header{
 	background: $media_dump_colour;
+	background: #333;
 	color: $media_dump_inverse_colour;
 	padding: $padding;
 }
@@ -86,6 +87,7 @@ layout parts
 */
 #logo{
 	font-size:x-large;
+
 	display: inline;
 	width:20%;
 	float:left;
@@ -97,5 +99,38 @@ layout parts
 #search_input{
 	display: inline;
 	width: 75%;
-	float: right;
+	right: $margin;
+	position: absolute;
+}
+#advanced_search{
+	position: relative;
+	width:100%;
+	padding: $padding;
+	border: $padding silver solid;
+}
+
+/*
+styling
+*/
+.btn-media-dump{
+	background: $media_dump_colour;
+	color: $media_dump_inverse_colour;
+}
+.btn-media-dump:hover,.btn-media-dump:active,.btn-media-dump:visited,{
+	color: $media_dump_inverse_colour;
+}
+.btn.advanced_showing{
+	background: silver;
+	color: $media_dump_colour;
+}
+#search_text_input{
+}
+.form-control, .btn{
+	border-radius: 0px;
+}
+.light_opacity{
+	background: silver;
+	/*
+	opacity: 0.9;
+    filter: alpha(opacity=90);*/ /* For IE8 and earlier */
 }
