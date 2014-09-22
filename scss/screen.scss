@@ -105,6 +105,14 @@ a:hover img{
 	right:0px;
 	overflow-y:auto;
 }
+#advanced_search{
+	background: $media_dump_colour;
+	color: $media_dump_inverse_colour;
+	position:relative;
+	height:200px;
+	left:$padding;
+	right:$padding;
+}
 #map_result_container{
 	position:absolute;
 	top:0px;

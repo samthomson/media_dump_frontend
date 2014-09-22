@@ -81,6 +81,14 @@ a:hover img {
   right: 0px;
   overflow-y: auto; }
 
+#advanced_search {
+  background: #b82731;
+  color: white;
+  position: relative;
+  height: 200px;
+  left: 8px;
+  right: 8px; }
+
 #map_result_container {
   position: absolute;
   top: 0px;
