@@ -9,6 +9,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 
 
 	$scope.query = "*";
+	$scope.operator = "and";
 	$scope.total_files_in_md = 12447;
 
 	
@@ -339,7 +340,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		        /*url     : 'http://media-dump-instant/api/search',
 		        url     : 'http://media-dump.samt.st/api/search',*/
 		        url     : 'http://127.0.0.1:8000/search/',
-		        params    : {query: $scope.query.replace(" ", ","), page: $scope.page, m: $scope.search_mode}
+		        params    : {query: $scope.query.replace(" ", ","), page: $scope.page, m: $scope.search_mode, operator: $scope.operator}
 		    })
 	        .success(function(data) {
 	            if(data != undefined){

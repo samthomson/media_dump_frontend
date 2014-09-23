@@ -43,9 +43,12 @@
 								sort
 							</div>
 							<div class="col-xs-3">
-								operator
+								<div class="btn-group">
+									<button type="button" class="btn btn-default" ng-class="{true:'active'}[operator === 'and']" ng-click="operator='and'">and</button>
+									<button type="button" class="btn btn-default" ng-class="{true:'active'}[operator === 'or']" ng-click="operator='or'">or</button>
+								</div>
 								<hr/>
-								<a class="btn" ng-show="bUpdate()" ng-click="refreshSearch();">update</a>
+								<a class="btn btn-default" ng-show="bUpdate()" ng-click="refreshSearch();">update</a>
 							</div>
 						</div>
 					</div>
