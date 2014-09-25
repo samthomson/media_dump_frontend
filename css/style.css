@@ -110,3 +110,5 @@ styling
   	opacity: 0.9;
       filter: alpha(opacity=90);*/
   /* For IE8 and earlier */ }
+
+.angular-google-map-container { height: 400px; }

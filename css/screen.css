@@ -117,10 +117,11 @@ a:hover img {
   margin-left: 280px; }
 
 /* maps */
-#search_map .angular-google-map-container {
+/*
+.angular-google-map-container, #map_result_container {
   height: 400px; }
 
-#map_result_container .angular-google-map-container {
+.angular-google-map-container, #map_result_container {
   position: absolute;
   display: block;
   top: 0;
@@ -128,6 +129,8 @@ a:hover img {
   left: 0px;
   right: 0px;
   padding: 8px; }
+  */
+.angular-google-map-container { height: 400px; width:400px; }
 
 #search_input {
   /*

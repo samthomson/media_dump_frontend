@@ -7,19 +7,16 @@ mediadumpApp.config(function($httpProvider){
 
 mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $routeParams, $http) {
 
-
 	$scope.query = "*";
+	$scope.query = "";
 	$scope.operator = "and";
 	$scope.total_files_in_md = 12447;
-
 	
 	$scope.default_queries = [];
 	$http.get('http://media-dump.samt.st/generate_json.php')
 	.then(function(res) {
 		$scope.default_queries = res.data;
 	});
-
-
 	
 	// app stuff
 	
@@ -33,6 +30,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	$scope.iLightIndex = -1;
 
 	$scope.bShowAdvancedSearch = false;
+
 
 
 	var jo_url_vars = $location.search();
@@ -53,6 +51,12 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 
 	$scope.results = [];
 	$scope.available_filters = [];
+
+	$scope.bResults = function(){
+		if(typeof $scope.results === 'undefined')
+			return false;
+		return ($scope.results.length > 0) ? true : false;
+	}
 	$scope.bUpdate = function(){
 		for(var cFilter = 0; cFilter < $scope.available_filters.length; cFilter++){
 			if($scope.available_filters[cFilter].add === true){
@@ -186,11 +190,13 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 
 		// go through all results and parse them into what a marker requires
 		for(var cResult = 0; cResult < $scope.results.length; cResult++){
+
+			console.log("tags: " + $scope.results[cResult].tags);
 			mTempMarker = {
-	            latitude: $scope.results[cResult].a,
-	            longitude: $scope.results[cResult].o,
+	            latitude: $scope.results[cResult].lat,
+	            longitude: $scope.results[cResult].lon,
 	            title: 'm' + cResult,
-	            icon: $scope.urlFromHash('map_search', $scope.results[cResult].h, '')
+	            icon: $scope.urlFromHash('map_search', $scope.results[cResult], '')
 	        };
 	        mTempMarker["id"] = cResult;
 	        $scope.markers.push(mTempMarker);
@@ -198,7 +204,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	});
 	$scope.$watch('result_info', function(){
 		var oTempFilter = {};
-		if(typeof($scope.result_info.distinct) !== undefined)
+		if(typeof $scope.result_info.distinct !== 'undefined')
 			for(var cFilter = 0; cFilter < $scope.result_info.distinct.length; cFilter++){
 				oTempFilter = {
 					"value": $scope.result_info.distinct[cFilter].term,
@@ -269,17 +275,21 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	$scope.urlFromHash = function(sMode, sHash, sExt){
 		//sHash = Object.keys(sHash)[0];
 
-		return 'http://mdcdn/thumb/'+sHash.id+'.jpg';
+		if(typeof sHash === "undefined")
+		{
+			console.log("failed to make");
+			return "";
+		}
 		
 		switch(sMode){
 			case 'lightbox':
-				return 'http://5.cdn.samt.st/lightbox/'+sHash+'.'+sExt;
+				return 'http://mdcdn/thumb/lightbox/'+sHash.id+'.jpg';
 				break;
 			case 'map_search':
-				return 'http://6.cdn.samt.st/icon/'+sHash+'.jpg';
+				return 'http://mdcdn/thumb/icon/'+sHash.id+'.jpg';
 				break;
 			case 'thumbs':
-				return 'http://7.cdn.samt.st/map-result/'+sHash+'.jpg';
+				return 'http://mdcdn/thumb/thumb/'+sHash.id+'.jpg';
 				break;
 		}
 	};
@@ -335,6 +345,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 
 		if($scope.query !== ""){
 			$scope.bSearching = true;	
+			$scope.bShowAdvancedSearch = false;
 			$http({
 		        method  : 'GET',
 		        /*url     : 'http://media-dump-instant/api/search',
@@ -346,7 +357,6 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	            if(data != undefined){
 	            	$scope.results = data.files;
 		            $scope.result_info = data.results_info;
-
 				}else{
 	            	// if not successful, bind errors to error variables
 	            	console.log("http successful, but problem with results :(");
