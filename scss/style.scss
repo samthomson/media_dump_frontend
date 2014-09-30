@@ -80,7 +80,13 @@ Layout
 	padding: $padding;
 }
 #nav{}
-#results{}
+#results{
+	position: absolute;
+	top:50px + $padding;
+	bottom:50px;
+	left:0px;
+	right:0px;
+}
 
 /*
 layout parts
@@ -155,12 +161,12 @@ layout parts
 }
 
 /* maps */
-
+/*
 .angular-google-map-container {
 	height: 500px;
 }
+*/
 
-/*
 #map_result_container .angular-google-map-container {
 	position:absolute;
 	display:block;
@@ -170,7 +176,7 @@ layout parts
 	right:0px;
 	padding: $padding;
 }
-*/
+
 
 /*
 styling

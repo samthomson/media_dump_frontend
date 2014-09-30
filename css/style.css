@@ -62,6 +62,13 @@ Layout
 #main {
   padding: 8px; }
 
+#results {
+  position: absolute;
+  top: 58px;
+  bottom: 50px;
+  left: 0px;
+  right: 0px; }
+
 /*
 layout parts
 */
@@ -136,20 +143,20 @@ layout parts
   font-size: x-large; }
 
 /* maps */
-.angular-google-map-container {
-  height: 500px; }
-
 /*
-#map_result_container .angular-google-map-container {
-	position:absolute;
-	display:block;
-	top:0;
-	bottom:0px;
-	left:0px;
-	right:0px;
-	padding: $padding;
+.angular-google-map-container {
+	height: 500px;
 }
 */
+#map_result_container .angular-google-map-container {
+  position: absolute;
+  display: block;
+  top: 0;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  padding: 8px; }
+
 /*
 styling
 */
