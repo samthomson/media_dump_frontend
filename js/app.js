@@ -191,17 +191,30 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		// go through all results and parse them into what a marker requires
 		for(var cResult = 0; cResult < $scope.results.length; cResult++){
 
-			console.log("tags: " + $scope.results[cResult].tags);
+			var pinIcon = new google.maps.MarkerImage(
+				$scope.urlFromHash('thumbs', $scope.results[cResult], ''),
+			    null, /* size is determined at runtime */
+			    null, /* origin is 0,0 */
+			    null, /* anchor is bottom center of the scaled image */
+			    new google.maps.Size(48, 48)
+			);  
+
 			mTempMarker = {
 	            latitude: $scope.results[cResult].lat,
 	            longitude: $scope.results[cResult].lon,
 	            title: 'm' + cResult,
-	            icon: $scope.urlFromHash('map_search', $scope.results[cResult], '')
+	            icon: pinIcon
 	        };
 	        mTempMarker["id"] = cResult;
 	        $scope.markers.push(mTempMarker);
+
 		}
 	});
+	$scope.markersEvents = {
+        click: function (gMarker, eventName, model) {            
+        	$scope.map_icon_click(model.id);
+        }
+    };
 	$scope.$watch('result_info', function(){
 		var oTempFilter = {};
 		if(typeof $scope.result_info.distinct !== 'undefined')
@@ -262,15 +275,22 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	$scope.lightChange = function(iDelta){
 		if(($scope.iLightIndex + iDelta) > -1 && ($scope.iLightIndex + iDelta) < $scope.results.length){
 			$scope.iLightIndex += iDelta;
+		}else{
+			// 'loop' the results
+			$scope.iLightIndex = 0;
 		}
 	};
+	/*
 	$scope.lightRight = function(){		
 		if($scope.iLightIndex < $scope.results.length -1){
 			$scope.iLightIndex++;
 			$scope.sLightboxURL = $scope.urlFromHash('lightbox', $scope.results[$scope.iLightIndex].h, $scope.results[$scope.iLightIndex].e);
 			$scope.sLightboxPlace = $scope.results[$scope.iLightIndex].p;
+		}else{
+			$scope.iLightIndex = 0;
 		}
 	};
+	*/
 
 	$scope.urlFromHash = function(sMode, sHash, sExt){
 		//sHash = Object.keys(sHash)[0];
@@ -289,7 +309,8 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 				return 'http://mdcdn/thumb/icon/'+sHash.id+'.jpg';
 				break;
 			case 'thumbs':
-				return 'http://mdcdn/thumb/thumb/'+sHash.id+'.jpg';
+				return 'data:image/jpeg;base64, '+sHash.data_thumb["115"];
+				/*return 'http://mdcdn/thumb/thumb/'+sHash.id+'.jpg';*/
 				break;
 		}
 	};
@@ -375,10 +396,13 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	};
 
 	$scope.thumb_click = function(index) {
+		console.log("thumb click");
 		$scope.iLightIndex = index;
 	}
-	$scope.map_icon_click = function() {
-		console.log("light clicked");
+	$scope.map_icon_click = function(index) {
+		console.log("map click");
+		$scope.thumb_click(index);
+		$scope.$apply();
 	}
 
 	/*

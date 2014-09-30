@@ -8,7 +8,7 @@ $margin: 4px;
 $no_padding: 0px;
 $ui_breakpoint: 400px;
 
-$media_dump_colour: #B82731;
+$media_dump_colour: #c0392b;
 $media_dump_inverse_colour: #fff;
 $secondary_colour: silver;
 
@@ -146,9 +146,12 @@ a:hover img{
 
 /* maps */
 
-#search_map .angular-google-map-container {
+.angular-google-map-container { height: 400px; }
+
+#map_result_container .angular-google-map-container {
 	height: 400px;
 }
+/*
 #map_result_container .angular-google-map-container {
 	position:absolute;
 	display:block;
@@ -158,7 +161,7 @@ a:hover img{
 	right:0px;
 	padding: $padding;
 }
-
+*/
 #search_input{
 	/*
 	margin-bottom: $padding;

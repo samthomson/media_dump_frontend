@@ -4,17 +4,17 @@ body {
   padding: 8px; }
 
 a {
-  color: #b82731;
+  color: #c0392b;
   cursor: pointer; }
 
 a:hover {
-  color: #b82731; }
+  color: #c0392b; }
 
 a:visited {
-  color: #b82731; }
+  color: #c0392b; }
 
 a:active {
-  color: #b82731; }
+  color: #c0392b; }
 
 a img {
   opacity: 1.0;
@@ -82,7 +82,7 @@ a:hover img {
   overflow-y: auto; }
 
 #advanced_search {
-  background: #b82731;
+  background: #c0392b;
   color: white;
   position: relative;
   height: 200px;
@@ -117,21 +117,23 @@ a:hover img {
   margin-left: 280px; }
 
 /* maps */
-/*
-.angular-google-map-container, #map_result_container {
+.angular-google-map-container {
   height: 400px; }
 
-.angular-google-map-container, #map_result_container {
-  position: absolute;
-  display: block;
-  top: 0;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
-  padding: 8px; }
-  */
-.angular-google-map-container { height: 400px; width:400px; }
+#map_result_container .angular-google-map-container {
+  height: 400px; }
 
+/*
+#map_result_container .angular-google-map-container {
+	position:absolute;
+	display:block;
+	top:0;
+	bottom:0px;
+	left:0px;
+	right:0px;
+	padding: $padding;
+}
+*/
 #search_input {
   /*
   margin-bottom: $padding;
@@ -144,7 +146,7 @@ a:hover img {
   padding: 8px; }
 
 #search ul li.active a {
-  background: #b82731;
+  background: #c0392b;
   color: white; }
 
 #tabs {
@@ -173,9 +175,9 @@ ul.nav-pills a {
   padding: 6px; }
 
 #search_input button.active {
-  background: #b82731;
+  background: #c0392b;
   color: white;
-  border-color: #b82731;
+  border-color: #c0392b;
   -webkit-box-shadow: none;
   box-shadow: none; }
 
@@ -189,7 +191,7 @@ ul.nav-pills a {
 #loading {
   font-size: xx-large;
   z-index: 50;
-  color: #b82731;
+  color: #c0392b;
   width: 200px;
   height: 50px;
   position: absolute;
@@ -301,6 +303,7 @@ Functional
 
   to {
     -webkit-transform: rotate(359deg); } }
+
 .spin {
   -webkit-animation-name: rotate;
   -webkit-animation-duration: 1s;
