@@ -67,6 +67,15 @@ Layout
   top: 58px;
   bottom: 50px;
   left: 0px;
+  right: 0px;
+  padding: 8px;
+  padding-top: 0px; }
+
+#pagination {
+  position: absolute;
+  bottom: 0px;
+  height: 40px;
+  left: 0px;
   right: 0px; }
 
 /*
@@ -91,7 +100,8 @@ layout parts
   position: relative;
   width: 100%;
   padding: 8px;
-  border: 8px silver solid; }
+  border: 8px silver solid;
+  z-index: 100; }
 
 #loading {
   font-size: xx-large;

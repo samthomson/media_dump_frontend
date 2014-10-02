@@ -8,7 +8,8 @@ mediadumpApp.config(function($httpProvider){
 mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $routeParams, $http) {
 
 	$scope.query = "*";
-	$scope.query = "";
+	$scope.sort_mode = "datetime";
+	$scope.sort_direction = "asc";
 	$scope.operator = "and";
 	$scope.total_files_in_md = 12447;
 	
@@ -29,8 +30,9 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 
 	$scope.iLightIndex = -1;
 
-	$scope.bShowAdvancedSearch = false;
+	$scope.i_markers_showing = 0;
 
+	$scope.bShowAdvancedSearch = false;
 
 
 	var jo_url_vars = $location.search();
@@ -175,6 +177,14 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		$scope.do_search();
 		$scope.reconstruct_url();
 	});
+	$scope.$watch('sort_mode', function(){
+		$scope.do_search();
+		$scope.reconstruct_url();
+	});
+	$scope.$watch('sort_direction', function(){
+		$scope.do_search();
+		$scope.reconstruct_url();
+	});
 	$scope.$watch('iLightIndex', function(){
 		$scope.reconstruct_url();
 		$scope.preload_around();
@@ -189,6 +199,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		var mTempMarker = {};
 
 		// go through all results and parse them into what a marker requires
+		$scope.i_markers_showing = 0;
 		for(var cResult = 0; cResult < $scope.results.length; cResult++){
 
 			var pinIcon = new google.maps.MarkerImage(
@@ -207,7 +218,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	        };
 	        mTempMarker["id"] = cResult;
 	        $scope.markers.push(mTempMarker);
-
+	        $scope.i_markers_showing++;
 		}
 	});
 	$scope.markersEvents = {
@@ -358,6 +369,21 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		}else{
 			$location.search('search_mode', null);
 		}
+
+
+		if($scope.sort_mode != 'datetime'){
+			$location.search('sort_mode', $scope.sort_mode);
+		}else{
+			$location.search('sort_mode', null);
+		}
+
+
+
+		if($scope.sort_direction != 'asc'){
+			$location.search('sort_direction', $scope.sort_direction);
+		}else{
+			$location.search('sort_direction', null);
+		}
 	};
 
 	$scope.do_search = function() {
@@ -372,7 +398,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		        /*url     : 'http://media-dump-instant/api/search',
 		        url     : 'http://media-dump.samt.st/api/search',*/
 		        url     : 'http://127.0.0.1:8000/search/',
-		        params    : {query: $scope.query.replace(" ", ","), page: $scope.page, m: $scope.search_mode, operator: $scope.operator}
+		        params    : {query: $scope.query.replace(" ", ","), page: $scope.page, m: $scope.search_mode, operator: $scope.operator, sort: $scope.sort_mode, sort_direction: $scope.sort_direction}
 		    })
 	        .success(function(data) {
 	            if(data != undefined){

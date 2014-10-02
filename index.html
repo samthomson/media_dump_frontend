@@ -44,7 +44,16 @@
 							<div class="col-xs-9">
 								<a ng-click="addFilter($index)" ng-repeat="filter in available_filters">{{filter.value}}</a>&nbsp;
 								<hr/>
-								sort
+								sort by: 
+								<select ng-model="sort_mode">
+									<option value="datetime">datetime</option>
+									<option value="elevation">elevation</option>
+								</select>
+								sort direction: 
+								<select ng-model="sort_direction">
+									<option value="asc">asc</option>
+									<option value="desc">desc</option>
+								</select>
 							</div>
 							<div class="col-xs-3">
 								<div class="form-group">
@@ -92,7 +101,18 @@
 							</markers>
 						</google-map>
 					</div>
-
+				</div>
+				<div id="pagination" ng-show="results.length > 0">
+					<div id="map_pagination" ng-show="search_mode==='map'">
+						showing {{i_markers_showing}}/{{results.length}}
+					</div>
+					<div id="grid_pagination" ng-show="search_mode==='search' && result_info.available_pages > 1">
+						<div class="row">
+							<div class="col-xs-6">
+								<a class="btn btn-default form-control text-center" ng-show="page > 1" ng-click="page = page - 1"><i class="glyphicon glyphicon-chevron-left"></i> previous</a></div>
+							<div class="col-xs-6"><a class="btn btn-default form-control text-center" ng-show="page < (results.length + 1)" ng-click="page = page + 1">next <i class="glyphicon glyphicon-chevron-right"></i></a></div>
+						</div>
+					</div>
 				</div>
 			</div>
 
@@ -111,7 +131,6 @@
 					<img ng-src="http://mdcdn/thumb/lightbox/{{results[iLightIndex].id}}.jpg" />
 				</a>
 			</div>
-						
 		</div>
 
 		<!-- scripts & analytics
