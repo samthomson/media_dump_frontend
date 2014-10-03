@@ -105,11 +105,11 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	};	
 	$scope.search_map = {
 	    center: {
-	        latitude: 45,
-	        longitude: -73
+	        latitude: 0,
+	        longitude: 0
 	    },
 	    bounds: {},
-	    zoom: 8,
+	    zoom: 4,
 	    events: {
 		    idle: function (map) {
 		    	$scope.$apply(function () {
@@ -124,29 +124,33 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		    		console.log("");
 		    		*/
 
-		    		/*
-		    		console.log($scope.search_map.bounds.northeast.latitude);
-		    		console.log($scope.search_map.bounds.southwest.latitude);
-		    		console.log("");
-		    		*/
-		    		/*
-		    		var llBounds = map.getBounds();
+		    		if(typeof $scope.search_map !== 'undefined'){
 
-			    	var llNorthEast = llBounds.getNorthEast();
-			    	var llSouthWest = llBounds.getSouthWest();
+			    		/*
+			    		console.log($scope.search_map.bounds.northeast.latitude);
+			    		console.log($scope.search_map.bounds.southwest.latitude);
+			    		console.log("");
+			    		*/
+			    		
+			    		var llBounds = map.getBounds();
+
+				    	var llNorthEast = llBounds.getNorthEast();
+				    	var llSouthWest = llBounds.getSouthWest();
 
 
-			    	var sQuery = "map=";
-			    	sQuery += llSouthWest.lat();
-			    	sQuery += ",";			
-			    	sQuery += llNorthEast.lat();
-			    	sQuery += ",";			
-			    	sQuery += llSouthWest.lng();
-			    	sQuery += ",";			
-			    	sQuery += llNorthEast.lng();
+				    	var sQuery = "map=";
+				    	sQuery += llSouthWest.lat().toFixed(2);
+				    	sQuery += "|";			
+				    	sQuery += llNorthEast.lat().toFixed(2);
+				    	sQuery += "|";			
+				    	sQuery += llSouthWest.lng().toFixed(2);
+				    	sQuery += "|";			
+				    	sQuery += llNorthEast.lng().toFixed(2);
 
-			    	console.log(sQuery);    
-			    	*/
+				    	console.log(sQuery);  
+				    	$scope.query = sQuery;  
+				    	/**/
+				    }
 				});
 		    }
 	    }

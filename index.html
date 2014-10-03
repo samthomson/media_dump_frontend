@@ -101,20 +101,15 @@
 
 						</div>
 						<div class="tab-pane" id="search_map" ng-if="bMapRefreshed">
-							<!-- TODO: map input 
-							<google-map 
-								center="search_map.center" 
-								zoom="search_map.zoom" 
-								draggable='true'
-								events="search_map.events"
-								bounds="search_map.bounds"
-								>
-							</google-map>-->
+							<!-- TODO: map input -->
+							
 							<google-map
 								center="search_map.center" 
 								zoom="search_map.zoom"
 								refresh="bMapRefreshed"
 								draggable='true'
+								events="search_map.events"
+								bounds="search_map.bounds"
 								>
 							</google-map>
 						</div>
