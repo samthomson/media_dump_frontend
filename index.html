@@ -74,6 +74,11 @@
 
 				<div id="nav">
 					left - nav (tree and map tab)
+					default_queries
+
+					<a class="thumb_result_link" ng-repeat="path in default_queries" ng-click="thumb_click($index)">
+						<img ng-src="{{sourceFromData(path['data_thumb'])}}"/> {{path.dir}}
+					</a>
 				</div>
 
 				<div id="results">

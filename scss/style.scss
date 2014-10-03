@@ -17,6 +17,7 @@ $font_size: larger;
 
 $border_radius: 4px;
 
+$i_nav_width: 340px;
 
 
 /* general */
@@ -81,13 +82,13 @@ Layout
 	padding: $padding;
 }
 #nav{
-	width: 200px;
+	width: $i_nav_width;
 }
 #results{
 	position: absolute;
 	top:50px + $padding;
 	bottom:50px;
-	left:0px;
+	left:$i_nav_width;
 	right:0px;
 	padding:$padding;
 	padding-top:0px;

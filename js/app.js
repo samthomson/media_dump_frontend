@@ -12,11 +12,13 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	$scope.sort_direction = "asc";
 	$scope.operator = "and";
 	$scope.total_files_in_md = 12447;
+
+	$scope.s_media_dump_url = "http://127.0.0.1:8000"
 	
 	$scope.default_queries = [];
-	$http.get('http://media-dump.samt.st/generate_json.php')
+	$http.get($scope.s_media_dump_url + '/tree/')
 	.then(function(res) {
-		$scope.default_queries = res.data;
+		$scope.default_queries = res.data.tree;
 	});
 	
 	// app stuff
@@ -149,6 +151,10 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		    }
 	    }
 	};	
+
+	$scope.sourceFromData = function(sBase){
+		return 'data:image/jpeg;base64, '+sBase;
+	}
 
 	$scope.bMapVisible = function(){
 		if ($scope.search_mode === 'map')
@@ -338,10 +344,8 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 					saPreloadURLS.push($scope.urlFromHash('lightbox', $scope.results[cImage].h, 'jpg'));
 				}
 			}
-
 			
 			
-			//console.log("preload: " + );
 			saPreloadURLS.forEach(function(value){
 				try {
 		            var _img = new Image();
@@ -400,7 +404,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		        method  : 'GET',
 		        /*url     : 'http://media-dump-instant/api/search',
 		        url     : 'http://media-dump.samt.st/api/search',*/
-		        url     : 'http://127.0.0.1:8000/search/',
+		        url     : $scope.s_media_dump_url + '/search/',
 		        params    : {query: $scope.query.replace(" ", ","), page: $scope.page, m: $scope.search_mode, operator: $scope.operator, sort: $scope.sort_mode, sort_direction: $scope.sort_direction}
 		    })
 	        .success(function(data) {
