@@ -72,13 +72,11 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 			return false;
 		return ($scope.results.length > 0) ? true : false;
 	}
-	$scope.bUpdate = function(){
-		for(var cFilter = 0; cFilter < $scope.available_filters.length; cFilter++){
-			if($scope.available_filters[cFilter].add === true){
-				return true;
-			}
-		}
-		return false;
+	$scope.bShowUpdateButton = false;
+	$scope.addFilter = function($index){
+		// add filters to search query
+		$scope.available_filters[$index].add = !$scope.available_filters[$index].add;
+		$scope.bShowUpdateButton = true;
 	}
 	$scope.results_bounds = {
 		northeast: {
@@ -236,11 +234,15 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
     $scope.refreshSearchMap = function(){
     	$scope.bMapRefreshed = false;
     	$scope.bMapRefreshed = true;
-    	console.log("map refreshed to: " + $scope.bMapRefreshed);
+    }
+    $scope.setOperator = function(sOperator){
+    	$scope.operator = sOperator;
+    	$scope.bShowUpdateButton = true;
     }
 
 	$scope.$watch('result_info', function(){
 		var oTempFilter = {};
+		$scope.available_filters = [];
 		if(typeof $scope.result_info.distinct !== 'undefined')
 			for(var cFilter = 0; cFilter < $scope.result_info.distinct.length; cFilter++){
 				oTempFilter = {
@@ -251,12 +253,10 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 			}
 	});
 
-	$scope.addFilter = function($index){
-		// add filters to search query
-		$scope.available_filters[$index].add = !$scope.available_filters[$index].add;
-	}
+	
 
 	$scope.refreshSearch = function(){
+		$scope.bShowUpdateButton = false;
 		// add filters to search query
 		for(var cFilter = 0; cFilter < $scope.available_filters.length; cFilter++){
 			if($scope.available_filters[cFilter].add === true){

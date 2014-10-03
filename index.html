@@ -42,8 +42,9 @@
 					<div id="advanced_search" class="light_opacity" ng-show="bShowAdvancedSearch">
 						<div class="row">
 							<div class="col-xs-9">
-								<a ng-click="addFilter($index)" ng-repeat="filter in available_filters">{{filter.value}}</a>&nbsp;
-								<hr/>
+								<div class="refine_filters">
+									<a ng-click="addFilter($index)" ng-repeat="filter in available_filters" class="filter" ng-class="{true:'active'}[filter.add === true]">{{filter.value}}</a>
+								</div>
 								sort by: 
 								<select ng-model="sort_mode" class="form-control" ng-disabled="search_mode != 'search'">
 									<option value="datetime">datetime</option>
@@ -57,12 +58,12 @@
 							</div>
 							<div class="col-xs-3">
 								<div class="form-group">
-									<div class="btn-group">
-										<button type="button" class="btn btn-default" ng-class="{true:'active'}[operator === 'and']" ng-click="operator='and'">and</button>
-										<button type="button" class="btn btn-default" ng-class="{true:'active'}[operator === 'or']" ng-click="operator='or'">or</button>
+									<div class="btn-group operator_toggle">
+										<button type="button" class="btn btn-default" ng-class="{true:'active'}[operator === 'and']" ng-click="setOperator('and')">and</button>
+										<button type="button" class="btn btn-default" ng-class="{true:'active'}[operator === 'or']" ng-click="setOperator('or')">or</button>
 									</div>
 									<hr/>
-									<a class="btn btn-default" ng-show="bUpdate()" ng-click="refreshSearch();">update</a>
+									<a class="btn btn-default" ng-show="bShowUpdateButton" ng-click="refreshSearch();">update</a>
 								</div>
 							</div>
 						</div>

@@ -129,7 +129,7 @@ layout parts
 	position: relative;
 	width:100%;
 	padding: $padding;
-	border: $padding silver solid;
+	border: 1px silver solid;
 	z-index:100;
 	border-bottom-left-radius: $border_radius;
 	border-bottom-right-radius: $border_radius;
@@ -181,7 +181,6 @@ layout parts
 }
 #search_map{
 	position: relative;
-	height:400px;
 }
 
 /* maps */
@@ -197,8 +196,9 @@ layout parts
 	top:0;
 	bottom:0px;
 	left:0px;
-	right:0px;
+	right:$margin;
 	padding: $padding;
+	height: 70%;
 }
 #map_result_container .angular-google-map-container {
 	position:absolute;
@@ -215,6 +215,13 @@ layout parts
 }
 .tree_link:hover{
 	cursor: pointer;
+}
+.refine_filters{
+	max-height:80px;
+	overflow-y:auto;
+}
+.operator_toggle{
+	width:100%;
 }
 /*
 styling
@@ -263,13 +270,26 @@ select.form-control{
 	display: inline;
 }
 .light_opacity{
-	background: $silver_colour;
-	/*
+	background: #fff;
+	
 	opacity: 0.9;
-    filter: alpha(opacity=90);*/ /* For IE8 and earlier */
+    filter: alpha(opacity=90); /* For IE8 and earlier */
 }
 
 #thumb_results img{
 	margin-right:$margin;
 	margin-bottom:$margin;
+}
+
+a.filter{
+	display:inline-block;
+	padding:$padding/2;
+	margin-right:$margin;
+	margin-bottom:$margin;
+	border: 1px solid $media_dump_colour;
+	border-radius: $border_radius;
+}
+a.filter.active{
+	background:$media_dump_colour;
+	color:$media_dump_inverse_colour;
 }
