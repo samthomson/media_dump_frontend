@@ -76,10 +76,10 @@
 
 					<ul class="nav nav-pills">
 						<li class="active">
-							<a href="#browse" role="tab" data-toggle="tab">Browse</a>
+							<a href="#browse" role="tab" data-toggle="tab" ng-click="setSearchInputMode('tree')">Browse</a>
 						</li>
   						<li>
-  							<a href="#search_map" role="tab" data-toggle="tab" ng-click="refreshSearchMap()">Map</a>
+  							<a href="#search_map" role="tab" data-toggle="tab" ng-click="setSearchInputMode('map')">Map</a>
   						</li>
 						<!--<li class="dropdown">
 						    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -95,7 +95,7 @@
 					<div class="tab-content">
 						<div class="tab-pane active" id="browse">
 														
-							<div class="" ng-repeat="path in default_queries" ng-click="do_default_query('directory.path_folders='+path.dir)">
+							<div class="tree_link" ng-repeat="path in default_queries" ng-click="do_default_query('directory.path_folders='+path.dir)">
 								<img ng-src="{{sourceFromData(path['data_thumb'])}}"/> {{path.dir}}
 							</div>
 
@@ -111,6 +111,14 @@
 								events="search_map.events"
 								bounds="search_map.bounds"
 								>
+								<markers
+									models="markers"
+									coords="'self'"
+									doCluster="true"
+									icon="'icon'"
+									events="markersEvents"
+									>
+								</markers>
 							</google-map>
 						</div>
 						<div class="tab-pane" id="more">...</div>

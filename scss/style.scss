@@ -84,6 +84,9 @@ Layout
 #nav{
 	width: $i_nav_width;
 }
+#nav .tab-content{
+	padding-top:$padding;
+}
 #results{
 	position: absolute;
 	top:50px + $padding;
@@ -206,8 +209,13 @@ layout parts
 	right:0px;
 	padding: $padding;
 }
-
-
+.tree_link{
+	margin-bottom:$margin;
+	font-size: large;
+}
+.tree_link:hover{
+	cursor: pointer;
+}
 /*
 styling
 */
@@ -238,11 +246,17 @@ textarea:focus, input[type]:focus, .uneditable-input:focus {
 	border-color: $media_dump_colour;
 	box-shadow:none !important;
 outline: 0 none;}
-/*
-.form-control, .btn{
-	border-radius: 0px;
+
+li a{
+	padding-left:0px !important;
 }
-*/
+li.active a{
+	background-color:#fff !important;
+	color: $media_dump_colour !important;
+	border-bottom: 2px solid $media_dump_colour;
+	border-radius:0px;
+
+}
 
 select.form-control{
 	width: auto;

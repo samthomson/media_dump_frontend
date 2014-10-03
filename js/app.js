@@ -26,7 +26,16 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	$scope.bQueryBuilderVisible = false;
 
 	// search stuff
+	$scope.search_input_mode = "tree";
 	$scope.search_mode = "search";
+	$scope.setSearchInputMode = function(sMode){
+		$scope.search_input_mode = sMode;
+		if(sMode === "map"){
+			$scope.refreshSearchMap()
+			// grid only when search mode is map
+			$scope.search_mode = "search";
+		}
+	}
 	
 	$scope.page = 1;
 
@@ -101,7 +110,8 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	        latitude: 45,
 	        longitude: -73
 	    },
-	    zoom: 8
+	    zoom: 8,
+	    bounds: {}
 	};	
 	$scope.search_map = {
 	    center: {
@@ -114,24 +124,8 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		    idle: function (map) {
 		    	$scope.$apply(function () {
 
-		    		//$scope.map_changed();
-
-
-					/*
-		    		console.log(map.getBounds().getNorthEast());
-		    		console.log(map.getBounds().getSouthWest());
-		    		console.log(map.getBounds());
-		    		console.log("");
-		    		*/
-
 		    		if(typeof $scope.search_map !== 'undefined'){
 
-			    		/*
-			    		console.log($scope.search_map.bounds.northeast.latitude);
-			    		console.log($scope.search_map.bounds.southwest.latitude);
-			    		console.log("");
-			    		*/
-			    		
 			    		var llBounds = map.getBounds();
 
 				    	var llNorthEast = llBounds.getNorthEast();
@@ -147,9 +141,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 				    	sQuery += "|";			
 				    	sQuery += llNorthEast.lng().toFixed(2);
 
-				    	console.log(sQuery);  
 				    	$scope.query = sQuery;  
-				    	/**/
 				    }
 				});
 		    }
