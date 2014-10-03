@@ -76,12 +76,13 @@
 					left - nav (tree and map tab)
 					default_queries
 
-					<a class="thumb_result_link" ng-repeat="path in default_queries" ng-click="thumb_click($index)">
+					<div class="" ng-repeat="path in default_queries" ng-click="do_default_query('directory.path_folders='+path.dir)">
 						<img ng-src="{{sourceFromData(path['data_thumb'])}}"/> {{path.dir}}
-					</a>
+					</div>
 				</div>
 
 				<div id="results">
+					<div id="loading" ng-show="bSearching"><i class="glyphicon glyphicon-refresh spin"></i> loading</div>
 					<!-- thumb results (grid search) -->
 					<div id="thumb_results" ng-show="search_mode === 'search'">
 						<a class="thumb_result_link" ng-repeat="result in results" ng-click="thumb_click($index)"><img ng-src="{{urlFromHash('thumbs', result, '')}}"/></a>
