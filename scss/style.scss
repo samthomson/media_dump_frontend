@@ -5,14 +5,17 @@ $padding: 8px;
 $margin: 4px;
 $ui_breakpoint: 400px;
 
-$media_dump_colour: #c0392b;
-$media_dump_inverse_colour: #fff;
-$secondary_colour: silver;
+$media_dump_colour: #e74c3c;
+$media_dump_dark_colour: #c0392b;
+$media_dump_inverse_colour: #ecf0f1;
+$silver_colour: #bdc3c7;
 
 $small_thumb_width: 115px;
 $small_thumb_height: 115px;
 
 $font_size: larger;
+
+$border_radius: 4px;
 
 
 
@@ -71,15 +74,15 @@ Functional
 Layout
 */
 #header{
-	background: $media_dump_colour;
-	background: #333;
 	color: $media_dump_inverse_colour;
 	padding: $padding;
 }
 #main{
 	padding: $padding;
 }
-#nav{}
+#nav{
+	width: 200px;
+}
 #results{
 	position: absolute;
 	top:50px + $padding;
@@ -88,6 +91,7 @@ Layout
 	right:0px;
 	padding:$padding;
 	padding-top:0px;
+	overflow-x:auto;
 }
 #pagination{
 	position: absolute;
@@ -123,6 +127,8 @@ layout parts
 	padding: $padding;
 	border: $padding silver solid;
 	z-index:100;
+	border-bottom-left-radius: $border_radius;
+	border-bottom-right-radius: $border_radius;
 }
 
 #loading{
@@ -191,24 +197,45 @@ layout parts
 /*
 styling
 */
-.btn-media-dump{
+.btn,.form-control{
+	font-size:large;
+	height:auto;
+}
+.btn:focus{
+	outline:none !important;
+}
+.btn.active{
 	background: $media_dump_colour;
+	color: $media_dump_inverse_colour;
+	border-color: $media_dump_colour !important;
+	box-shadow:none !important;
+	-webkit-box-shadow:none !important;
+}
+.btn.advanced_showing{
+	background: $media_dump_dark_colour;
 	color: $media_dump_inverse_colour;
 }
 .btn-media-dump:hover,.btn-media-dump:active,.btn-media-dump:visited,{
 	color: $media_dump_inverse_colour;
 }
-.btn.advanced_showing{
-	background: silver;
-	color: $media_dump_colour;
-}
 #search_text_input{
 }
+textarea:focus, input[type]:focus, .uneditable-input:focus {   
+	border-color: $media_dump_colour;
+	box-shadow:none !important;
+outline: 0 none;}
+/*
 .form-control, .btn{
 	border-radius: 0px;
 }
+*/
+
+select.form-control{
+	width: auto;
+	display: inline;
+}
 .light_opacity{
-	background: silver;
+	background: $silver_colour;
 	/*
 	opacity: 0.9;
     filter: alpha(opacity=90);*/ /* For IE8 and earlier */

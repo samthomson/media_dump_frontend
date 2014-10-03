@@ -5,17 +5,17 @@ body {
   margin: 0px; }
 
 a {
-  color: #c0392b;
+  color: #e74c3c;
   cursor: pointer; }
 
 a:hover {
-  color: #c0392b; }
+  color: #e74c3c; }
 
 a:visited {
-  color: #c0392b; }
+  color: #e74c3c; }
 
 a:active {
-  color: #c0392b; }
+  color: #e74c3c; }
 
 a img {
   opacity: 1.0;
@@ -54,13 +54,14 @@ Functional
 Layout
 */
 #header {
-  background: #c0392b;
-  background: #333;
-  color: #fff;
+  color: #ecf0f1;
   padding: 8px; }
 
 #main {
   padding: 8px; }
+
+#nav {
+  width: 200px; }
 
 #results {
   position: absolute;
@@ -69,7 +70,8 @@ Layout
   left: 0px;
   right: 0px;
   padding: 8px;
-  padding-top: 0px; }
+  padding-top: 0px;
+  overflow-x: auto; }
 
 #pagination {
   position: absolute;
@@ -101,12 +103,14 @@ layout parts
   width: 100%;
   padding: 8px;
   border: 8px silver solid;
-  z-index: 100; }
+  z-index: 100;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px; }
 
 #loading {
   font-size: xx-large;
   z-index: 50;
-  color: #c0392b;
+  color: #e74c3c;
   width: 200px;
   height: 50px;
   position: absolute;
@@ -170,22 +174,43 @@ layout parts
 /*
 styling
 */
-.btn-media-dump {
-  background: #c0392b;
-  color: #fff; }
+.btn, .form-control {
+  font-size: large;
+  height: auto; }
 
-.btn-media-dump:hover, .btn-media-dump:active, .btn-media-dump:visited {
-  color: #fff; }
+.btn:focus {
+  outline: none !important; }
+
+.btn.active {
+  background: #e74c3c;
+  color: #ecf0f1;
+  border-color: #e74c3c !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important; }
 
 .btn.advanced_showing {
-  background: silver;
-  color: #c0392b; }
+  background: #c0392b;
+  color: #ecf0f1; }
 
-.form-control, .btn {
-  border-radius: 0px; }
+.btn-media-dump:hover, .btn-media-dump:active, .btn-media-dump:visited {
+  color: #ecf0f1; }
+
+textarea:focus, input[type]:focus, .uneditable-input:focus {
+  border-color: #e74c3c;
+  box-shadow: none !important;
+  outline: 0 none; }
+
+/*
+.form-control, .btn{
+	border-radius: 0px;
+}
+*/
+select.form-control {
+  width: auto;
+  display: inline; }
 
 .light_opacity {
-  background: silver;
+  background: #bdc3c7;
   	/*
   	opacity: 0.9;
       filter: alpha(opacity=90);*/

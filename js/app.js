@@ -33,6 +33,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	$scope.i_markers_showing = 0;
 
 	$scope.bShowAdvancedSearch = false;
+	$scope.bEventsOn = false;
 
 
 	var jo_url_vars = $location.search();
@@ -50,6 +51,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	if(jo_url_vars.file  != undefined){
 		$scope.iLightIndex = parseInt(jo_url_vars.file);
 	}
+	$scope.bEventsOn = true;
 
 	$scope.results = [];
 	$scope.available_filters = [];
@@ -166,12 +168,13 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	// 'events'
 	//
 	$scope.$watch('query', function(){
-		$scope.page = 1;
+		if($scope.bEventsOn)
+			$scope.page = 1;
 		$scope.do_search();
 		$scope.reconstruct_url();
 	});
 	$scope.$watch('page', function(){
-		if($scope.page < 1){
+		if($scope.page < 1 && $scope.bEventsOn){
 			$scope.page = 1;
 		}
 		$scope.do_search();
@@ -231,7 +234,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		if(typeof $scope.result_info.distinct !== 'undefined')
 			for(var cFilter = 0; cFilter < $scope.result_info.distinct.length; cFilter++){
 				oTempFilter = {
-					"value": $scope.result_info.distinct[cFilter].term,
+					"value": $scope.result_info.distinct[cFilter],
 					"add": false
 				};
 				$scope.available_filters.push(oTempFilter);

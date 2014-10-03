@@ -45,12 +45,12 @@
 								<a ng-click="addFilter($index)" ng-repeat="filter in available_filters">{{filter.value}}</a>&nbsp;
 								<hr/>
 								sort by: 
-								<select ng-model="sort_mode">
+								<select ng-model="sort_mode" class="form-control" ng-disabled="search_mode != 'search'">
 									<option value="datetime">datetime</option>
 									<option value="elevation">elevation</option>
 								</select>
 								sort direction: 
-								<select ng-model="sort_direction">
+								<select ng-model="sort_direction" class="form-control" ng-disabled="search_mode != 'search'">
 									<option value="asc">asc</option>
 									<option value="desc">desc</option>
 								</select>
@@ -110,7 +110,7 @@
 						<div class="row">
 							<div class="col-xs-6">
 								<a class="btn btn-default form-control text-center" ng-show="page > 1" ng-click="page = page - 1"><i class="glyphicon glyphicon-chevron-left"></i> previous</a></div>
-							<div class="col-xs-6"><a class="btn btn-default form-control text-center" ng-show="page < (results.length + 1)" ng-click="page = page + 1">next <i class="glyphicon glyphicon-chevron-right"></i></a></div>
+							<div class="col-xs-6"><a class="btn btn-default form-control text-center" ng-show="page < (result_info.available_pages)" ng-click="page = page + 1">next <i class="glyphicon glyphicon-chevron-right"></i></a></div>
 						</div>
 					</div>
 				</div>
@@ -128,7 +128,7 @@
 					<i class="fa fa-arrow-right"></i>
 				</a>
 				<a ng-click="lightChange(1);">
-					<img ng-src="http://mdcdn/thumb/lightbox/{{results[iLightIndex].id}}.jpg" />
+					<img ng-if="iLightIndex > -1" ng-src="http://mdcdn/thumb/lightbox/{{results[iLightIndex].id}}.jpg" />
 				</a>
 			</div>
 		</div>
