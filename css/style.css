@@ -156,12 +156,25 @@ layout parts
   padding: 10px;
   font-size: x-large; }
 
+#search_map {
+  position: relative;
+  height: 400px; }
+
 /* maps */
 /*
 .angular-google-map-container {
 	height: 500px;
 }
 */
+#search_map .angular-google-map-container {
+  position: absolute;
+  display: block;
+  top: 0;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  padding: 8px; }
+
 #map_result_container .angular-google-map-container {
   position: absolute;
   display: block;

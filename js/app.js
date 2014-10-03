@@ -235,6 +235,14 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
         	$scope.map_icon_click(model.id);
         }
     };
+    $scope.bMapRefreshed = false;
+
+    $scope.refreshSearchMap = function(){
+    	$scope.bMapRefreshed = false;
+    	$scope.bMapRefreshed = true;
+    	console.log("map refreshed to: " + $scope.bMapRefreshed);
+    }
+
 	$scope.$watch('result_info', function(){
 		var oTempFilter = {};
 		if(typeof $scope.result_info.distinct !== 'undefined')

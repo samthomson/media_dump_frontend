@@ -73,12 +73,55 @@
 			<div id="main">
 
 				<div id="nav">
-					left - nav (tree and map tab)
-					default_queries
 
-					<div class="" ng-repeat="path in default_queries" ng-click="do_default_query('directory.path_folders='+path.dir)">
-						<img ng-src="{{sourceFromData(path['data_thumb'])}}"/> {{path.dir}}
+					<ul class="nav nav-pills">
+						<li class="active">
+							<a href="#browse" role="tab" data-toggle="tab">Browse</a>
+						</li>
+  						<li>
+  							<a href="#search_map" role="tab" data-toggle="tab" ng-click="refreshSearchMap()">Map</a>
+  						</li>
+						<!--<li class="dropdown">
+						    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						      More <span class="caret"></span>
+						    </a>
+					    	
+					    	<ul class="dropdown-menu" role="menu">
+					    	</ul>
+					    </li>-->
+					</ul>
+
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<div class="tab-pane active" id="browse">
+														
+							<div class="" ng-repeat="path in default_queries" ng-click="do_default_query('directory.path_folders='+path.dir)">
+								<img ng-src="{{sourceFromData(path['data_thumb'])}}"/> {{path.dir}}
+							</div>
+
+						</div>
+						<div class="tab-pane" id="search_map" ng-if="bMapRefreshed">
+							<!-- TODO: map input 
+							<google-map 
+								center="search_map.center" 
+								zoom="search_map.zoom" 
+								draggable='true'
+								events="search_map.events"
+								bounds="search_map.bounds"
+								>
+							</google-map>-->
+							<google-map
+								center="search_map.center" 
+								zoom="search_map.zoom"
+								refresh="bMapRefreshed"
+								draggable='true'
+								>
+							</google-map>
+						</div>
+						<div class="tab-pane" id="more">...</div>
 					</div>
+
+
 				</div>
 
 				<div id="results">
