@@ -75,7 +75,6 @@ Functional
 Layout
 */
 #header{
-	color: $media_dump_inverse_colour;
 	padding: $padding;
 }
 #main{
@@ -130,9 +129,11 @@ layout parts
 	width:100%;
 	padding: $padding;
 	border: 1px silver solid;
+	border-top:none;
 	z-index:100;
 	border-bottom-left-radius: $border_radius;
 	border-bottom-right-radius: $border_radius;
+
 }
 
 #loading{
@@ -217,10 +218,10 @@ layout parts
 	cursor: pointer;
 }
 .refine_filters{
-	max-height:80px;
+	max-height:140px;
 	overflow-y:auto;
 }
-.operator_toggle{
+.btn-group.operator_toggle{
 	width:100%;
 }
 /*

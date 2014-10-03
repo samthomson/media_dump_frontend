@@ -72,11 +72,9 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 			return false;
 		return ($scope.results.length > 0) ? true : false;
 	}
-	$scope.bShowUpdateButton = false;
 	$scope.addFilter = function($index){
 		// add filters to search query
-		$scope.available_filters[$index].add = !$scope.available_filters[$index].add;
-		$scope.bShowUpdateButton = true;
+		$scope.query += " " + $scope.available_filters[$index].value;
 	}
 	$scope.results_bounds = {
 		northeast: {
@@ -184,6 +182,10 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		$scope.do_search();
 		$scope.reconstruct_url();
 	});
+	$scope.$watch('operator', function(){
+		$scope.do_search();
+		$scope.reconstruct_url();
+	});
 	$scope.$watch('sort_direction', function(){
 		$scope.do_search();
 		$scope.reconstruct_url();
@@ -254,18 +256,6 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	});
 
 	
-
-	$scope.refreshSearch = function(){
-		$scope.bShowUpdateButton = false;
-		// add filters to search query
-		for(var cFilter = 0; cFilter < $scope.available_filters.length; cFilter++){
-			if($scope.available_filters[cFilter].add === true){
-				$scope.query += " " + $scope.available_filters[cFilter].value;
-			}
-		}
-		$scope.available_filters = [];
-	}
-
 	$scope.boundsChanged = function(){
 		console.log("var");
 	};
@@ -394,6 +384,12 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 			$location.search('sort_direction', $scope.sort_direction);
 		}else{
 			$location.search('sort_direction', null);
+		}
+
+		if($scope.operator != 'and'){
+			$location.search('operator', $scope.operator);
+		}else{
+			$location.search('operator', null);
 		}
 	};
 
