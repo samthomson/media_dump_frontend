@@ -423,7 +423,11 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 				return 'http://mdcdn/thumb/icon/'+sHash.id+'.jpg';
 				break;
 			case 'thumbs':
-				return 'data:image/jpeg;base64, '+sHash.data_thumb["115"];
+				var sType = "jpeg";
+				if(sHash.type === "video"){
+					sType = "gif";
+				}
+				return 'data:image/'+sType+';base64, '+sHash.data_thumb["210"];
 				break;
 		}
 	};
