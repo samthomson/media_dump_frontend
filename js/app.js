@@ -414,13 +414,6 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	*/
 
 	$scope.urlFromHash = function(sMode, sHash, sExt){
-		//sHash = Object.keys(sHash)[0];
-
-		if(typeof sHash === "undefined")
-		{
-			console.log("failed to make");
-			return "";
-		}
 		
 		switch(sMode){
 			case 'lightbox':
@@ -431,10 +424,20 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 				break;
 			case 'thumbs':
 				return 'data:image/jpeg;base64, '+sHash.data_thumb["115"];
-				/*return 'http://mdcdn/thumb/thumb/'+sHash.id+'.jpg';*/
 				break;
 		}
 	};
+
+	$scope.preload_thumb = function(index){
+		$scope.preloadImage($scope.urlFromHash('lightbox', $scope.results[index], 'jpg'));
+	}
+
+	$scope.preloadImage = function(sURL){
+		try {
+            var _img = new Image();
+            _img.src = sURL;
+        } catch (e) { }		
+	}
 
 	$scope.preload_around = function(){
 		if($scope.iLightIndex > -1 && $scope.results.length > 0){
@@ -448,10 +451,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 			
 			
 			saPreloadURLS.forEach(function(value){
-				try {
-		            var _img = new Image();
-		            _img.src = value;
-		        } catch (e) { }
+				$scope.preloadImage(value);
 			});
 		}
 	}
