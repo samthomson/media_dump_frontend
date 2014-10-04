@@ -198,6 +198,7 @@ layout parts
   max-height: 140px;
   overflow-y: auto; }
 
+.refine_filters
 .btn-group.operator_toggle {
   width: 100%; }
 
@@ -261,7 +262,8 @@ a.filter {
   border: 1px solid #e74c3c;
   border-radius: 4px; }
 
-a.filter.active {
+a.filter:hover {
+  text-decoration: none;
   background: #e74c3c;
   color: #ecf0f1; }
 

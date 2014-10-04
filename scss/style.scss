@@ -221,6 +221,7 @@ layout parts
 	max-height:140px;
 	overflow-y:auto;
 }
+.refine_filters
 .btn-group.operator_toggle{
 	width:100%;
 }
@@ -290,7 +291,8 @@ a.filter{
 	border: 1px solid $media_dump_colour;
 	border-radius: $border_radius;
 }
-a.filter.active{
+a.filter:hover{
+	text-decoration:none;
 	background:$media_dump_colour;
 	color:$media_dump_inverse_colour;
 }
