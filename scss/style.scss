@@ -88,6 +88,7 @@ Layout
 	position:absolute;
 	top:$i_header_height + $padding;
 	bottom:$i_footer_height;
+	bottom:0px;
 }
 #nav .tab-content{
 	padding-top:$padding;

@@ -63,7 +63,8 @@ Layout
   width: 30%;
   position: absolute;
   top: 58px;
-  bottom: 50px; }
+  bottom: 50px;
+  bottom: 0px; }
 
 #nav .tab-content {
   padding-top: 8px; }

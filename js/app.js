@@ -390,11 +390,15 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		$scope.query = s_new_query;
 	};
 	$scope.lightChange = function(iDelta){
-		if(($scope.iLightIndex + iDelta) > -1 && ($scope.iLightIndex + iDelta) < $scope.results.length){
-			$scope.iLightIndex += iDelta;
-		}else{
-			// 'loop' the results
+		if($scope.iLightIndex + iDelta === -1){
+			// go to last
+			$scope.iLightIndex = $scope.results.length - 1;
+		}
+		else if($scope.iLightIndex + iDelta === $scope.results.length){
+			// go to first
 			$scope.iLightIndex = 0;
+		}else{
+			$scope.iLightIndex += iDelta;
 		}
 	};
 	/*
@@ -611,4 +615,26 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 
 		return s_message;
 	}
+
+	//
+	// hooked in jquery events
+	//
+	$('body').keydown(function (e) {
+		var iAcceptedCodes = [37, 39];
+
+		if(iAcceptedCodes.indexOf(e.keyCode) > -1){
+		    $scope.$apply(function () {
+		    	switch(e.keyCode){
+		    		case 37:
+		    			// left
+		        		$scope.lightChange(-1);
+		        		break;
+		    		case 39:
+		    			// left
+		        		$scope.lightChange(1);
+		        		break;
+		    	}
+		    })
+		}
+	});
 });
