@@ -48,7 +48,8 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	$scope.bShowAdvancedSearch = false;
 	$scope.bEventsOn = false;
 
-	$scope.media_dump_map_styling = [
+
+	$scope.media_dump_map_options = {styles: [
 		  {
 		    stylers: [
 		      { hue: "#e74c3c" },
@@ -67,7 +68,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		      { visibility: "off" }
 		    ]
 		  }
-		];
+		]};
 
 	var jo_url_vars = $location.search();
 	
@@ -154,8 +155,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 				    }
 				});
 		    }
-	    },
-	    options: {styles: $scope.media_dump_map_styling}
+	    }
 	};	
 	$scope.markers = [];
 	$scope.map = {
@@ -164,8 +164,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	        longitude: -73
 	    },
 	    zoom: 8,
-	    bounds: {},
-	    options: {styles: $scope.media_dump_map_styling}
+	    bounds: {}
 	};	
 
 	$scope.sourceFromData = function(sBase){
