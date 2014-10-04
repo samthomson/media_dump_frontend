@@ -157,8 +157,12 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 				iLeftWidth = "50%";
 				break;
 		}
+		/*
 		$("#nav").width(iLeftWidth);
 		$("#results").css("left", iLeftWidth);
+		*/
+		$("#nav").animate({'width':iLeftWidth},700);
+		$("#results").animate({'left':iLeftWidth},700);
 	}
 
 	$scope.bMapVisible = function(){
