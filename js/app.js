@@ -48,27 +48,86 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	$scope.bShowAdvancedSearch = false;
 	$scope.bEventsOn = false;
 
+	var s_land = "#c0c0c0";
+	var s_media_dump_color = "#e74c3c";
+	var s_silver_colour = "#bdc3c7";
+	s_land = s_silver_colour;
 
-	$scope.media_dump_map_options = {styles: [
-		  {
-		    stylers: [
-		      { hue: "#e74c3c" },
-		    ]
-		  },{
-		    featureType: "road",
-		    elementType: "geometry",
-		    stylers: [
-		      { lightness: 100 },
-		      { visibility: "simplified" }
-		    ]
-		  },{
-		    featureType: "road",
-		    elementType: "labels",
-		    stylers: [
-		      { visibility: "off" }
-		    ]
-		  }
-		]};
+
+	$scope.media_dump_map_options = {
+		styles: [{
+            "featureType": "water",
+            "stylers": [{
+                "color": "#ffffff"
+            }]
+        }, {
+            "featureType": "landscape.natural",
+            "stylers": [{
+                "color": s_land
+            }]
+        }, {
+            "featureType": "poi",
+            "stylers": [{
+                "visibility": "on"
+            }, {
+                "color": s_silver_colour
+            }]
+        }, {
+            "featureType": "road",
+            "stylers": [{
+                "color": s_media_dump_color
+            }]
+        }, {
+            "featureType": "poi",
+            "elementType": "labels.text.stroke",
+            "stylers": [{
+                "color": "#ffffff"
+            }]
+        }, {
+            "featureType": "poi",
+            "elementType": "labels.text.fill",
+            "stylers": [{
+                "color": "#000000"
+            }]
+        }, {
+            "featureType": "road",
+            "elementType": "labels.text.stroke",
+            "stylers": [{
+                "color": s_silver_colour
+            }]
+        }, {
+            "featureType": "road.local",
+            "elementType": "labels.icon",
+            "stylers": [{
+                "color": "#000000"
+            }]
+        }, {
+            "featureType": "transit",
+            "stylers": [{
+                "color": s_silver_colour
+            }]
+        }, {
+            "featureType": "poi",
+            "elementType": "labels.icon",
+            "stylers": [{
+                "color": "#000000"
+            }]
+        }, {
+            "featureType": "water",
+            "elementType": "labels.text.fill",
+            "stylers": [{
+                "color": s_silver_colour
+            }]
+        }, {
+            "elementType": "labels.text.stroke",
+            "stylers": [{
+                "color": "#ffffff"
+            }]
+        }, {
+            "featureType": "road.highway",
+            "elementType": "labels.icon"
+        }],
+		backgroundColor: '#fff'};
 
 	var jo_url_vars = $location.search();
 	
