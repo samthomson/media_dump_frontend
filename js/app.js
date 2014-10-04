@@ -48,6 +48,26 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	$scope.bShowAdvancedSearch = false;
 	$scope.bEventsOn = false;
 
+	$scope.media_dump_map_styling = [
+		  {
+		    stylers: [
+		      { hue: "#e74c3c" },
+		    ]
+		  },{
+		    featureType: "road",
+		    elementType: "geometry",
+		    stylers: [
+		      { lightness: 100 },
+		      { visibility: "simplified" }
+		    ]
+		  },{
+		    featureType: "road",
+		    elementType: "labels",
+		    stylers: [
+		      { visibility: "off" }
+		    ]
+		  }
+		];
 
 	var jo_url_vars = $location.search();
 	
@@ -102,15 +122,6 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	//
 	// data interfaces
 	//
-	$scope.markers = [];
-	$scope.map = {
-	    center: {
-	        latitude: 45,
-	        longitude: -73
-	    },
-	    zoom: 8,
-	    bounds: {}
-	};	
 	$scope.search_map = {
 	    center: {
 	        latitude: 0,
@@ -143,7 +154,18 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 				    }
 				});
 		    }
-	    }
+	    },
+	    options: {styles: $scope.media_dump_map_styling}
+	};	
+	$scope.markers = [];
+	$scope.map = {
+	    center: {
+	        latitude: 45,
+	        longitude: -73
+	    },
+	    zoom: 8,
+	    bounds: {},
+	    options: {styles: $scope.media_dump_map_styling}
 	};	
 
 	$scope.sourceFromData = function(sBase){
