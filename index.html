@@ -21,8 +21,8 @@
 		<!-- the actual webpage -->
 		<div id="mainBody" ng-controller="mediadumpCtrl">
 			<div id="header" class="clearfix">
-				<a id="logo" ng-click="query = default_query">media-dump</a>
-				<div id="search_input">					
+				<a id="logo" class="left_position" ng-click="query = default_query">media-dump</a>
+				<div id="search_input" class="right_position">					
 					<div class="input-group">
 					    <input class="form-control" id="search_text_input" name="key" placeholder="type for search suggestions..." ng-model="query" type="text">
 
@@ -73,7 +73,7 @@
 
 			<div id="main">
 
-				<div id="nav">
+				<div id="nav" class="left_position">
 
 					<ul class="nav nav-pills">
 						<li class="active">
@@ -129,7 +129,7 @@
 
 				</div>
 
-				<div id="results">
+				<div id="results" class="right_position">
 					<div id="loading" ng-show="bSearching"><i class="glyphicon glyphicon-refresh spin"></i> loading</div>
 					<!-- thumb results (grid search) -->
 					<div id="thumb_results" ng-show="search_mode === 'search'">
@@ -157,7 +157,7 @@
 						</google-map>
 					</div>
 				</div>
-				<div id="pagination" ng-show="results.length > 0">
+				<div id="pagination" class="right_position" ng-show="results.length > 0">
 					<div id="map_pagination" ng-show="search_mode==='map'">
 						showing {{i_markers_showing}}/{{results.length}}
 					</div>

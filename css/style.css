@@ -75,6 +75,7 @@ Layout
   left: 30%;
   right: 0px;
   padding: 8px;
+  padding-left: 0px;
   padding-top: 0px;
   overflow-x: auto; }
 
@@ -82,8 +83,8 @@ Layout
   position: absolute;
   bottom: 0px;
   height: 40px;
-  left: 0px;
-  right: 0px; }
+  right: 0px;
+  padding: 8px; }
 
 /*
 layout parts
@@ -91,7 +92,6 @@ layout parts
 #logo {
   font-size: x-large;
   display: inline;
-  width: 20%;
   float: left;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -99,7 +99,6 @@ layout parts
 
 #search_input {
   display: inline;
-  width: 75%;
   right: 4px;
   position: absolute; }
 
@@ -175,7 +174,7 @@ layout parts
   /* tab links */
   bottom: 0px;
   left: 0px;
-  right: 8px;
+  right: 16px;
   padding: 8px; }
 
 #map_result_container .angular-google-map-container {

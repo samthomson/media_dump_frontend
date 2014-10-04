@@ -241,8 +241,8 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		$("#nav").width(iLeftWidth);
 		$("#results").css("left", iLeftWidth);
 		*/
-		$("#nav").animate({'width':iLeftWidth},700);
-		$("#results").animate({'left':iLeftWidth},700);
+		$(".left_position").animate({'width':iLeftWidth},700);
+		$(".right_position").animate({'left':iLeftWidth},700);
 	}
 
 	$scope.bMapVisible = function(){

@@ -99,6 +99,7 @@ Layout
 	left:$i_nav_width;
 	right:0px;
 	padding:$padding;
+	padding-left:0px;
 	padding-top:0px;
 	overflow-x:auto;
 }
@@ -106,8 +107,8 @@ Layout
 	position: absolute;
 	bottom:0px;
 	height: 40px;
-	left:0px;
 	right:0px;
+	padding:$padding;
 }
 
 /*
@@ -117,7 +118,6 @@ layout parts
 	font-size:x-large;
 
 	display: inline;
-	width:20%;
 	float:left;
 
 	text-overflow: ellipsis;
@@ -126,7 +126,6 @@ layout parts
 }
 #search_input{
 	display: inline;
-	width: 75%;
 	right: $margin;
 	position: absolute;
 }
@@ -200,7 +199,7 @@ layout parts
 	top:50px; /* tab links */
 	bottom:0px;
 	left:0px;
-	right:$margin * 2;
+	right: ($margin*4);
 	padding: $padding;
 }
 #map_result_container .angular-google-map-container {
