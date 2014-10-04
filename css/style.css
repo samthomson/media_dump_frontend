@@ -60,7 +60,7 @@ Layout
   padding: 8px; }
 
 #nav {
-  width: 340px;
+  width: 30%;
   position: absolute;
   top: 58px;
   bottom: 50px; }
@@ -72,7 +72,7 @@ Layout
   position: absolute;
   top: 58px;
   bottom: 50px;
-  left: 340px;
+  left: 30%;
   right: 0px;
   padding: 8px;
   padding-top: 0px;

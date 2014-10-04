@@ -115,7 +115,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	        longitude: 0
 	    },
 	    bounds: {},
-	    zoom: 4,
+	    zoom: 1,
 	    events: {
 		    idle: function (map) {
 		    	$scope.$apply(function () {
@@ -146,6 +146,18 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 
 	$scope.sourceFromData = function(sBase){
 		return 'data:image/jpeg;base64, '+sBase;
+	}
+	$scope.setNavSize = function(sMode){
+		console.log("setNavSize called: "+sMode);
+		// set size of left nav section and results to give best UX for current search/browse mode
+		var iLeftWidth = "30%";
+		switch(sMode){
+			case "map":
+				iLeftWidth = "50%";
+				break;
+		}
+		$("#nav").width(iLeftWidth);
+		$("#results").css("left", iLeftWidth);
 	}
 
 	$scope.bMapVisible = function(){
@@ -196,7 +208,14 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	});
 	$scope.$watch('search_mode', function(){
 		$scope.reconstruct_url();
+		console.log("search_mode changed");
 	});
+	$scope.$watch('search_input_mode', function(){
+		$scope.setNavSize($scope.search_input_mode);
+	});
+
+
+
 	$scope.$watch('results', function(){
 		// reset markers structure that we'll return (so that it can be returned empty if no resutls)
 		$scope.markers = [];
