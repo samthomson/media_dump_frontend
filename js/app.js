@@ -8,6 +8,8 @@ mediadumpApp.config(function($httpProvider){
 mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $routeParams, $http) {
 
 	$scope.query = "*";
+	$scope.default_query = "*";
+
 	$scope.sort_mode = "datetime";
 	$scope.sort_direction = "asc";
 	$scope.operator = "and";
@@ -148,7 +150,6 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		return 'data:image/jpeg;base64, '+sBase;
 	}
 	$scope.setNavSize = function(sMode){
-		console.log("setNavSize called: "+sMode);
 		// set size of left nav section and results to give best UX for current search/browse mode
 		var iLeftWidth = "30%";
 		switch(sMode){
@@ -208,7 +209,6 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	});
 	$scope.$watch('search_mode', function(){
 		$scope.reconstruct_url();
-		console.log("search_mode changed");
 	});
 	$scope.$watch('search_input_mode', function(){
 		$scope.setNavSize($scope.search_input_mode);
