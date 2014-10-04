@@ -60,7 +60,10 @@ Layout
   padding: 8px; }
 
 #nav {
-  width: 340px; }
+  width: 340px;
+  position: absolute;
+  top: 58px;
+  bottom: 50px; }
 
 #nav .tab-content {
   padding-top: 8px; }
@@ -159,9 +162,6 @@ layout parts
   padding: 10px;
   font-size: x-large; }
 
-#search_map {
-  position: relative; }
-
 /* maps */
 /*
 .angular-google-map-container {
@@ -171,12 +171,12 @@ layout parts
 #search_map .angular-google-map-container {
   position: absolute;
   display: block;
-  top: 0;
+  top: 50px;
+  /* tab links */
   bottom: 0px;
   left: 0px;
-  right: 4px;
-  padding: 8px;
-  height: 70%; }
+  right: 8px;
+  padding: 8px; }
 
 #map_result_container .angular-google-map-container {
   position: absolute;
@@ -231,14 +231,20 @@ textarea:focus, input[type]:focus, .uneditable-input:focus {
   box-shadow: none !important;
   outline: 0 none; }
 
-li a {
-  padding-left: 0px !important; }
+.nav-pills li a {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  margin-right: 4px;
+  border-radius: 0px; }
 
-li.active a {
+.nav-pills li.active a {
   background-color: #fff !important;
   color: #e74c3c !important;
-  border-bottom: 2px solid #e74c3c;
-  border-radius: 0px; }
+  border-bottom: 2px solid #e74c3c; }
+
+.nav-pills li:hover a {
+  background: #fff;
+  border-bottom: 2px solid #e74c3c; }
 
 select.form-control {
   width: auto;
