@@ -17,6 +17,8 @@
 		<!-- flow player -->
 		<link rel="stylesheet" href="//releases.flowplayer.org/5.5.0/skin/minimalist.css">
 
+
+
 	</head>
 	<body ng-app="mediadumpApp">
 
@@ -186,9 +188,10 @@
 				<a class="lightbox_button" id="right_lightbox" ng-click="lightChange(1);">
 					<i class="fa fa-arrow-right"></i>
 				</a>
-				<a ng-click="lightChange(1);">
-					<img ng-if="iLightIndex > -1" ng-src="http://mdcdn/thumb/lightbox/{{results[iLightIndex].id}}.jpg" />
+				<a ng-click="lightChange(1);" ng-show="results[iLightIndex].type === 'image'">
+					<img ng-if="iLightIndex > -1 && results[iLightIndex].type === 'image'" ng-src="http://mdcdn/thumb/lightbox/{{results[iLightIndex].id}}.jpg" />
 				</a>
+				<div id="player" ng-show="results[iLightIndex].type === 'video'"></div>
 			</div>
 		</div>
 
@@ -211,5 +214,6 @@
 
 		<!-- flow player -->
 		<script src="//releases.flowplayer.org/5.5.0/flowplayer.min.js"></script>
+
 	</body>
 </html>

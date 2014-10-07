@@ -1,9 +1,19 @@
 
 var mediadumpApp = angular.module('mediadumpApp', ['ngRoute', 'google-maps']);
 
-mediadumpApp.config(function($httpProvider){
+mediadumpApp.config(function($httpProvider, $sceDelegateProvider){
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
+
+    $sceDelegateProvider.resourceUrlWhitelist([
+    // Allow same origin resource loads.
+    'self',
+    // Allow loading from our assets domain.  Notice the difference between * and **.
+    'http://mdcdn/**'
+  ]);
+
 });
+
+
 
 mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $routeParams, $http) {
 
@@ -413,27 +423,72 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	};
 	*/
 
-	$scope.urlFromHash = function(sMode, sHash, sExt){
+	$scope.urlFromHash = function(sMode, oObject, sExt){
 		
 		switch(sMode){
 			case 'lightbox':
-				return 'http://mdcdn/thumb/lightbox/'+sHash.id+'.jpg';
+				return 'http://mdcdn/thumb/lightbox/'+oObject.id+'.jpg';
 				break;
 			case 'map_search':
-				return 'http://mdcdn/thumb/icon/'+sHash.id+'.jpg';
+				return 'http://mdcdn/thumb/icon/'+oObject.id+'.jpg';
 				break;
 			case 'thumbs':
 				var sType = "jpeg";
-				if(sHash.type === "video"){
-					sType = "gif";
+				if(oObject.type === "video"){
+					return 'data:image/gif;base64, '+oObject.data_thumb["210"];
+				}else{
+					return 'data:image/jpeg;base64, '+oObject.data_thumb["115"];
 				}
-				return 'data:image/'+sType+';base64, '+sHash.data_thumb["210"];
 				break;
 		}
 	};
+	$scope.videoSRC = function(oObject, sType){
+		var sSource = "";
+		if(typeof oObject === "undefined"){
+			sSource = "";
+			console.log("undefined object to make video url from");
+		}else{
+			switch(sType){
+				case "webm":
+					sSource = "http://mdcdn/thumb/video/" + oObject.id + ".webm";
+					break;
+				case "ogv":
+					sSource = "http://mdcdn/thumb/video/" + oObject.id + ".ogv";
+					break;
+				case "mp4":
+					sSource = "http://mdcdn/thumb/video/" + oObject.id + ".mp4";
+					break;
+			}
+		}
+		return sSource;
+	}
+
+	$scope.videoSRCs = function(oObject){
+		if(typeof oObject === "undefined"){
+			sSource = "";
+			console.log("undefined object to make video url from");
+		}else{
+			var sSrcBase = "http://mdcdn/thumb/video/";
+			return [
+				{src: sSrcBase + oObject.id + '.mp4', type: "video/mp4"},
+				{src: sSrcBase + oObject.id + '.webm', type: "video/webm"},
+				{src: sSrcBase + oObject.id + '.ogv', type: "video/ogg"}
+			];
+		}
+	}
 
 	$scope.preload_thumb = function(index){
-		$scope.preloadImage($scope.urlFromHash('lightbox', $scope.results[index], 'jpg'));
+		if(typeof $scope.results[index] !== "undefined")
+			switch($scope.results[index].type){
+				case "image":
+					$scope.preloadImage($scope.urlFromHash('lightbox', $scope.results[index], 'jpg'));
+					break;
+				default:
+					// do nothing
+					break;
+			}			
+		else
+			console.log("can't preload undefined element")
 	}
 
 	$scope.preloadImage = function(sURL){
@@ -449,10 +504,10 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 
 			for(cImage = $scope.iLightIndex - 2, cPreloadCount = 0; cPreloadCount < 5; cImage++, cPreloadCount++){
 				if(cImage > -1 && cImage < $scope.results.length){
-					saPreloadURLS.push($scope.urlFromHash('lightbox', $scope.results[cImage].h, 'jpg'));
+					if($scope.results[cImage].type === "image")
+						saPreloadURLS.push($scope.urlFromHash('lightbox', $scope.results[cImage].h, 'jpg'));
 				}
-			}
-			
+			}			
 			
 			saPreloadURLS.forEach(function(value){
 				$scope.preloadImage(value);
@@ -542,7 +597,66 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	$scope.thumb_click = function(index) {
 		console.log("thumb click");
 		$scope.iLightIndex = index;
+
+
+		if($scope.results[index].type === "video"){
+			// initiate flowplayer
+
+
+			var sSrcBase = "http://mdcdn/thumb/video/";
+			var oObject = $scope.results[index];
+/*
+			var oObject = $scope.results[index];
+
+			$(function () { // ensure DOM is ready
+ 				var sSrcBase = "http://mdcdn/thumb/video/";
+				// this will install flowplayer into an element with id="player"
+				console.log("make video");
+				console.log(sSrcBase + oObject.id + '.mp4');
+				$(".flowplayer").flowplayer({
+
+				// one video: a one-member playlist
+					playlist: [
+					// a list of type-url mappings in picking order
+						[
+							{ webm: sSrcBase + oObject.id + '.webm' },
+							{ mp4:  sSrcBase + oObject.id + '.mp4' },
+							{ ogg:  sSrcBase + oObject.id + '.ogv' }
+						]
+					],
+					ratio: 3/4 // video with 4:3 aspect ratio
+				});			 
+			});
+			*/
+				var s_ogv = sSrcBase + oObject.id + '.ogv';
+				var s_mp4 = sSrcBase + oObject.id + '.mp4';
+				var s_webm = sSrcBase + oObject.id + '.webm';
+									
+				var html_lightbox = '<div class="f-p" data-swf="/flowplayer.swf"><video autoplay><source src="' + s_webm +'" type="video/webm"/><source src="' + s_mp4 + '" type="video/mp4"/><source src="' + s_ogv + '" type="video/ogv"/></video></div>';				
+				html_lightbox += '<script>var api = $(".f-p").flowplayer();api.bind("finish", function(e, api) {if(b_s_p){ss_interval = setInterval(rightFile, i_ss_delay);}});</script>';
+				
+				$("#player").html(html_lightbox);
+		}
 	}
+
+
+
+if(typeof oObject === "undefined"){
+			sSource = "";
+			console.log("undefined object to make video url from");
+		}else{
+			var sSrcBase = "http://mdcdn/thumb/video/";
+			return [
+				{src: sSrcBase + oObject.id + '.mp4', type: "video/mp4"},
+				{src: sSrcBase + oObject.id + '.webm', type: "video/webm"},
+				{src: sSrcBase + oObject.id + '.ogv', type: "video/ogg"}
+			];
+		}
+
+
+
+
+
 	$scope.map_icon_click = function(index) {
 		console.log("map click");
 		$scope.thumb_click(index);
