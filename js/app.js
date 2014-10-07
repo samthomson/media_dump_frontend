@@ -298,8 +298,16 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		$scope.reconstruct_url();
 	});
 	$scope.$watch('iLightIndex', function(){
-		$scope.reconstruct_url();
-		$scope.preload_around();
+		$scope.reconstruct_url();		
+		if($scope.iLightIndex > -1){
+
+			if($scope.results.length === 0){
+				console.log("results not ready yet, despite index");
+			}else{
+				$scope.preload_around();
+				$scope.showVideoInLightbox();
+			}
+		}
 	});
 	$scope.$watch('search_mode', function(){
 		$scope.reconstruct_url();
@@ -337,6 +345,12 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	        mTempMarker["id"] = cResult;
 	        $scope.markers.push(mTempMarker);
 	        $scope.i_markers_showing++;
+		}
+
+		if($scope.iLightIndex > -1 && $scope.results.length > 0){
+			if($scope.results[$scope.iLightIndex].type === "video"){
+				$scope.showVideoInLightbox();
+			}
 		}
 	});
 	$scope.markersEvents = {
@@ -559,6 +573,22 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		}
 	};
 
+	$scope.showVideoInLightbox = function(){
+		if($scope.results[$scope.iLightIndex].type === "video"){
+			// initiate flowplayer
+			var sSrcBase = "http://mdcdn/thumb/video/";
+			var oObject = $scope.results[$scope.iLightIndex];
+			var s_ogv = sSrcBase + oObject.id + '.ogv';
+			var s_mp4 = sSrcBase + oObject.id + '.mp4';
+			var s_webm = sSrcBase + oObject.id + '.webm';
+								
+			var html_lightbox = '<div class="f-p" data-swf="/flowplayer.swf"><video autoplay><source src="' + s_webm +'" type="video/webm"/><source src="' + s_mp4 + '" type="video/mp4"/><source src="' + s_ogv + '" type="video/ogv"/></video></div>';				
+			html_lightbox += '<script>var api = $(".f-p").flowplayer();</script>';
+			
+			$("#player").html(html_lightbox);
+		}
+	}
+
 	$scope.do_search = function() {
 		$scope.results = [];
 		$scope.search_info = [];
@@ -577,6 +607,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	            if(data != undefined){
 	            	$scope.results = data.files;
 		            $scope.result_info = data.results_info;
+		            console.log("now we have some results");
 				}else{
 	            	// if not successful, bind errors to error variables
 	            	console.log("http successful, but problem with results :(");
@@ -596,23 +627,6 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 
 	$scope.thumb_click = function(index) {
 		$scope.iLightIndex = index;
-
-
-		if($scope.results[index].type === "video"){
-			// initiate flowplayer
-
-
-			var sSrcBase = "http://mdcdn/thumb/video/";
-			var oObject = $scope.results[index];
-				var s_ogv = sSrcBase + oObject.id + '.ogv';
-				var s_mp4 = sSrcBase + oObject.id + '.mp4';
-				var s_webm = sSrcBase + oObject.id + '.webm';
-									
-				var html_lightbox = '<div class="f-p" data-swf="/flowplayer.swf"><video autoplay><source src="' + s_webm +'" type="video/webm"/><source src="' + s_mp4 + '" type="video/mp4"/><source src="' + s_ogv + '" type="video/ogv"/></video></div>';				
-				html_lightbox += '<script>var api = $(".f-p").flowplayer();</script>';
-				
-				$("#player").html(html_lightbox);
-		}
 	}
 
 	$scope.stop_videos = function(){
