@@ -595,7 +595,6 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	};
 
 	$scope.thumb_click = function(index) {
-		console.log("thumb click");
 		$scope.iLightIndex = index;
 
 
@@ -605,53 +604,24 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 
 			var sSrcBase = "http://mdcdn/thumb/video/";
 			var oObject = $scope.results[index];
-/*
-			var oObject = $scope.results[index];
-
-			$(function () { // ensure DOM is ready
- 				var sSrcBase = "http://mdcdn/thumb/video/";
-				// this will install flowplayer into an element with id="player"
-				console.log("make video");
-				console.log(sSrcBase + oObject.id + '.mp4');
-				$(".flowplayer").flowplayer({
-
-				// one video: a one-member playlist
-					playlist: [
-					// a list of type-url mappings in picking order
-						[
-							{ webm: sSrcBase + oObject.id + '.webm' },
-							{ mp4:  sSrcBase + oObject.id + '.mp4' },
-							{ ogg:  sSrcBase + oObject.id + '.ogv' }
-						]
-					],
-					ratio: 3/4 // video with 4:3 aspect ratio
-				});			 
-			});
-			*/
 				var s_ogv = sSrcBase + oObject.id + '.ogv';
 				var s_mp4 = sSrcBase + oObject.id + '.mp4';
 				var s_webm = sSrcBase + oObject.id + '.webm';
 									
 				var html_lightbox = '<div class="f-p" data-swf="/flowplayer.swf"><video autoplay><source src="' + s_webm +'" type="video/webm"/><source src="' + s_mp4 + '" type="video/mp4"/><source src="' + s_ogv + '" type="video/ogv"/></video></div>';				
-				html_lightbox += '<script>var api = $(".f-p").flowplayer();api.bind("finish", function(e, api) {if(b_s_p){ss_interval = setInterval(rightFile, i_ss_delay);}});</script>';
+				html_lightbox += '<script>var api = $(".f-p").flowplayer();</script>';
 				
 				$("#player").html(html_lightbox);
 		}
 	}
 
-
-
-if(typeof oObject === "undefined"){
-			sSource = "";
-			console.log("undefined object to make video url from");
-		}else{
-			var sSrcBase = "http://mdcdn/thumb/video/";
-			return [
-				{src: sSrcBase + oObject.id + '.mp4', type: "video/mp4"},
-				{src: sSrcBase + oObject.id + '.webm', type: "video/webm"},
-				{src: sSrcBase + oObject.id + '.ogv', type: "video/ogg"}
-			];
-		}
+	$scope.stop_videos = function(){
+		$(".f-p").remove();
+	}
+	$scope.closeLightbox = function(){
+		$scope.stop_videos();
+		$scope.iLightIndex = -1;
+	}
 
 
 
@@ -689,9 +659,6 @@ if(typeof oObject === "undefined"){
 		}
 	}
 
-	$scope.close_lightbox = function(){
-		$scope.iLightIndex = -1;
-	}
 	$scope.pagination_enabled = function(b_previous){
 		if(b_previous){
 			if($scope.page == 1)

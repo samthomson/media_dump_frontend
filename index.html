@@ -179,7 +179,7 @@
 
 
 			<div id="lightbox" ng-show="iLightIndex > -1">
-				<a class="lightbox_button" id="close_lightbox" ng-click="close_lightbox();">
+				<a class="lightbox_button" id="close_lightbox" ng-click="closeLightbox();">
 					<i class="fa fa-times"></i>
 				</a>
 				<a class="lightbox_button" id="left_lightbox" ng-click="lightChange(-1);">
@@ -188,10 +188,12 @@
 				<a class="lightbox_button" id="right_lightbox" ng-click="lightChange(1);">
 					<i class="fa fa-arrow-right"></i>
 				</a>
-				<a ng-click="lightChange(1);" ng-show="results[iLightIndex].type === 'image'">
-					<img ng-if="iLightIndex > -1 && results[iLightIndex].type === 'image'" ng-src="http://mdcdn/thumb/lightbox/{{results[iLightIndex].id}}.jpg" />
-				</a>
-				<div id="player" ng-show="results[iLightIndex].type === 'video'"></div>
+				<div id="lightbox_contents">
+					<a ng-click="lightChange(1);" ng-show="results[iLightIndex].type === 'image'">
+						<img ng-if="iLightIndex > -1 && results[iLightIndex].type === 'image'" ng-src="http://mdcdn/thumb/lightbox/{{results[iLightIndex].id}}.jpg" />
+					</a>
+					<div id="player" ng-show="results[iLightIndex].type === 'video'"></div>
+				</div>
 			</div>
 		</div>
 
