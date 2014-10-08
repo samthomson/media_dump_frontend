@@ -252,7 +252,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		$("#results").css("left", iLeftWidth);
 		*/
 		$(".left_position").animate({'width':iLeftWidth},700);
-		$(".right_position").animate({'left':iLeftWidth},{duration: 700, complete: function(){$scope.refreshSearchMap();}});
+		$(".right_position").animate({'left':iLeftWidth},700);
 	}
 
 	$scope.bMapVisible = function(){
