@@ -43,7 +43,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	$scope.setSearchInputMode = function(sMode){
 		$scope.search_input_mode = sMode;
 		if(sMode === "map"){
-			$scope.refreshSearchMap()
+			$scope.refreshSearchMap();
 			// grid only when search mode is map
 			$scope.search_mode = "search";
 		}
@@ -241,10 +241,10 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	}
 	$scope.setNavSize = function(sMode){
 		// set size of left nav section and results to give best UX for current search/browse mode
-		var iLeftWidth = "30%";
+		var iLeftWidth = "40%";
 		switch(sMode){
 			case "map":
-				iLeftWidth = "50%";
+				//iLeftWidth = "50%";
 				break;
 		}
 		/*
@@ -252,7 +252,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		$("#results").css("left", iLeftWidth);
 		*/
 		$(".left_position").animate({'width':iLeftWidth},700);
-		$(".right_position").animate({'left':iLeftWidth},700);
+		$(".right_position").animate({'left':iLeftWidth},{duration: 700, complete: function(){$scope.refreshSearchMap();}});
 	}
 
 	$scope.bMapVisible = function(){
