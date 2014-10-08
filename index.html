@@ -102,8 +102,9 @@
 					<div class="tab-content">
 						<div class="tab-pane active" id="browse">
 														
-							<div class="tree_link" ng-repeat="path in default_queries" ng-click="do_default_query('directory.path_folders='+path.dir)">
-								<img ng-src="{{sourceFromData(path['data_thumb'])}}"/> {{path.dir}}
+							<div class="tree_link" ng-repeat="path in default_queries" ng-click="do_default_query('directory.path_folders='+path.dir)" alt="{{path.dir}}" title="{{path.dir}}">
+								<img ng-src="{{sourceFromData(path['data_thumb'])}}"/> 
+								<span class="tree_link_title">{{path.dir_text}}</span>
 							</div>
 
 						</div>

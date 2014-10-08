@@ -227,11 +227,25 @@ layout parts
 	padding: $padding;
 }
 .tree_link{
+	width:45%;
 	margin-bottom:$margin;
 	font-size: large;
+	display: inline-block;
+	padding: $padding;
+}
+.tree_link img{
+	max-width:100%;
+	height: auto;
+}
+.tree_link_title{
+	margin-bottom:$margin;
+	font-size: large;
+	text-overflow: hidden;
 }
 .tree_link:hover{
 	cursor: pointer;
+	border:1px solid $media_dump_colour;
+	border-radius: $border_radius;
 }
 .refine_filters{
 	max-height:140px;
