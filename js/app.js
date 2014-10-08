@@ -298,7 +298,8 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		$scope.reconstruct_url();
 	});
 	$scope.$watch('iLightIndex', function(){
-		$scope.reconstruct_url();		
+		$scope.reconstruct_url();	
+		$scope.stop_videos();	
 		if($scope.iLightIndex > -1){
 
 			if($scope.results.length === 0){
@@ -328,23 +329,30 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		$scope.i_markers_showing = 0;
 		for(var cResult = 0; cResult < $scope.results.length; cResult++){
 
-			var pinIcon = new google.maps.MarkerImage(
-				$scope.urlFromHash('thumbs', $scope.results[cResult], ''),
-			    null, /* size is determined at runtime */
-			    null, /* origin is 0,0 */
-			    null, /* anchor is bottom center of the scaled image */
-			    new google.maps.Size(48, 48)
-			);  
+			// only make marker if geo tag exists
+			if(typeof $scope.results[cResult].lat !== "undefined" &&
+				typeof $scope.results[cResult].lon !== "undefined" &&
+				$scope.results[cResult].lat !== 0 &&
+				$scope.results[cResult].lon !== 0)
+			{
+				var pinIcon = new google.maps.MarkerImage(
+					$scope.urlFromHash('thumbs', $scope.results[cResult], ''),
+				    null, /* size is determined at runtime */
+				    null, /* origin is 0,0 */
+				    null, /* anchor is bottom center of the scaled image */
+				    new google.maps.Size(48, 48)
+				);  
 
-			mTempMarker = {
-	            latitude: $scope.results[cResult].lat,
-	            longitude: $scope.results[cResult].lon,
-	            title: 'm' + cResult,
-	            icon: pinIcon
-	        };
-	        mTempMarker["id"] = cResult;
-	        $scope.markers.push(mTempMarker);
-	        $scope.i_markers_showing++;
+				mTempMarker = {
+		            latitude: $scope.results[cResult].lat,
+		            longitude: $scope.results[cResult].lon,
+		            title: 'm' + cResult,
+		            icon: pinIcon
+		        };
+		        mTempMarker["id"] = cResult;
+		        $scope.markers.push(mTempMarker);
+		        $scope.i_markers_showing++;
+		    }
 		}
 
 		if($scope.iLightIndex > -1 && $scope.results.length > 0){
@@ -438,7 +446,8 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	*/
 
 	$scope.urlFromHash = function(sMode, oObject, sExt){
-		
+		if(typeof oObject === "undefined")
+			return "";
 		switch(sMode){
 			case 'lightbox':
 				return 'http://mdcdn/thumb/lightbox/'+oObject.id+'.jpg';
@@ -449,7 +458,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 			case 'thumbs':
 				var sType = "jpeg";
 				if(oObject.type === "video"){
-					return 'data:image/gif;base64, '+oObject.data_thumb["210"];
+					return 'data:image/gif;base64, '+oObject.data_thumb["115"];
 				}else{
 					return 'data:image/jpeg;base64, '+oObject.data_thumb["115"];
 				}
@@ -519,7 +528,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 			for(cImage = $scope.iLightIndex - 2, cPreloadCount = 0; cPreloadCount < 5; cImage++, cPreloadCount++){
 				if(cImage > -1 && cImage < $scope.results.length){
 					if($scope.results[cImage].type === "image")
-						saPreloadURLS.push($scope.urlFromHash('lightbox', $scope.results[cImage].h, 'jpg'));
+						saPreloadURLS.push($scope.urlFromHash('lightbox', $scope.results[cImage].id, 'jpg'));
 				}
 			}			
 			
