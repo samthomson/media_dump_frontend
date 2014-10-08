@@ -168,10 +168,14 @@
 						showing {{i_markers_showing}}/{{results.length}}
 					</div>
 					<div id="grid_pagination" ng-show="search_mode==='search' && result_info.available_pages > 1">
-						<div class="row">
-							<div class="col-xs-6">
-								<a class="btn btn-default form-control text-center" ng-show="page > 1" ng-click="page = page - 1"><i class="glyphicon glyphicon-chevron-left"></i> previous</a></div>
-							<div class="col-xs-6"><a class="btn btn-default form-control text-center" ng-show="page < (result_info.available_pages)" ng-click="page = page + 1">next <i class="glyphicon glyphicon-chevron-right"></i></a></div>
+
+						<a class="pull-left" ng-show="page > 1" ng-click="page = page - 1"><i class="glyphicon glyphicon-chevron-left"></i> previous</a>
+
+						<a class="pull-right" ng-show="page < (result_info.available_pages)" ng-click="page = page + 1">next <i class="glyphicon glyphicon-chevron-right"></i></a>
+
+						<span>showing {{results.length}}/{{result_info.count}}</span>
+						<span><i class="glyphicon glyphicon-flash"></i> found in ~{{result_info.speed | number:0}} ms</span>
+
 						</div>
 					</div>
 				</div>
