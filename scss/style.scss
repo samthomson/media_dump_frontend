@@ -227,25 +227,39 @@ layout parts
 	padding: $padding;
 }
 .tree_link{
-	width:45%;
-	margin-bottom:$margin;
+	width:40%;
+	margin-bottom:($margin*2);
+	margin-right:($margin*2);
 	font-size: large;
 	display: inline-block;
 	padding: $padding;
+	border:1px solid $silver_colour;
+	border-radius: $border_radius;
+}
+.tree_link .tree_image_container{
+
 }
 .tree_link img{
 	max-width:100%;
 	height: auto;
+	max-height: 80px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto 
 }
 .tree_link_title{
 	margin-bottom:$margin;
+	width: 100%;
 	font-size: large;
-	text-overflow: hidden;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-align: center;
+	display: block;
 }
 .tree_link:hover{
 	cursor: pointer;
-	border:1px solid $media_dump_colour;
-	border-radius: $border_radius;
+	border-color: $media_dump_colour;
 }
 .refine_filters{
 	max-height:140px;
