@@ -312,6 +312,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		}
 	});
 	$scope.$watch('search_mode', function(){
+		$scope.do_search();
 		$scope.reconstruct_url();
 	});
 	$scope.$watch('search_input_mode', function(){
@@ -593,10 +594,8 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	};
 
 	$scope.showVideoInLightbox = function(){
-		console.log("show video");
 		if($scope.results[$scope.iLightIndex].type === "video"){
 			// initiate flowplayer
-			console.log("show VIDEO");
 			var sSrcBase = "http://mdcdn/thumb/video/";
 			var oObject = $scope.results[$scope.iLightIndex];
 			var s_ogv = sSrcBase + oObject.id + '.ogv';
