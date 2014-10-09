@@ -182,6 +182,17 @@ layout parts
 	height: 500px;
 }
 */
+#browse {
+  position: absolute;
+  display: block;
+  top: 50px;
+  /* tab links */
+  bottom: 0px;
+  left: 0px;
+  right: 16px;
+  padding: 8px;
+  overflow-y: auto; }
+
 #search_map .angular-google-map-container {
   position: absolute;
   display: block;
@@ -294,6 +305,9 @@ select.form-control {
   opacity: 0.9;
   filter: alpha(opacity=90);
   /* For IE8 and earlier */ }
+
+#thumb_results {
+  overflow-y: auto; }
 
 #thumb_results img {
   margin-right: 4px;
