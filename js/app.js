@@ -620,7 +620,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		        /*url     : 'http://media-dump-instant/api/search',
 		        url     : 'http://media-dump.samt.st/api/search',*/
 		        url     : $scope.s_media_dump_url + '/search/',
-		        params    : {query: $scope.query.replace(" ", ","), page: $scope.page, m: $scope.search_mode, operator: $scope.operator, sort: $scope.sort_mode, sort_direction: $scope.sort_direction}
+		        params    : {query: $scope.query, page: $scope.page, m: $scope.search_mode, operator: $scope.operator, sort: $scope.sort_mode, sort_direction: $scope.sort_direction}
 		    })
 	        .success(function(data) {
 	            if(data != undefined){
