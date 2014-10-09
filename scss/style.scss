@@ -342,11 +342,16 @@ select.form-control{
 	overflow-y:auto;
 }
 
-#thumb_results img{
-	margin-right:$margin;
-	margin-bottom:$margin;
+#thumb_results img{	
+	margin-right:$margin/2;
 }
-
+.gallery_row{
+	margin-bottom:$margin/2;
+}
+.gallery_row img{
+	max-height: 100%;
+	width:auto;
+}
 a.filter{
 	display:inline-block;
 	padding:$padding/2;
@@ -360,6 +365,7 @@ a.filter:hover{
 	background:$media_dump_colour;
 	color:$media_dump_inverse_colour;
 }
+
 /*
 .flowplayer .fp-mute{background: url('s.png') no-repeat top left;  background-position: -585px 0px; width: 24px; height: 18px;} */
 /*

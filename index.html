@@ -139,8 +139,8 @@
 				<div id="results" class="right_position">
 					<div id="loading" ng-show="bSearching"><i class="glyphicon glyphicon-refresh spin"></i> loading</div>
 					<!-- thumb results (grid search) -->
-					<div id="thumb_results" ng-show="search_mode === 'search'">
-						<a class="thumb_result_link" ng-repeat="result in results" ng-mousedown="preload_thumb($index)" ng-click="thumb_click($index)"><img ng-src="{{urlFromHash('thumbs', result, '')}}"/></a>
+					<div id="thumb_results" ng-show="search_mode === 'search'" justified>
+						<a class="thumb_result_link" ng-repeat="result in results" ng-mousedown="preload_thumb($index)" ng-click="thumb_click($index)" repeat-done><img ng-src="{{urlFromHash('thumbs', result, '')}}"/></a>
 					</div>
 
 					<!-- map results (map search) -->
@@ -218,6 +218,9 @@
 
 		<!-- flow player -->
 		<script src="//releases.flowplayer.org/5.5.0/flowplayer.min.js"></script>
+
+		<!-- justified gallery script -->
+		<script src="/js/justify.js"></script>
 
 	</body>
 </html>

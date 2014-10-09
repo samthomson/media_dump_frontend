@@ -13,6 +13,31 @@ mediadumpApp.config(function($httpProvider, $sceDelegateProvider){
 
 });
 
+mediadumpApp.directive('justified', ['$timeout', function ($timeout) {
+    return {
+        restrict: 'AE',
+        link: function (scope, el, attrs) {
+            scope.$watch('$last', function (n, o) {
+                if (n) {
+                    $timeout(function () { justifyImages($(el[0]))});
+                }
+            });
+        }
+    };
+}]);
+
+mediadumpApp.directive('repeatDone', [function () {
+  return {
+    restrict: 'A',
+     link: function (scope, element, iAttrs) {
+          var parentScope = element.parent().scope();
+          if (scope.$last){
+               parentScope.$last = true;           
+          }
+        }
+      };
+    }]);
+
 
 
 mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $routeParams, $http) {
