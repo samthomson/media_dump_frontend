@@ -593,8 +593,10 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	};
 
 	$scope.showVideoInLightbox = function(){
+		console.log("show video");
 		if($scope.results[$scope.iLightIndex].type === "video"){
 			// initiate flowplayer
+			console.log("show VIDEO");
 			var sSrcBase = "http://mdcdn/thumb/video/";
 			var oObject = $scope.results[$scope.iLightIndex];
 			var s_ogv = sSrcBase + oObject.id + '.ogv';

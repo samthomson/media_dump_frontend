@@ -195,7 +195,7 @@
 					<a ng-click="lightChange(1);" >
 						<img ng-if="results[iLightIndex].type === 'image'" ng-src="{{lightboxURL()}}" />
 					</a>
-					<div id="player" ng-if="results[iLightIndex].type === 'video'"></div>
+					<div id="player" ng-show="results[iLightIndex].type === 'video'"></div>
 				</div>
 			</div>
 		</div>
