@@ -298,12 +298,13 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		$scope.reconstruct_url();
 	});
 	$scope.$watch('iLightIndex', function(){
+		
 		$scope.reconstruct_url();	
 		$scope.stop_videos();	
 		if($scope.iLightIndex > -1){
 
 			if($scope.results.length === 0){
-				console.log("results not ready yet, despite index");
+				//console.log("results not ready yet, despite index");
 			}else{
 				$scope.preload_around();
 				$scope.showVideoInLightbox();
@@ -355,7 +356,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		    }
 		}
 
-		if($scope.iLightIndex > -1 && $scope.results.length > 0){
+		if($scope.iLightIndex > -1 && $scope.iLightIndex < $scope.results.length){
 			if($scope.results[$scope.iLightIndex].type === "video"){
 				$scope.showVideoInLightbox();
 			}
@@ -499,24 +500,33 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 			];
 		}
 	}
+	$scope.lightboxURL = function(){
+		if(typeof $scope.results[$scope.iLightIndex] !== "undefined"){
+			if($scope.results[$scope.iLightIndex].type === "image"){
+				return "http://mdcdn/thumb/lightbox/" + $scope.results[$scope.iLightIndex].id + ".jpg";
+			}
+		}else{return "undefined item";}
+	}
 
 	$scope.preload_thumb = function(index){
 		if(typeof $scope.results[index] !== "undefined")
+		{
 			switch($scope.results[index].type){
-				case "image":
+				case "image":				
 					$scope.preloadImage($scope.urlFromHash('lightbox', $scope.results[index], 'jpg'));
 					break;
 				default:
 					// do nothing
 					break;
-			}			
+			}
+		}
 		else
 			console.log("can't preload undefined element")
 	}
 
 	$scope.preloadImage = function(sURL){
 		try {
-            var _img = new Image();
+			var _img = new Image();
             _img.src = sURL;
         } catch (e) { }		
 	}
@@ -528,7 +538,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 			for(cImage = $scope.iLightIndex - 2, cPreloadCount = 0; cPreloadCount < 5; cImage++, cPreloadCount++){
 				if(cImage > -1 && cImage < $scope.results.length){
 					if($scope.results[cImage].type === "image")
-						saPreloadURLS.push($scope.urlFromHash('lightbox', $scope.results[cImage].id, 'jpg'));
+						saPreloadURLS.push($scope.urlFromHash('lightbox', $scope.results[cImage], 'jpg'));
 				}
 			}			
 			
@@ -616,10 +626,8 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	            if(data != undefined){
 	            	$scope.results = data.files;
 		            $scope.result_info = data.results_info;
-		            console.log("now we have some results");
 				}else{
 	            	// if not successful, bind errors to error variables
-	            	console.log("http successful, but problem with results :(");
 					$scope.results = [];
 					$scope.search_info = [];					
 				}
@@ -651,7 +659,6 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 
 
 	$scope.map_icon_click = function(index) {
-		console.log("map click");
 		$scope.thumb_click(index);
 		$scope.$apply();
 	}

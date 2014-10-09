@@ -112,7 +112,6 @@
 						</div>
 						<div class="tab-pane" id="search_map" ng-if="bMapRefreshed">
 							<!-- TODO: map input -->
-							
 							<google-map
 								center="search_map.center" 
 								zoom="search_map.zoom"
@@ -170,7 +169,7 @@
 					<div id="map_pagination" ng-show="search_mode==='map'">
 						showing {{i_markers_showing}}/{{results.length}}
 					</div>
-					<div id="grid_pagination" ng-show="search_mode==='search' && result_info.available_pages > 1">
+					<div id="grid_pagination" ng-show="search_mode==='search'">
 
 						<a class="pull-left" ng-show="page > 1" ng-click="page = page - 1"><i class="glyphicon glyphicon-chevron-left"></i> previous</a>
 
@@ -178,12 +177,9 @@
 
 						<span>showing {{results.length}}/{{result_info.count}}</span>
 						<span><i class="glyphicon glyphicon-flash"></i> found in ~{{result_info.speed | number:0}} ms</span>
-
-						</div>
 					</div>
 				</div>
 			</div>
-
 
 			<div id="lightbox" ng-show="iLightIndex > -1">
 				<a class="lightbox_button" id="close_lightbox" ng-click="closeLightbox();">
@@ -196,10 +192,10 @@
 					<i class="fa fa-arrow-right"></i>
 				</a>
 				<div id="lightbox_contents">
-					<a ng-click="lightChange(1);" ng-show="results[iLightIndex].type === 'image'">
-						<img ng-if="iLightIndex > -1 && results[iLightIndex].type === 'image'" ng-src="http://mdcdn/thumb/lightbox/{{results[iLightIndex].id}}.jpg" />
+					<a ng-click="lightChange(1);" >
+						<img ng-if="results[iLightIndex].type === 'image'" ng-src="{{lightboxURL()}}" />
 					</a>
-					<div id="player" ng-show="results[iLightIndex].type === 'video'"></div>
+					<div id="player" ng-if="results[iLightIndex].type === 'video'"></div>
 				</div>
 			</div>
 		</div>
