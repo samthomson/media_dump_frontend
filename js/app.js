@@ -12,7 +12,7 @@ mediadumpApp.config(function($httpProvider, $sceDelegateProvider){
   ]);
 
 });
-
+/*
 mediadumpApp.directive('justified', ['$timeout', function ($timeout) {
     return {
         restrict: 'AE',
@@ -25,19 +25,21 @@ mediadumpApp.directive('justified', ['$timeout', function ($timeout) {
         }
     };
 }]);
-
+*/
+/*
 mediadumpApp.directive('repeatDone', [function () {
   return {
     restrict: 'A',
      link: function (scope, element, iAttrs) {
           var parentScope = element.parent().scope();
           if (scope.$last){
-               parentScope.$last = true;           
+               //parentScope.$last = true;  
+               justifyImages(parentScope);         
           }
         }
       };
     }]);
-
+*/
 
 
 mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $routeParams, $http) {
@@ -380,6 +382,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		        $scope.markers.push(mTempMarker);
 		        $scope.i_markers_showing++;
 		    }
+		    $scope.results[cResult].height = 115;
 		}
 
 		if($scope.iLightIndex > -1 && $scope.iLightIndex < $scope.results.length){
@@ -387,7 +390,49 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 				$scope.showVideoInLightbox();
 			}
 		}
+
+		$scope.justifyImages($("#thumb_results"));
 	});
+	$scope.justifyImages = function(uniqueDiv){
+
+		var allImages = $('img', uniqueDiv);
+
+		var iAvailableWidth = $(uniqueDiv).innerWidth();
+		var iRightMargin = 4;
+
+		var sGalleryHTMLBuilder = '';
+
+		var iRunningRowWidth = 0;
+		var aRowImageIds = [];
+
+
+		$scope.results.forEach(function(result, index){
+		    // add image to row
+		    aRowImageIds.push(index);
+
+		    var img = new Image();
+			img.src = $scope.urlFromHash("thumbs", result);
+
+		    // add up height
+		    iRunningRowWidth += img.width + iRightMargin;
+		    // check row size
+		    if(iRunningRowWidth > iAvailableWidth || index === ($scope.results.length -1)){
+		        // calculate resize index
+		        var iRowHeight = Math.floor(115*(iAvailableWidth / iRunningRowWidth));
+		        // finish row, start next, resize row
+		        for(var cImage = 0; cImage < aRowImageIds.length; cImage++){
+		        	$scope.results[aRowImageIds[cImage]].height = iRowHeight;
+		        }
+		        // reset row
+		        iRunningRowWidth = 0;
+		        aRowImageIds = [];
+		    }else{
+		        // nothing, carry on to add next image
+		    }
+		});
+	}
+
+
 	$scope.markersEvents = {
         click: function (gMarker, eventName, model) {            
         	$scope.map_icon_click(model.id);
@@ -547,7 +592,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 			}
 		}
 		else
-			console.log("can't preload undefined element")
+			console.log("can't preload undefined element");
 	}
 
 	$scope.preloadImage = function(sURL){

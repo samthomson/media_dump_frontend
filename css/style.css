@@ -310,13 +310,8 @@ select.form-control {
   overflow-y: auto; }
 
 #thumb_results img {
-  margin-right: 2px; }
-
-.gallery_row {
-  margin-bottom: 2px; }
-
-.gallery_row img {
-  max-height: 100%;
+  margin-right: 2px;
+  margin-bottom: 2px;
   width: auto; }
 
 a.filter {

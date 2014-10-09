@@ -140,7 +140,7 @@
 					<div id="loading" ng-show="bSearching"><i class="glyphicon glyphicon-refresh spin"></i> loading</div>
 					<!-- thumb results (grid search) -->
 					<div id="thumb_results" ng-show="search_mode === 'search'" justified>
-						<a class="thumb_result_link" ng-repeat="result in results" ng-mousedown="preload_thumb($index)" ng-click="thumb_click($index)" repeat-done><img ng-src="{{urlFromHash('thumbs', result, '')}}"/></a>
+						<a class="thumb_result_link" ng-repeat="result in results" ng-mousedown="preload_thumb($index)" ng-click="thumb_click($index)" repeat-done><img ng-src="{{urlFromHash('thumbs', result, '')}}" id="{{result.id}}" height="{{result.height}}" /></a>
 					</div>
 
 					<!-- map results (map search) -->
