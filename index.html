@@ -48,7 +48,7 @@
 					<div id="advanced_search" class="light_opacity" ng-show="bShowAdvancedSearch">
 						<div class="form-group">
 							<div class="refine_filters">
-								<a ng-click="addFilter($index)" ng-repeat="filter in available_filters" class="filter" ng-class="{true:'active'}[filter.add === true]">{{filter.value}}</a>
+								<a ng-click="addFilter($index)" ng-repeat="filter in available_filters" class="filter" ng-class="{true:'active'}[filter.add === true]">{{filter.value[0]}}: {{filter.value[1]}}</a>
 							</div>
 						</div>
 						<div class="row">

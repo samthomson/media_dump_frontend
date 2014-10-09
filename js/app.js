@@ -166,7 +166,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	}
 	$scope.addFilter = function($index){
 		// add filters to search query
-		$scope.query += " " + $scope.available_filters[$index].value;
+		$scope.query += " " + $scope.available_filters[$index].value[0];
 	}
 	$scope.results_bounds = {
 		northeast: {
