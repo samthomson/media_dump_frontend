@@ -12,34 +12,6 @@ mediadumpApp.config(function($httpProvider, $sceDelegateProvider){
   ]);
 
 });
-/*
-mediadumpApp.directive('justified', ['$timeout', function ($timeout) {
-    return {
-        restrict: 'AE',
-        link: function (scope, el, attrs) {
-            scope.$watch('$last', function (n, o) {
-                if (n) {
-                    $timeout(function () { justifyImages($(el[0]))});
-                }
-            });
-        }
-    };
-}]);
-*/
-/*
-mediadumpApp.directive('repeatDone', [function () {
-  return {
-    restrict: 'A',
-     link: function (scope, element, iAttrs) {
-          var parentScope = element.parent().scope();
-          if (scope.$last){
-               //parentScope.$last = true;  
-               justifyImages(parentScope);         
-          }
-        }
-      };
-    }]);
-*/
 
 
 mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $routeParams, $http) {
@@ -382,7 +354,6 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		        $scope.markers.push(mTempMarker);
 		        $scope.i_markers_showing++;
 		    }
-		    $scope.results[cResult].height = 115;
 		}
 
 		if($scope.iLightIndex > -1 && $scope.iLightIndex < $scope.results.length){
@@ -392,14 +363,17 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		}
 
 		$scope.justifyImages($("#thumb_results"));
+		if(!$scope.$$phase) {
+			$scope.$apply();
+		}
 	});
 	$scope.justifyImages = function(uniqueDiv){
 
+		var iRightMargin = 4;
 		var allImages = $('img', uniqueDiv);
 
-		var iAvailableWidth = $(uniqueDiv).innerWidth();
-		var iRightMargin = 4;
-
+		var iAvailableWidth = Math.ceil($(uniqueDiv).innerWidth()) - 10;
+		
 		var sGalleryHTMLBuilder = '';
 
 		var iRunningRowWidth = 0;
@@ -414,11 +388,16 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 			img.src = $scope.urlFromHash("thumbs", result);
 
 		    // add up height
-		    iRunningRowWidth += img.width + iRightMargin;
+		    iRunningRowWidth += (img.width + iRightMargin);
 		    // check row size
-		    if(iRunningRowWidth > iAvailableWidth || index === ($scope.results.length -1)){
+		    if(iRunningRowWidth > iAvailableWidth){
 		        // calculate resize index
 		        var iRowHeight = Math.floor(115*(iAvailableWidth / iRunningRowWidth));
+
+		        //console.log("available width: " + iAvailableWidth);
+		        //console.log("row width: " + (iRunningRowWidth*(iAvailableWidth / iRunningRowWidth)));
+
+		        
 		        // finish row, start next, resize row
 		        for(var cImage = 0; cImage < aRowImageIds.length; cImage++){
 		        	$scope.results[aRowImageIds[cImage]].height = iRowHeight;
@@ -823,4 +802,18 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		    })
 		}
 	});
+
+	var loop;
+
+	$(window).resize(function() {
+		console.log("resize");
+		clearTimeout(loop);
+		loop = setTimeout(doneResizing, 500);	
+	});
+	function doneResizing(){
+		console.log("doneResizing");
+		$scope.justifyImages($("#thumb_results")); 
+		$scope.$apply();
+	}
+
 });
