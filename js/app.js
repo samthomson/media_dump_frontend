@@ -374,6 +374,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 
 		
 	});
+/*
 	$scope.justifyImages = function(uniqueDiv){
 
 		var iRightMargin = 4;
@@ -417,7 +418,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		    }
 		});
 	}
-
+*/
 
 	$scope.markersEvents = {
         click: function (gMarker, eventName, model) {            
@@ -682,7 +683,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	        .success(function(data) {
 	            if(data != undefined){
 	            	$scope.results = data.files;
-	            	$scope.justifyImages($("#thumb_results"));
+	            	//$scope.justifyImages($("#thumb_results"));
 		            
 		            $scope.result_info = data.results_info;
 				}else{
@@ -814,13 +815,14 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 
 	var loop;
 
+	/*
 	$(window).resize(function() {
 		clearTimeout(loop);
 		loop = setTimeout(doneResizing, 500);	
 	});
 	function doneResizing(){
-		$scope.justifyImages($("#thumb_results")); 
+		//$scope.justifyImages($("#thumb_results")); 
 		$scope.$apply();
 	}
-
+	*/
 });
