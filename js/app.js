@@ -1,5 +1,10 @@
 
-var mediadumpApp = angular.module('mediadumpApp', ['ngRoute', 'google-maps']);
+var mediadumpApp = angular.module('mediadumpApp', ['ngRoute', 'google-maps']).directive('myRepeatDirective', function() {
+  return function(scope, element, attrs) {
+	    //scope.justifyImages($("#thumb_results")); 
+		//scope.$digest();
+	};
+});
 
 mediadumpApp.config(function($httpProvider, $sceDelegateProvider){
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
@@ -13,6 +18,11 @@ mediadumpApp.config(function($httpProvider, $sceDelegateProvider){
 
 });
 
+
+/*
+$scope.justifyImages($("#thumb_results")); 
+$scope.$apply();
+*/
 
 mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $routeParams, $http) {
 
@@ -362,10 +372,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 			}
 		}
 
-		$scope.justifyImages($("#thumb_results"));
-		if(!$scope.$$phase) {
-			$scope.$apply();
-		}
+		
 	});
 	$scope.justifyImages = function(uniqueDiv){
 
@@ -675,6 +682,8 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	        .success(function(data) {
 	            if(data != undefined){
 	            	$scope.results = data.files;
+	            	$scope.justifyImages($("#thumb_results"));
+		            
 		            $scope.result_info = data.results_info;
 				}else{
 	            	// if not successful, bind errors to error variables
@@ -806,12 +815,10 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	var loop;
 
 	$(window).resize(function() {
-		console.log("resize");
 		clearTimeout(loop);
 		loop = setTimeout(doneResizing, 500);	
 	});
 	function doneResizing(){
-		console.log("doneResizing");
 		$scope.justifyImages($("#thumb_results")); 
 		$scope.$apply();
 	}
