@@ -175,7 +175,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	}
 	$scope.addFilter = function($index){
 		// add filters to search query
-		$scope.query += " " + $scope.available_filters[$index].value[0];
+		$scope.query += "," + $scope.available_filters[$index].value[0];
 	}
 	$scope.results_bounds = {
 		northeast: {
@@ -678,7 +678,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		        /*url     : 'http://media-dump-instant/api/search',
 		        url     : 'http://media-dump.samt.st/api/search',*/
 		        url     : $scope.s_media_dump_url + '/search/',
-		        params    : {query: $scope.query, page: $scope.page, m: $scope.search_mode, operator: $scope.operator, sort: $scope.sort_mode, sort_direction: $scope.sort_direction}
+		        params    : {query: $scope.query, page: $scope.page, m: $scope.search_mode, operator: $scope.operator, sort: $scope.sort_mode, sort_direction: $scope.sort_direction, "search_input": $scope.search_input_mode}
 		    })
 	        .success(function(data) {
 	            if(data != undefined){
