@@ -124,6 +124,12 @@ layout parts
 	text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    background-color: $media_dump_colour;
+    color: $media_dump_inverse_colour;
+    padding: $padding;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    border-radius: $border_radius;
 }
 #search_input{
 	display: inline;
@@ -361,7 +367,12 @@ a.filter:hover{
 	background:$media_dump_colour;
 	color:$media_dump_inverse_colour;
 }
-
+#logo button{
+	border-color: $media_dump_inverse_colour;
+	float:none !important;}
+#logo button span.icon-bar{
+	background: $media_dump_inverse_colour;
+}
 /*
 .flowplayer .fp-mute{background: url('s.png') no-repeat top left;  background-position: -585px 0px; width: 24px; height: 18px;} */
 /*

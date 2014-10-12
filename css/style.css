@@ -97,7 +97,13 @@ layout parts
   float: left;
   text-overflow: ellipsis;
   overflow: hidden;
-  white-space: nowrap; }
+  white-space: nowrap;
+  background-color: #e74c3c;
+  color: #ecf0f1;
+  padding: 8px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  border-radius: 4px; }
 
 #search_input {
   display: inline;
@@ -327,6 +333,13 @@ a.filter:hover {
   text-decoration: none;
   background: #e74c3c;
   color: #ecf0f1; }
+
+#logo button {
+  border-color: #ecf0f1;
+  float: none !important; }
+
+#logo button span.icon-bar {
+  background: #ecf0f1; }
 
 /*
 .flowplayer .fp-mute{background: url('s.png') no-repeat top left;  background-position: -585px 0px; width: 24px; height: 18px;} */

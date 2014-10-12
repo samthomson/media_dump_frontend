@@ -26,49 +26,132 @@
 
 		<!-- the actual webpage -->
 		<div id="mainBody" ng-controller="mediadumpCtrl">
+
+
+
 			<div id="header" class="clearfix">
-				<a id="logo" class="left_position" ng-click="query = default_query">media-dump</a>
-				<div id="search_input" class="right_position">					
-					<div class="input-group">
-					    <input class="form-control" id="search_text_input" name="key" placeholder="type for search suggestions..." ng-model="query" type="text">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-8">
+							<!--
+							<a id="logo" class="" ng-click="query = default_query">
+								<button data-target="#jobbank_resp_nav" class="navbar-toggle menu_toggle_button hidden-print collapsed" data-toggle="collapse" id="menu_toggle_button">
+									<span class="sr-only">Toggle navigation</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								</button>
+								media-dump
+							</a>
 
-					    <div class="input-group-btn">
-					        <button class="btn btn-default" id="toggle_advanced_search_form" ng-click="bShowAdvancedSearch = !bShowAdvancedSearch" title="advanced search" type="button" ng-class="{true:'advanced_showing'}[(bShowAdvancedSearch && bResults())]" ng-disabled="(!bResults()) && (query === '')">
-					        	<i class="glyphicon glyphicon-sort-by-attributes"></i>&nbsp;
-				        	</button>
+							<nav id="site_menu" class="navbar navbar-jobbank navbar-static-top" role="navigation">
+								<div class="">
+									<div class="navbar-collapse collapse" id="jobbank_resp_nav" style="height: 0px;">
+										<ul class="nav navbar-nav">
+											<li><a>Browse</a></li>
+											<li><a>Map</a></li>
+											<li><a>Shuffle</a></li>
+										</ul>
+									</div>
+								</div>
+							</nav>
+							-->
 
-							<button class="btn btn-default" ng-click="search_mode = 'search'" type="button" ng-class="{active: search_mode == 'search'}">
-								grid
-							</button>
-							<button class="btn btn-default" ng-click="search_mode = 'map'" type="button" ng-class="{active: search_mode == 'map'}">
-								map
-							</button>
-					    </div>
-					</div>
-					<div id="advanced_search" class="light_opacity" ng-show="bShowAdvancedSearch">
-						<div class="form-group">
-							<div class="refine_filters">
-								<a ng-click="addFilter($index)" ng-repeat="filter in available_filters" class="filter" ng-class="{true:'active'}[filter.add === true]">{{filter.value[0]}}: {{filter.value[1]}}</a>
-							</div>
+							<nav class="navbar navbar-default" role="navigation">
+								<div class="container-fluid">
+								<!-- Brand and toggle get grouped for better mobile display -->
+									<div class="navbar-header">
+										<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+											<span class="sr-only">Toggle navigation</span>
+											<span class="icon-bar"></span>
+											<span class="icon-bar"></span>
+											<span class="icon-bar"></span>
+										</button>
+										<a class="navbar-brand" href="#">Brand</a>
+									</div>
+
+									<!-- Collect the nav links, forms, and other content for toggling -->
+									<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+										<ul class="nav navbar-nav">
+											<li class="active"><a href="#">Link</a></li>
+											<li><a href="#">Link</a></li>
+											<li class="dropdown">
+												<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown 	<span class="caret"></span></a>
+												<ul class="dropdown-menu" role="menu">
+													<li><a href="#">Action</a></li>
+													<li><a href="#">Another action</a></li>
+													<li><a href="#">Something else here</a></li>
+													<li class="divider"></li>
+													<li><a href="#">Separated link</a></li>
+													<li class="divider"></li>
+													<li><a href="#">One more separated link</a></li>
+												</ul>
+											</li>
+										</ul>
+										<form class="navbar-form navbar-left" role="search">
+											<div class="form-group">
+												<input type="text" class="form-control" placeholder="Search">
+											</div>
+											<button type="submit" class="btn btn-default">Submit</button>
+										</form>
+										<ul class="nav navbar-nav navbar-right">
+											<li><a href="#">Link</a></li>
+											<li class="dropdown">
+												<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+												<ul class="dropdown-menu" role="menu">
+													<li><a href="#">Action</a></li>
+													<li><a href="#">Another action</a></li>
+													<li><a href="#">Something else here</a></li>
+													<li class="divider"></li>
+													<li><a href="#">Separated link</a></li>
+												</ul>
+											</li>
+										</ul>
+									</div><!-- /.navbar-collapse -->
+								</div><!-- /.container-fluid -->
+							</nav>
+
+
+
 						</div>
-						<div class="row">
-							<div class="col-xs-9">					
-								sort by: 
-								<select ng-model="sort_mode" class="form-control" ng-disabled="search_mode != 'search'">
-									<option value="datetime">datetime</option>
-									<option value="elevation">elevation</option>
-								</select>
-								sort direction: 
-								<select ng-model="sort_direction" class="form-control" ng-disabled="search_mode != 'search'">
-									<option value="asc">asc</option>
-									<option value="desc">desc</option>
-								</select>
-							</div>
-							<div class="col-xs-3">
-								<div class="form-group">
-									<div class="btn-group operator_toggle">
-										<button type="button" class="btn btn-default" ng-class="{true:'active'}[operator === 'and']" ng-click="operator = 'and'">and</button>
-										<button type="button" class="btn btn-default" ng-class="{true:'active'}[operator === 'or']" ng-click="operator = 'or'">or</button>
+						<div class="col-sm-4">
+							<div id="search_input" class="">					
+								<div class="input-group">
+								    <input class="form-control" id="search_text_input" name="key" placeholder="type for search suggestions..." ng-model="query" type="text">
+
+								    <div class="input-group-btn pull-right">
+								        <button class="btn btn-default" id="toggle_advanced_search_form" ng-click="bShowAdvancedSearch = !bShowAdvancedSearch" title="advanced search" type="button" ng-class="{true:'advanced_showing'}[(bShowAdvancedSearch && bResults())]" ng-disabled="(!bResults()) && (query === '')">
+								        	<i class="glyphicon glyphicon-sort-by-attributes"></i>&nbsp;
+							        	</button>
+								    </div>
+								</div>
+								<div id="advanced_search" class="light_opacity" ng-show="bShowAdvancedSearch">
+									<div class="form-group">
+										<div class="refine_filters">
+											<a ng-click="addFilter($index)" ng-repeat="filter in available_filters" class="filter" ng-class="{true:'active'}[filter.add === true]">{{filter.value[0]}}: {{filter.value[1]}}</a>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-9">					
+											sort by: 
+											<select ng-model="sort_mode" class="form-control" ng-disabled="search_mode != 'search'">
+												<option value="datetime">datetime</option>
+												<option value="elevation">elevation</option>
+											</select>
+											sort direction: 
+											<select ng-model="sort_direction" class="form-control" ng-disabled="search_mode != 'search'">
+												<option value="asc">asc</option>
+												<option value="desc">desc</option>
+											</select>
+										</div>
+										<div class="col-xs-3">
+											<div class="form-group">
+												<div class="btn-group operator_toggle">
+													<button type="button" class="btn btn-default" ng-class="{true:'active'}[operator === 'and']" ng-click="operator = 'and'">and</button>
+													<button type="button" class="btn btn-default" ng-class="{true:'active'}[operator === 'or']" ng-click="operator = 'or'">or</button>
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -76,6 +159,12 @@
 					</div>
 				</div>
 			</div>
+
+
+
+
+
+
 
 			<div id="main">
 
