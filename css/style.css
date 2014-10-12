@@ -54,7 +54,8 @@ Functional
 Layout
 */
 #header {
-  padding: 8px; }
+  padding: 8px;
+  border-bottom: 1px solid #e74c3c; }
 
 #main {
   padding: 8px; }

@@ -83,7 +83,7 @@ a:hover img {
 
 #advanced_search {
   background: #c0392b;
-  color: white;
+  color: #fff;
   position: relative;
   height: 200px;
   left: 8px;
@@ -111,7 +111,7 @@ a:hover img {
 .flexible_container_left_fixed .left_div {
   float: left;
   width: 280px;
-  background-image: linear-gradient(to left, #f6f6f6 0%, white 16px); }
+  background-image: linear-gradient(to left, #f6f6f6 0%, #fff 16px); }
 
 .flexible_container_left_fixed .right_div {
   margin-left: 280px; }
@@ -147,7 +147,7 @@ a:hover img {
 
 #search ul li.active a {
   background: #c0392b;
-  color: white; }
+  color: #fff; }
 
 #tabs {
   display: none; }
@@ -176,7 +176,7 @@ ul.nav-pills a {
 
 #search_input button.active {
   background: #c0392b;
-  color: white;
+  color: #fff;
   border-color: #c0392b;
   -webkit-box-shadow: none;
   box-shadow: none; }
@@ -300,12 +300,12 @@ Functional
 @-webkit-keyframes rotate {
   from {
     -webkit-transform: rotate(0deg); }
-
   to {
     -webkit-transform: rotate(359deg); } }
-
 .spin {
   -webkit-animation-name: rotate;
   -webkit-animation-duration: 1s;
   -webkit-animation-iteration-count: infinite;
   -webkit-animation-timing-function: linear; }
+
+/*# sourceMappingURL=screen.css.map */
