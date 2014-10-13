@@ -375,6 +375,9 @@ a.filter:hover{
 	background:$media_dump_colour;
 	color:$media_dump_inverse_colour;
 }
+nav.navbar{
+	z-index: 100;
+}
 nav.navbar button{
 	border-color: $media_dump_inverse_colour;
 	margin-left: $margin !important;

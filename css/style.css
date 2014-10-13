@@ -342,6 +342,9 @@ a.filter:hover {
   background: #e74c3c;
   color: #ecf0f1; }
 
+nav.navbar {
+  z-index: 100; }
+
 nav.navbar button {
   border-color: #ecf0f1;
   margin-left: 4px !important; }
