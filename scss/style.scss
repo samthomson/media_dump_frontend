@@ -410,7 +410,7 @@ nav.navbar button span.icon-bar{
 #toggle_advanced_search_form{
 	z-index:400;
 }
-ul.nav li{padding: $padding; margin-right: ($margin * 4);}
+ul.nav li{padding: $padding; margin-left: ($margin * 4);}
 ul.nav li a{color: $media_dump_colour;padding:0px;}
 ul.nav li a.active{border-bottom: 2px solid $media_dump_colour;}
 /*

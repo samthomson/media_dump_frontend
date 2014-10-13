@@ -26,8 +26,8 @@ $scope.$apply();
 
 mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $routeParams, $http) {
 
-	$scope.query = "*";
-	$scope.default_query = "*";
+	$scope.query = "";
+	$scope.default_query = "";
 
 	$scope.sort_mode = "datetime";
 	$scope.sort_direction = "asc";
@@ -59,6 +59,10 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		if(sMode === 'shuffle'){
 			$scope.query = "search=shuffle";
 		}
+		if(sMode === 'browse'){
+			$scope.query = "";
+		}
+		$scope.setNavSize($scope.search_input_mode);
 	}
 	
 	$scope.page = 1;
@@ -258,13 +262,23 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 			case "map":
 				//iLeftWidth = "50%";
 				break;
+			case "browse":
+				//iLeftWidth = "50%";
+				iLeftWidth = "0%";
+				break;
+			case "search":
+				//iLeftWidth = "50%";
+				iLeftWidth = "0%";
+				break;
 		}
+		/**/
+		$(".left_position").width(iLeftWidth);
+		$(".right_position").css("left", iLeftWidth);
+		
 		/*
-		$("#nav").width(iLeftWidth);
-		$("#results").css("left", iLeftWidth);
-		*/
 		$(".left_position").animate({'width':iLeftWidth},700);
 		$(".right_position").animate({'left':iLeftWidth},700);
+		*/
 	}
 
 	$scope.bMapVisible = function(){

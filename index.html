@@ -27,8 +27,6 @@
 		<!-- the actual webpage -->
 		<div id="mainBody" ng-controller="mediadumpCtrl">
 
-
-
 			<div id="header" class="clearfix">
 				<div class="container">
 							<!--
@@ -65,13 +63,13 @@
 									<span class="icon-bar"></span>
 									<span class="icon-bar"></span>
 								</button>
-								<a class="navbar-brand" href="#">media-dump</a>
+								<a class="navbar-brand" ng-click="query = default_query">media-dump</a>
 							</div>
 
 							<!-- Collect the nav links, forms, and other content for toggling -->
 							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 								<ul class="nav navbar-nav">
-									<li><a ng-click="setSearchInputMode('tree')" ng-class="{true:'active'}[search_input_mode === 'tree']">Browse</a></li>
+									<li><a ng-click="setSearchInputMode('browse')" ng-class="{true:'active'}[search_input_mode === 'browse']">Browse</a></li>
 									<li><a ng-click="setSearchInputMode('map')" ng-class="{true:'active'}[search_input_mode === 'map']">Map</a></li>
 									<li ng-click="setSearchInputMode('shuffle')" ng-class="{true:'active'}[search_input_mode === 'shuffle']"><a>Shuffle</a></li>
 								</ul>
@@ -166,16 +164,6 @@
 
 					<!-- Tab panes -->
 					<div class="tab-content">
-						<div ng-show="search_input_mode === 'tree'" id="browse">
-														
-							<div class="tree_link" ng-repeat="path in default_queries" ng-click="do_default_query('directory.path_folders='+path.dir)" alt="{{path.dir}}" title="{{path.dir}}">
-								<div class="tree_image_container">
-									<img ng-src="{{sourceFromData(path['data_thumb'])}}"/>
-								</div>
-								<span class="tree_link_title">{{path.dir_text}}</span>
-							</div>
-
-						</div>
 						<div ng-show="search_input_mode === 'map'" id="search_map" ng-if="bMapRefreshed">
 							<!-- TODO: map input -->
 							<google-map
@@ -205,30 +193,18 @@
 				<div id="results" class="right_position">
 					<div id="loading" ng-show="bSearching"><i class="glyphicon glyphicon-refresh spin"></i> loading</div>
 					<!-- thumb results (grid search) -->
-					<div id="thumb_results" ng-show="search_mode === 'search'" justified>
+					<div id="thumb_results" ng-show="search_mode === 'search' && query !== ''" justified>
 						<a class="thumb_result_link" ng-repeat="result in results" ng-mousedown="preload_thumb($index)" ng-click="thumb_click($index)" my-repeat-directive><img ng-src="{{urlFromHash('thumbs', result, '')}}" id="{{result.id}}" height="{{result.height}}" /></a>
 					</div>
-
-					<!-- map results (map search) -->
-					<div id="map_result_container" ng-show="bMapVisible()" ng-if="bMapVisible()">
-					<!--<div id="map_result_container">-->
-						<google-map 
-							center="map.center" 
-							zoom="map.zoom" 
-							draggable='true'
-							bounds="map.bounds"
-							options="media_dump_map_options"
-							>
-							<markers
-								models="markers"
-								coords="'self'"
-								doCluster="true"
-								icon="'icon'"
-								events="markersEvents"
-								>
-							</markers>
-						</google-map>
+					<div ng-show="search_input_mode === 'browse' && query === ''">
+						<div class="tree_link" ng-repeat="path in default_queries" ng-click="do_default_query('directory.path_folders='+path.dir)" alt="{{path.dir}}" title="{{path.dir}}">
+							<div class="tree_image_container">
+								<img ng-src="{{sourceFromData(path['data_thumb'])}}"/>
+							</div>
+							<span class="tree_link_title">{{path.dir_text}}</span>
+						</div>
 					</div>
+
 				</div>
 				<div id="pagination" class="right_position" ng-show="results.length > 0">
 					<div id="map_pagination" ng-show="search_mode==='map'">
