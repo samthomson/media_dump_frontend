@@ -71,7 +71,7 @@
 								<ul class="nav navbar-nav">
 									<li><a ng-click="setSearchInputMode('browse')" ng-class="{true:'active'}[search_input_mode === 'browse']">Browse</a></li>
 									<li><a ng-click="setSearchInputMode('map')" ng-class="{true:'active'}[search_input_mode === 'map']">Map</a></li>
-									<li ng-click="setSearchInputMode('shuffle')" ng-class="{true:'active'}[search_input_mode === 'shuffle']"><a>Shuffle</a></li>
+									<li><a ng-click="setSearchInputMode('shuffle')" ng-class="{true:'active'}[search_input_mode === 'shuffle']">Shuffle</a></li>
 								</ul>
 
 								<!--
@@ -91,7 +91,7 @@
 									<div class="form-group">
 										<input type="text" class="form-control" placeholder="Search" ng-model="query">
 									</div>
-									<a ng-click="bShowAdvancedSearch = !bShowAdvancedSearch">advanced</a>
+									<a id="toggle_advanced_search_form" ng-click="bShowAdvancedSearch = !bShowAdvancedSearch">advanced</a>
 								</form>
 
 
@@ -194,7 +194,7 @@
 					<div id="loading" ng-show="bSearching"><i class="glyphicon glyphicon-refresh spin"></i> loading</div>
 					<!-- thumb results (grid search) -->
 					<div id="thumb_results" ng-show="search_mode === 'search' && query !== ''" justified>
-						<a class="thumb_result_link" ng-repeat="result in results" ng-mousedown="preload_thumb($index)" ng-click="thumb_click($index)" my-repeat-directive><img ng-src="{{urlFromHash('thumbs', result, '')}}" id="{{result.id}}" height="{{result.height}}" /></a>
+						<a class="thumb_result_link" ng-repeat="result in results" ng-mousedown="preload_thumb($index)" ng-click="thumb_click($index)" my-repeat-directive><img ng-src="{{urlFromHash('thumbs', result, '')}}" id="{{result.id}}" /></a>
 					</div>
 					<div ng-show="search_input_mode === 'browse' && query === ''">
 						<div class="tree_link" ng-repeat="path in default_queries" ng-click="do_default_query('directory.path_folders='+path.dir)" alt="{{path.dir}}" title="{{path.dir}}">

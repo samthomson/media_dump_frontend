@@ -57,12 +57,13 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 			$scope.search_mode = "search";
 		}
 		if(sMode === 'shuffle'){
+			$scope.search_mode = "search";
 			$scope.query = "search=shuffle";
 		}
 		if(sMode === 'browse'){
 			$scope.query = "";
 		}
-		$scope.setNavSize($scope.search_input_mode);
+		$scope.setNavSize(sMode);
 	}
 	
 	$scope.page = 1;
@@ -218,7 +219,6 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	    events: {
 		    idle: function (map) {
 		    	$scope.$apply(function () {
-
 		    		if(typeof $scope.search_map !== 'undefined'){
 
 			    		var llBounds = map.getBounds();
@@ -238,6 +238,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 
 				    	$scope.query = sQuery;  
 				    }
+		    		
 				});
 		    }
 	    }
@@ -267,6 +268,10 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 				iLeftWidth = "0%";
 				break;
 			case "search":
+				//iLeftWidth = "50%";
+				iLeftWidth = "0%";
+				break;
+			case "shuffle":
 				//iLeftWidth = "50%";
 				iLeftWidth = "0%";
 				break;
@@ -534,9 +539,9 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 			case 'thumbs':
 				var sType = "jpeg";
 				if(oObject.type === "video"){
-					return 'data:image/gif;base64, '+oObject.data_thumb["115"];
+					return 'data:image/gif;base64, '+oObject.data_thumb["220"];
 				}else{
-					return 'data:image/jpeg;base64, '+oObject.data_thumb["115"];
+					return 'data:image/jpeg;base64, '+oObject.data_thumb["220"];
 				}
 				break;
 		}

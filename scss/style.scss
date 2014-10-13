@@ -8,10 +8,13 @@ $ui_breakpoint: 400px;
 $media_dump_colour: #e74c3c;
 $media_dump_dark_colour: #c0392b;
 $media_dump_inverse_colour: #ecf0f1;
+$media_dump_inverse_colour: #fff;
 $silver_colour: #bdc3c7;
 
+/*
 $small_thumb_width: 115px;
 $small_thumb_height: 115px;
+*/
 
 $font_size: larger;
 
@@ -144,10 +147,10 @@ layout parts
 	width:100%;
 	padding: $padding;
 	border: 1px silver solid;
-	border-top:none;
-	z-index:100;
-	border-bottom-left-radius: $border_radius;
-	border-bottom-right-radius: $border_radius;
+	z-index:-100;
+	border-radius: $border_radius;
+	padding-top:100px;
+	margin-top:-4px;
 
 }
 
@@ -293,12 +296,14 @@ layout parts
 /*
 styling
 */
-html { 
+html {
+	/*
 	background: url(/images/default_background.jpg) no-repeat center center fixed; 
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
+	*/
 }
 #header{
 	background-color: $media_dump_inverse_colour;
