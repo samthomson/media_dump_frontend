@@ -29,29 +29,6 @@
 
 			<div id="header" class="clearfix">
 				<div class="container">
-							<!--
-							<a id="logo" class="" ng-click="query = default_query">
-								<button data-target="#jobbank_resp_nav" class="navbar-toggle menu_toggle_button hidden-print collapsed" data-toggle="collapse" id="menu_toggle_button">
-									<span class="sr-only">Toggle navigation</span>
-									<span class="icon-bar"></span>
-									<span class="icon-bar"></span>
-									<span class="icon-bar"></span>
-								</button>
-								media-dump
-							</a>
-
-							<nav id="site_menu" class="navbar navbar-jobbank navbar-static-top" role="navigation">
-								<div class="">
-									<div class="navbar-collapse collapse" id="jobbank_resp_nav" style="height: 0px;">
-										<ul class="nav navbar-nav">
-											<li><a>Browse</a></li>
-											<li><a>Map</a></li>
-											<li><a>Shuffle</a></li>
-										</ul>
-									</div>
-								</div>
-							</nav>
-							-->
 
 					<nav class="navbar navbar-default" role="navigation">
 						<div class="container-fluid">
@@ -74,19 +51,7 @@
 									<li><a ng-click="setSearchInputMode('shuffle')" ng-class="{true:'active'}[search_input_mode === 'shuffle']">Shuffle</a></li>
 								</ul>
 
-								<!--
-								<div id="search_input" class="">					
-								<div class="navbar-right form-group">
-
-									<input class="form-control" id="search_text_input" name="key" placeholder="type for search suggestions..." ng-model="query" type="text">
-									<span class="input-group-btn">
-										<button class="btn btn-default" id="toggle_advanced_search_form" ng-click="bShowAdvancedSearch = !bShowAdvancedSearch" title="advanced search" type="button" ng-class="{true:'advanced_showing'}[(bShowAdvancedSearch && bResults())]" ng-disabled="(!bResults()) && (query === '')">
-							        	<i class="glyphicon glyphicon-sort-by-attributes"></i>&nbsp;
-						        		</button>
-									</span>
-								</div>
-								-->
-
+								
 								<form class="navbar-form navbar-right" role="search">
 									<div class="form-group">
 										<input type="text" class="form-control" placeholder="Search" ng-model="query">
@@ -130,13 +95,8 @@
 						</div><!-- /.container-fluid -->
 					</nav>
 
-
-							
 				</div>
 			</div>
-
-
-
 
 
 
@@ -144,23 +104,6 @@
 			<div id="main">
 
 				<div id="nav" class="left_position">
-
-					<!--<ul class="nav nav-pills">
-						<li class="active">
-							<a href="#browse" role="tab" data-toggle="tab" ng-click="setSearchInputMode('tree')">Browse</a>
-						</li>
-  						<li>
-  							<a href="#search_map" role="tab" data-toggle="tab" ng-click="setSearchInputMode('map')">Map</a>
-  						</li>
-						<li class="dropdown">
-						    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-						      More <span class="caret"></span>
-						    </a>
-					    	
-					    	<ul class="dropdown-menu" role="menu">
-					    	</ul>
-					    </li>
-					</ul>-->
 
 					<!-- Tab panes -->
 					<div class="tab-content">
@@ -191,13 +134,17 @@
 				</div>
 
 				<div id="results" class="right_position">
+					<!-- loading -->
 					<div id="loading" ng-show="bSearching"><i class="glyphicon glyphicon-refresh spin"></i> loading</div>
+
 					<!-- thumb results (grid search) -->
 					<div id="thumb_results" ng-show="search_mode === 'search' && query !== ''" justified>
 						<a class="thumb_result_link" ng-repeat="result in results" ng-mousedown="preload_thumb($index)" ng-click="thumb_click($index)" my-repeat-directive><img ng-src="{{urlFromHash('thumbs', result, '')}}" id="{{result.id}}" /></a>
 					</div>
-					<div ng-show="search_input_mode === 'browse' && query === ''">
-						<div class="tree_link" ng-repeat="path in default_queries" ng-click="do_default_query('directory.path_folders='+path.dir)" alt="{{path.dir}}" title="{{path.dir}}">
+
+					<!-- browse -->
+					<div ng-show="search_input_mode === 'browse' && query === ''" class="container">
+						<div class="tree_link col-xs-6 col-sm-4" ng-repeat="path in default_queries" ng-click="do_default_query('directory.path_folders='+path.dir)" alt="{{path.dir}}" title="{{path.dir}}">
 							<div class="tree_image_container">
 								<img ng-src="{{sourceFromData(path['data_thumb'])}}"/>
 							</div>
@@ -206,18 +153,19 @@
 					</div>
 
 				</div>
-				<div id="pagination" class="right_position" ng-show="results.length > 0">
-					<div id="map_pagination" ng-show="search_mode==='map'">
-						showing {{i_markers_showing}}/{{results.length}}
-					</div>
-					<div id="grid_pagination" ng-show="search_mode==='search'">
+				<div id="pagination" class="" ng-show="results.length > 0">
+					<div class="container">
+						<div id="map_pagination" ng-show="search_mode==='map'">
+							showing {{i_markers_showing}}/{{results.length}}
+						</div>
+						<div id="grid_pagination" ng-show="search_mode==='search'">
+							<a class="pull-left" ng-show="page > 1" ng-click="page = page - 1"><i class="glyphicon glyphicon-chevron-left"></i> previous</a>
 
-						<a class="pull-left" ng-show="page > 1" ng-click="page = page - 1"><i class="glyphicon glyphicon-chevron-left"></i> previous</a>
+							<a class="pull-right" ng-show="page < (result_info.available_pages)" ng-click="page = page + 1">next <i class="glyphicon glyphicon-chevron-right"></i></a>
 
-						<a class="pull-right" ng-show="page < (result_info.available_pages)" ng-click="page = page + 1">next <i class="glyphicon glyphicon-chevron-right"></i></a>
-
-						<span>showing {{results.length}}/{{result_info.count}}</span>
-						<span><i class="glyphicon glyphicon-flash"></i> found in ~{{result_info.speed | number:0}} ms</span>
+							<span>showing {{results.length}}/{{result_info.count}}</span>
+							<span><i class="glyphicon glyphicon-flash"></i> found in ~{{result_info.speed | number:0}} ms</span>
+						</div>
 					</div>
 				</div>
 			</div>

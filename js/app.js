@@ -47,7 +47,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	$scope.bQueryBuilderVisible = false;
 
 	// search stuff
-	$scope.search_input_mode = "tree";
+	$scope.search_input_mode = "browse";
 	$scope.search_mode = "search";
 	$scope.setSearchInputMode = function(sMode){
 		$scope.search_input_mode = sMode;
@@ -258,10 +258,10 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	}
 	$scope.setNavSize = function(sMode){
 		// set size of left nav section and results to give best UX for current search/browse mode
-		var iLeftWidth = "40%";
+		var iLeftWidth = "0%";
 		switch(sMode){
 			case "map":
-				//iLeftWidth = "50%";
+				iLeftWidth = "45%";
 				break;
 			case "browse":
 				//iLeftWidth = "50%";
