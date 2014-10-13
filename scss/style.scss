@@ -27,6 +27,7 @@ body{
 	font-family: Muli;
 	padding: $zero_pix;
 	margin: $zero_pix;
+	background: none !important;
 }
 
 a{color: $media_dump_colour;cursor: pointer;}

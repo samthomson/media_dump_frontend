@@ -2,7 +2,8 @@
 body {
   font-family: Muli;
   padding: 0px;
-  margin: 0px; }
+  margin: 0px;
+  background: none !important; }
 
 a {
   color: #e74c3c;
