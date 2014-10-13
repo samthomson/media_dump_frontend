@@ -90,6 +90,7 @@ Layout
 	top:$i_header_height + $padding;
 	bottom:$i_footer_height;
 	bottom:0px;
+	z-index: -1;
 }
 #nav .tab-content{
 	padding-top:$padding;
@@ -104,6 +105,7 @@ Layout
 	padding-left:0px;
 	padding-top:0px;
 	overflow-x:auto;
+	z-index: -1;
 }
 #pagination{
 	position: absolute;
@@ -219,7 +221,7 @@ layout parts
 #browse{
 	position:absolute;
 	display:block;
-	top:50px; /* tab links */
+	top:0px; /* tab links */
 	bottom:0px;
 	left:0px;
 	right: ($margin*4);
@@ -230,7 +232,7 @@ layout parts
 #search_map .angular-google-map-container {
 	position:absolute;
 	display:block;
-	top:50px; /* tab links */
+	top:0px; /* tab links */
 	bottom:0px;
 	left:0px;
 	right: ($margin*4);
@@ -297,6 +299,9 @@ html {
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
+}
+#header{
+	background-color: $media_dump_inverse_colour;
 }
 .btn,.form-control{
 	font-size:large;
@@ -377,21 +382,37 @@ a.filter:hover{
 }
 nav.navbar{
 	z-index: 100;
+	min-height: 0px !important;
+	background: none;
 }
 nav.navbar button{
-	border-color: $media_dump_inverse_colour;
-	margin-left: $margin !important;
+	border-color: $media_dump_colour !important;
+	margin: 0px;
+	margin-right: $margin !important;
 }
 nav.navbar button span.icon-bar{
-	background: $media_dump_inverse_colour;
+	background: $media_dump_colour !important;
 }
-.navbar-brand{
-	padding-left: $padding;
-	padding-right: $padding;
+.navbar-default{
+	border: none !important;
+	margin-bottom:0px !important;
+}
+.navbar-brand, .navbar-brand{
+	padding: $padding;
+	height: auto;
+	background-color: $media_dump_colour !important;
+	color: $media_dump_inverse_colour !important;
+	border-radius: $border_radius;
+}
+.navbar-form{
+	margin: 0px;
 }
 #toggle_advanced_search_form{
 	z-index:400;
 }
+ul.nav li{padding: $padding; margin-right: ($margin * 4);}
+ul.nav li a{color: $media_dump_colour;padding:0px;}
+ul.nav li a.active{border-bottom: 2px solid $media_dump_colour;}
 /*
 .flowplayer .fp-mute{background: url('s.png') no-repeat top left;  background-position: -585px 0px; width: 24px; height: 18px;} */
 /*

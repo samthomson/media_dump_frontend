@@ -66,7 +66,8 @@ Layout
   position: absolute;
   top: 58px;
   bottom: 50px;
-  bottom: 0px; }
+  bottom: 0px;
+  z-index: -1; }
 
 #nav .tab-content {
   padding-top: 8px; }
@@ -80,7 +81,8 @@ Layout
   padding: 8px;
   padding-left: 0px;
   padding-top: 0px;
-  overflow-x: auto; }
+  overflow-x: auto;
+  z-index: -1; }
 
 #pagination {
   position: absolute;
@@ -193,7 +195,7 @@ layout parts
 #browse {
   position: absolute;
   display: block;
-  top: 50px;
+  top: 0px;
   /* tab links */
   bottom: 0px;
   left: 0px;
@@ -204,7 +206,7 @@ layout parts
 #search_map .angular-google-map-container {
   position: absolute;
   display: block;
-  top: 50px;
+  top: 0px;
   /* tab links */
   bottom: 0px;
   left: 0px;
@@ -269,6 +271,9 @@ html {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover; }
+
+#header {
+  background-color: #ecf0f1; }
 
 .btn, .form-control {
   font-size: large;
@@ -343,21 +348,45 @@ a.filter:hover {
   color: #ecf0f1; }
 
 nav.navbar {
-  z-index: 100; }
+  z-index: 100;
+  min-height: 0px !important;
+  background: none; }
 
 nav.navbar button {
-  border-color: #ecf0f1;
-  margin-left: 4px !important; }
+  border-color: #e74c3c !important;
+  margin: 0px;
+  margin-right: 4px !important; }
 
 nav.navbar button span.icon-bar {
-  background: #ecf0f1; }
+  background: #e74c3c !important; }
 
-.navbar-brand {
-  padding-left: 8px;
-  padding-right: 8px; }
+.navbar-default {
+  border: none !important;
+  margin-bottom: 0px !important; }
+
+.navbar-brand, .navbar-brand {
+  padding: 8px;
+  height: auto;
+  background-color: #e74c3c !important;
+  color: #ecf0f1 !important;
+  border-radius: 4px; }
+
+.navbar-form {
+  margin: 0px; }
 
 #toggle_advanced_search_form {
   z-index: 400; }
+
+ul.nav li {
+  padding: 8px;
+  margin-right: 16px; }
+
+ul.nav li a {
+  color: #e74c3c;
+  padding: 0px; }
+
+ul.nav li a.active {
+  border-bottom: 2px solid #e74c3c; }
 
 /*
 .flowplayer .fp-mute{background: url('s.png') no-repeat top left;  background-position: -585px 0px; width: 24px; height: 18px;} */

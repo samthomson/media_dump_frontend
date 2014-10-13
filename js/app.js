@@ -56,6 +56,9 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 			// grid only when search mode is map
 			$scope.search_mode = "search";
 		}
+		if(sMode === 'shuffle'){
+			$scope.query = "search=shuffle";
+		}
 	}
 	
 	$scope.page = 1;
