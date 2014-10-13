@@ -262,6 +262,13 @@ layout parts
 /*
 styling
 */
+html {
+  background: url(/images/default_background.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; }
+
 .btn, .form-control {
   font-size: large;
   height: auto; }
@@ -334,12 +341,19 @@ a.filter:hover {
   background: #e74c3c;
   color: #ecf0f1; }
 
-#logo button {
+nav.navbar button {
   border-color: #ecf0f1;
-  float: none !important; }
+  margin-left: 4px !important; }
 
-#logo button span.icon-bar {
+nav.navbar button span.icon-bar {
   background: #ecf0f1; }
+
+.navbar-brand {
+  padding-left: 8px;
+  padding-right: 8px; }
+
+#toggle_advanced_search_form {
+  z-index: 400; }
 
 /*
 .flowplayer .fp-mute{background: url('s.png') no-repeat top left;  background-position: -585px 0px; width: 24px; height: 18px;} */

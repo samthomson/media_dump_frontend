@@ -290,6 +290,13 @@ layout parts
 /*
 styling
 */
+html { 
+	background: url(/images/default_background.jpg) no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
 .btn,.form-control{
 	font-size:large;
 	height:auto;
@@ -367,11 +374,19 @@ a.filter:hover{
 	background:$media_dump_colour;
 	color:$media_dump_inverse_colour;
 }
-#logo button{
+nav.navbar button{
 	border-color: $media_dump_inverse_colour;
-	float:none !important;}
-#logo button span.icon-bar{
+	margin-left: $margin !important;
+}
+nav.navbar button span.icon-bar{
 	background: $media_dump_inverse_colour;
+}
+.navbar-brand{
+	padding-left: $padding;
+	padding-right: $padding;
+}
+#toggle_advanced_search_form{
+	z-index:400;
 }
 /*
 .flowplayer .fp-mute{background: url('s.png') no-repeat top left;  background-position: -585px 0px; width: 24px; height: 18px;} */
