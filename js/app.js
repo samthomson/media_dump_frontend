@@ -13,7 +13,8 @@ mediadumpApp.config(function($httpProvider, $sceDelegateProvider){
     // Allow same origin resource loads.
     'self',
     // Allow loading from our assets domain.  Notice the difference between * and **.
-    'http://mdcdn/**'
+    'http://mdcdn/**',
+    'http://cdn.samt.st/**'
   ]);
 
 });
@@ -37,7 +38,10 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	$scope.thumb_height = 180;
 
 	$scope.s_media_dump_url = "http://178.62.251.180:8080"
-	$scope.s_media_dump_url = "http://127.0.0.1:8000"
+	//$scope.s_media_dump_url = "http://127.0.0.1:8000"
+
+	$scope.s_cdn_url = "http://cdn.samt.st"
+
 	
 	$scope.default_queries = [];
 	$http.get($scope.s_media_dump_url + '/tree/')
@@ -534,10 +538,10 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 			return "";
 		switch(sMode){
 			case 'lightbox':
-				return 'http://mdcdn/thumb/lightbox/'+oObject.id+'.jpg';
+				return $scope.s_cdn_url + '/lightbox/'+oObject.id+'.jpg';
 				break;
 			case 'map_search':
-				return 'http://mdcdn/thumb/icon/'+oObject.id+'.jpg';
+				return $scope.s_cdn_url + '/icon/'+oObject.id+'.jpg';
 				break;
 			case 'thumbs':
 				var sType = "jpeg";
@@ -557,13 +561,13 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 		}else{
 			switch(sType){
 				case "webm":
-					sSource = "http://mdcdn/thumb/video/" + oObject.id + ".webm";
+					sSource = $scope.s_cdn_url + "/video/" + oObject.id + ".webm";
 					break;
 				case "ogv":
-					sSource = "http://mdcdn/thumb/video/" + oObject.id + ".ogv";
+					sSource = $scope.s_cdn_url + "/video/" + oObject.id + ".ogv";
 					break;
 				case "mp4":
-					sSource = "http://mdcdn/thumb/video/" + oObject.id + ".mp4";
+					sSource = $scope.s_cdn_url + "/video/" + oObject.id + ".mp4";
 					break;
 			}
 		}
@@ -575,7 +579,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 			sSource = "";
 			console.log("undefined object to make video url from");
 		}else{
-			var sSrcBase = "http://mdcdn/thumb/video/";
+			var sSrcBase = $scope.s_cdn_url + "/video/";
 			return [
 				{src: sSrcBase + oObject.id + '.mp4', type: "video/mp4"},
 				{src: sSrcBase + oObject.id + '.webm', type: "video/webm"},
@@ -586,7 +590,7 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	$scope.lightboxURL = function(){
 		if(typeof $scope.results[$scope.iLightIndex] !== "undefined"){
 			if($scope.results[$scope.iLightIndex].type === "image"){
-				return "http://mdcdn/thumb/lightbox/" + $scope.results[$scope.iLightIndex].id + ".jpg";
+				return $scope.s_cdn_url + "/lightbox/" + $scope.results[$scope.iLightIndex].id + ".jpg";
 			}
 		}else{return "undefined item";}
 	}
