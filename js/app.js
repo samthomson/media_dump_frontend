@@ -34,6 +34,9 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 	$scope.operator = "and";
 	$scope.total_files_in_md = 12447;
 
+	$scope.thumb_height = 180;
+
+	$scope.s_media_dump_url = "http://178.62.251.180:8080"
 	$scope.s_media_dump_url = "http://127.0.0.1:8000"
 	
 	$scope.default_queries = [];
@@ -539,9 +542,9 @@ mediadumpApp.controller('mediadumpCtrl', function ($location, $scope, $route, $r
 			case 'thumbs':
 				var sType = "jpeg";
 				if(oObject.type === "video"){
-					return 'data:image/gif;base64, '+oObject.data_thumb["220"];
+					return 'data:image/gif;base64, '+oObject.data_thumb[$scope.thumb_height];
 				}else{
-					return 'data:image/jpeg;base64, '+oObject.data_thumb["220"];
+					return 'data:image/jpeg;base64, '+oObject.data_thumb[$scope.thumb_height];
 				}
 				break;
 		}
